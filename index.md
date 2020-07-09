@@ -40,9 +40,9 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif;}
   </a>
   <h4 class="w3-bar-item"><b>Menu</b></h4>
   <a class="w3-bar-item w3-button w3-hover-black" href="initial_value_problems.html">Initial Value Problems</a>
-  <a class="w3-bar-item w3-button w3-hover-black" href="#">Link</a>
-  <a class="w3-bar-item w3-button w3-hover-black" href="#">Link</a>
-  <a class="w3-bar-item w3-button w3-hover-black" href="#">Link</a>
+  <a class="w3-bar-item w3-button w3-hover-black" href="runge_kutta_methods.html">Runge-Kutta Methods</a>
+  <a class="w3-bar-item w3-button w3-hover-black" href="IRK_methods.html">Implicit Runge-Kutta Methods</a>
+  <a class="w3-bar-item w3-button w3-hover-black" href="Stability">Stability</a>
 </nav>
 
 <!-- Overlay effect when opening sidebar on small screens -->
