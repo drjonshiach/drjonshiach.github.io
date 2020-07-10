@@ -1,13 +1,8 @@
 <!DOCTYPE html>
-<!--
-    Plain-Academic by Vasilios Mavroudis
-    Released under the  Simplified BSD License/FreeBSD (2-clause) License.
-    https://github.com/mavroudisv/plain-academic
--->
 
 <html lang="en">
 <head>
-  <title>Dr Jon Shiach</title>
+  <title>Jon Shiach</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
@@ -22,9 +17,10 @@
     <nav class="navbar navbar-inverse">
       <div class="container">
 		<ul class="nav navbar-nav">
-              <li><a href="/">Home</a></li>
-              <li><a href="#">Projects</a></li>
-              <li><a href="#publications">Publications</a></li> 
+              <li><a href="index.html">Home</a></li>
+              <li><a href="odes.html">Ordinary Differential Equations</a></li>
+              <li><a href="#">Programming Skills</a></li>
+              <li><a href="#publications">Mathematics of Computer Graphics</a></li> 
               <li><a href="#">CV</a></li> 
 		</ul>
 	  </div>
@@ -44,7 +40,10 @@
                 <img class="img-responsive" src="photo.gif" alt=""><br>
                 
                 <div style="margin-top:3%; text-align:justify;">                
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing <a href="#">elit</a>, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+          
+                <h1> Ordinary Differential Equations</h1>
+          
+          <p>Lorem ipsum dolor sit ajkkjkjmet, consectetur adipiscing <a href="#">elit</a>, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
 					
 					<p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
 					
@@ -54,13 +53,10 @@
 
             <!-- Contact Info on the Sidebar -->
             <div class="col-md-4">
-                <div style="font-family: 'Oswald', sans-serif; font-size: 32px;"><b>John Doe</b></div><br>
-                <p><b>john at doe.com</b><br>
-                <p>Random Department<br>
-                University of Randomness<br>
-                Street<br>
-                City <br>
-                Country<br>
+                <div style="font-family: 'Oswald', sans-serif; font-size: 32px;"><b>Dr Jon Shiach</b></div><br>
+                <p><b>drjonshiach.github.io/</b><br>
+                <p>Department of Computing and Mathematics<br>
+                Manchester Metropolitan University<br>
                 </p>
             </div>
             
@@ -68,12 +64,12 @@
             <!-- Links on the Sidebar -->
             <div class="col-md-4" style="margin-top:2%">
               <dd><a href="#">Google Scholar</a></dd> 
-              <dd><a href="#">Twitter</a></dd>
               <dd><a href="#">LinkedIn</a></dd>
+              <!-- <dd><a href="#">Twitter</a></dd> -->
             </div>
             
             
-            <!-- Publications -->
+            <!-- Publications
             <div class="col-md-8" style="height: 100vh;">    
                 <h2 id="publications">Publications</h2>
                 
@@ -86,7 +82,7 @@
                 <ul>
                 <li class="paper" words="add, your, keywords, here"><a href="#">Full title</a>. Details of the report</li>
                 </ul>
-            </div>
+            </div> -->
 
             
         </div>
