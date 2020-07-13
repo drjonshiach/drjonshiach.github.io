@@ -13095,19 +13095,22 @@ div#notebook {
 </ul>
 <p><a id="runge_kutta_methods"></a><a href="https://en.wikipedia.org/wiki/Runge%E2%80%93Kutta_methods">Runge-Kutta methods</a> are a family of numerical methods for solving a first-order <a href="https://en.wikipedia.org/wiki/Ordinary_differential_equation">Ordinary Differential Equation</a> (ODE). The general form of a Runge-Kutta method for solving the ODE $y'=f(t, y)$ is</p>
 <p><a id="rk"></a>
-\begin{align*}
+<p>\begin{align*}
     y_{n+1} &amp;= y_n + h\sum_{i=1}^s b_i k_i, &amp;&amp; (1)  \\
     k_i &amp;= f(t_n + c_ih, y_n + h\displaystyle\sum_{j=1}^s a_{ij} k_j).  &amp;&amp; (2)
 \end{align*}</p>
 <p>where $t_n$ is some value of the independent variable $t$, $y_n=y(t_n)$ is the value of the function $y$ when $t=t_n$, $h=t_{n+1}-t_n$ is the <strong>step length</strong> between two successive values of $t$, $k_i$ are intermediate <strong>stage values</strong> and $s$ is the number of stages of the method. Runge-Methods are called <strong>single step methods</strong> because they update the solution for the next step $y_{n+1}$ using information from the single step $y_n$. The other type of method for solving ODEs are <a href="https://en.wikipedia.org/wiki/Linear_multistep_method"><strong>multistep methods</strong></a> that calculate $y_{n+1}$ using information from multiple steps $y_n, y_{n-1}, y_{n-2}, \ldots$</p>
 <h3 id="Butcher-tableau">Butcher tableau<a class="anchor-link" href="#Butcher-tableau">&#182;</a></h3><p>A common method used to express a Runge-Kutta method is to use a <strong>Butcher tableau</strong>. Expanding the summations of the general form of a Runge-Kutta method</p>
-\begin{align*}
+<br>
+<p>\begin{align*}
     y_{n+1} &amp;= y_n + h(b_1 k_1 + b_2 k_2 + \cdots + b_s k_s), \\
     k_1 &amp;= f(t_1 + c_1 h, y_n + h(a_{11} k_1 + a_{12} k_2 + \cdots + a_{1s} k_s), \\
     k_2 &amp;= f(t_2 + c_2 h, y_n + h(a_{21} k_1 + a_{22} k_2 + \cdots + a_{2s} k_s), \\
     &amp;\vdots \\
     k_s &amp;= f(t_s + c_s h, y_n + h(a_{s1} k_1 + a_{s2} k_2 + \cdots + a_{ss} k_s).
-\end{align*}<p>It is the values of the coefficients $a_{ij}$, $b_i$ and $c_i$ that define a particular Runge-Kutta method and these values are arranged in tabular form as follows</p>
+\end{align*}</p>
+<br>
+<p>It is the values of the coefficients $a_{ij}$, $b_i$ and $c_i$ that define a particular Runge-Kutta method and these values are arranged in tabular form as follows</p>
 $$\begin{array}{c|cccc}
 c_1 &amp; a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1s} \\
 c_2 &amp; a_{21} &amp; a_{22} &amp; \cdots &amp; a_{2s} \\
@@ -13122,23 +13125,30 @@ c_s &amp; a_{s1} &amp; a_{s2} &amp; \cdots &amp; a_{ss} \\ \hline
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Explicit-and-implicit-Runge-Kutta-methods">Explicit and implicit Runge-Kutta methods<a class="anchor-link" href="#Explicit-and-implicit-Runge-Kutta-methods">&#182;</a></h3><p>The stage values of a general Runge-Kutta method are</p>
-\begin{align*}
+<br>
+<p>\begin{align*}
     k_1 &amp;= f(t_1 + c_1 h, y_n + h(a_{11} k_1 + a_{12} k_2 + \cdots + a_{1s} k_s), \\
     k_2 &amp;= f(t_2 + c_2 h, y_n + h(a_{21} k_1 + a_{22} k_2 + \cdots + a_{2s} k_s), \\
     &amp;\vdots \\
     k_s &amp;= f(t_s + c_s h, y_n + h(a_{s1} k_1 + a_{s2} k_2 + \cdots + a_{ss} k_s).
-\end{align*}<p>Here the equation for calculating the value of $k_1$ includes $k_1$ on the right-hand side and similar for $k_2, k_3, \ldots, k_s$. These are examples of <strong>implicit</strong> equations and Runge-Kutta methods where the stage values are expressed using implicit equations are known as <strong>Implicit Runge-Kutta</strong> (IRK) methods. To calculate the solution of the stage values of an IRK method involves solving a system of equations which is computationally expensive.</p>
+\end{align*}</p>
+<br>
+<p>Here the equation for calculating the value of $k_1$ includes $k_1$ on the right-hand side and similar for $k_2, k_3, \ldots, k_s$. These are examples of <strong>implicit</strong> equations and Runge-Kutta methods where the stage values are expressed using implicit equations are known as <strong>Implicit Runge-Kutta</strong> (IRK) methods. To calculate the solution of the stage values of an IRK method involves solving a system of equations which is computationally expensive.</p>
 <p>If the summation in equation <a href="#rk">(2)</a> is altered so the upper limit to the sum is $i-1$ term, i.e.,</p>
 $$k_i = f(t_n + c_ih, y_n + h\sum_{j=1}^{i-1} a_{ij} k_j),$$<p>and let $c_1=0$ then we have the following equations for calculating the stage values</p>
-\begin{align*}
+<br>
+<p>\begin{align*}
     k_1 &amp;= f(t_n, y_n), \\
     k_2 &amp;= f(t_n + c_2h, y_n + h a_{21} k_1), \\
     k_3 &amp;= f(t_n + c_3h, y_n + h (a_{31} k_1 + a_{32} k_2)), \\
     &amp;\vdots \\
     k_s &amp;= f(t_n + c_sh, y_n + h (a_{s1} k_1 + a_{s2} k_2 + \cdots + a_{s,s-1} k_{s-1})).
-\end{align*}<p>These stages values are <strong>explicit</strong> equations where the subject of the equation does not appear on the right-hand side. Runge-Kutta methods where the stages values are calculated using explicit equations are known as <strong>Explicit Runge Kutta</strong> (ERK) methods. Note that we can calculate the stage values in order, i.e., $k_1$ can be calculated using $t_n$ and $y_n$; $k_2$ can be calculated using $t_n$, $y_n$ and $k_1$; $k_3$ can be calculated using $t_n$, $y_n$, $k_1$ and $k_2$ and so on. This means that ERK methods as more computationally efficient than IRK methods, however in certain situations ERK methods cannot be used and we must then use IRK methods (see <a href="IRK_methods.ipynb">Implicit Runge-Kutta Methods</a>).</p>
+\end{align*}</p>
+<br>
+<p>These stages values are <strong>explicit</strong> equations where the subject of the equation does not appear on the right-hand side. Runge-Kutta methods where the stages values are calculated using explicit equations are known as <strong>Explicit Runge Kutta</strong> (ERK) methods. Note that we can calculate the stage values in order, i.e., $k_1$ can be calculated using $t_n$ and $y_n$; $k_2$ can be calculated using $t_n$, $y_n$ and $k_1$; $k_3$ can be calculated using $t_n$, $y_n$, $k_1$ and $k_2$ and so on. This means that ERK methods as more computationally efficient than IRK methods, however in certain situations ERK methods cannot be used and we must then use IRK methods (see <a href="IRK_methods.ipynb">Implicit Runge-Kutta Methods</a>).</p>
 <h3 id="Butcher-tableau-for-explicit-and-implicit-Runge-Kutta-methods">Butcher tableau for explicit and implicit Runge-Kutta methods<a class="anchor-link" href="#Butcher-tableau-for-explicit-and-implicit-Runge-Kutta-methods">&#182;</a></h3><p>ERK and IRK methods can be easily distinguished looking at the Butcher tableau. The $A$ matrix in the top right region of a Butcher tableau for an ERK method (left) is lower-triangular whereas for an IRK method (right) the main-diagonal and upper triangular elements are non-zero.</p>
-\begin{align*}
+<br>
+<p>\begin{align*}
 \begin{array}{c|cccc}
 0 &amp;  \\
 c_2 &amp; a_{21} \\
@@ -13156,7 +13166,8 @@ c_3 &amp; a_{31} &amp; a_{32} &amp; a_{33} &amp; \cdots &amp; a_{3s} \\
 c_s &amp; a_{s1} &amp; a_{s2} &amp; a_{s3} &amp; \cdots &amp; a_{ss} \\ \hline
 &amp; b_1 &amp; b_2 &amp; b_3 &amp; \cdots &amp; b_s
 \end{array}
-\end{align*}
+\end{align*}</p>
+<br>
 </div>
 </div>
 </div>
@@ -13167,23 +13178,36 @@ c_s &amp; a_{s1} &amp; a_{s2} &amp; a_{s3} &amp; \cdots &amp; a_{ss} \\ \hline
 <h2 id="Derivation-of-a-second-order-explicit-Runge-Kutta-method">Derivation of a second-order explicit Runge-Kutta method<a class="anchor-link" href="#Derivation-of-a-second-order-explicit-Runge-Kutta-method">&#182;</a></h2><p>A Runge-Kutta method is derived by comparing the <a href="https://en.wikipedia.org/wiki/Taylor_series">Taylor series</a> of the general Runge-Kutta method and ensuring the coefficients $a_{ij}$, $b_i$ and $c_i$ match those of the Taylor series expansion of the ODE $y'=f(t, y)$.</p>
 <p>The second-order Taylor series expansion of $y(t+h)$ is</p>
 $$y_{n+1} = y + hy' + \frac{h^2}{2}y''.$$<p>Since $y' = f(t, y)$ and applying the <a href="https://en.wikipedia.org/wiki/Chain_rule">chain rule</a> to differentiate $y'$ we have</p>
-$$y'' = f_t(t, y) + f_y(t, y)f(t, y),$$<p>then the Taylor series becomes</p>
-\begin{align*}
+<br>
+$$y'' = f_t(t, y) + f_y(t, y)f(t, y),$$
+<br>
+<p>then the Taylor series becomes</p>
+<br>
+<p>\begin{align*}
     y_{n+1} &amp;= y + hf(t, y) + \frac{h^2}{2}(f_t(t, y) + f_y(t, y)f(t, y)) \\
     &amp;= y + \frac{h}{2}f(t, y) + \frac{h}{2}(f(t, y) + hf_t(t, y) + hf_y(t, y)f(t,y)). &amp;&amp; (3)
-\end{align*}<p>The general form of a second-order Runge-Kutta method is</p>
-\begin{align*}
+\end{align*}</p>
+<br>
+<p>The general form of a second-order Runge-Kutta method is</p>
+<br>
+<p>\begin{align*}
 y_{n+1} &amp;= y_n + h b_1 f(t_n, y_n) + h b_2 f(t + c_2h, y + h a_{21} f(t_n, y_n)), &amp;&amp; (4)
-\end{align*}<p>The first-order bivariate Taylor series expansion of $f(t_n + c_2h, y_n + h a_{21} f(t_n, y_n))$ is</p>
-$$f(t_n + c_2h, y_n + h a_{21} f(t_n,y_n)) = f(t_n, y_n) + h c_2 f_t(t_n, y_n) + h a_{21} f(t_n, y_n) f_y(t_n, y_n),$$<p>which is substituted into equation (4) to give</p>
-\begin{align*}
+\end{align*}</p>
+<br>
+<p>The first-order bivariate Taylor series expansion of $f(t_n + c_2h, y_n + h a_{21} f(t_n, y_n))$ is</p>
+<p>
+$$f(t_n + c_2h, y_n + h a_{21} f(t_n,y_n)) = f(t_n, y_n) + h c_2 f_t(t_n, y_n) + h a_{21} f(t_n, y_n) f_y(t_n, y_n),$$</p>
+<p>which is substituted into equation (4) to give</p>
+<p>\begin{align*}
     y_{n+1} &amp;= y_n + h b_1 f(t_n, y_n) + h b_2 (f(t_n, y_n) + h c_2 f_t(t_n, y_n) + h a_{21} f(t_n, y_n) f_y(t_n, y_n)). &amp;&amp; (5)
-\end{align*}<p>Equating (3) and (5) we see that</p>
-\begin{align*}
+\end{align*}</p>
+<p>Equating (3) and (5) we see that</p>
+<p>\begin{align*}
     b_1 + b_2 &amp;= 1, \\
     c_2b_2 &amp;= \frac{1}{2}, \\
     a_{21}b_2 &amp;= \frac{1}{2}.
-\end{align*}<p>Here we have a system of 3 equations expressed in the 4 unknowns $b_1$, $b_2$, $c_2$ and $a_{21}$. These equations are known as the <strong>order conditions</strong> for a second-order Runge-Kutta method. To derive a second-order ERK method we choose a value for one of these coefficients and solve for the others.</p>
+\end{align*}</p>
+<p>Here we have a system of 3 equations expressed in the 4 unknowns $b_1$, $b_2$, $c_2$ and $a_{21}$. These equations are known as the <strong>order conditions</strong> for a second-order Runge-Kutta method. To derive a second-order ERK method we choose a value for one of these coefficients and solve for the others.</p>
 
 </div>
 </div>
@@ -13247,7 +13271,7 @@ $$f(t_n + c_2h, y_n + h a_{21} f(t_n,y_n)) = f(t_n, y_n) + h c_2 f_t(t_n, y_n) +
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>So $a_{21}=1$ and $b_1=b_2=\frac{1}{2}$ so this second-order ERK method is</p>
 <p><a id="rk2"></a>
-\begin{align*}
+<p>\begin{align*}
 y_{n+1} &amp;= y_n + \frac{h}{2}(k_1 + k_2), \\
 k_1 &amp;= f(t_n, y_n), \\
 k_2 &amp;= f(t_n + h, y_n + h k_1),
@@ -13267,9 +13291,9 @@ $$\begin{array}{c|cc}
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr>
 <h2 id="Use-of-Explicit-Runge-Kutta-Methods-to-solve-Initial-Value-Problems">Use of Explicit Runge-Kutta Methods to solve Initial Value Problems<a class="anchor-link" href="#Use-of-Explicit-Runge-Kutta-Methods-to-solve-Initial-Value-Problems">&#182;</a></h2><p>Runge-Kutta methods are used to solve <a href="https://en.wikipedia.org/wiki/Initial_value_problem">Initial Value Problems</a> (IVP) of the form</p>
-\begin{align*}
+<p>\begin{align*}
     y' &amp;= f(t, y), &amp; t &amp;\in [t_{\min}, t_{\max}], &amp; y(t_{\min}) &amp;= y_0,
-\end{align*}<p>where $y'=f(t,y)$ is a first-order ODE defined over the domain $t\in [t_{\min}, t_{\max}]$ and the initial solution $y(t_{\min})$ is the known value $y_0$.</p>
+\end{align*}</p><p>where $y'=f(t,y)$ is a first-order ODE defined over the domain $t\in [t_{\min}, t_{\max}]$ and the initial solution $y(t_{\min})$ is the known value $y_0$.</p>
 <p>To apply the an ERK method to solve an IVP we calculate the stage values $k_1$ and $k_2$ using the known values of $t_n$, $y_n$ and the step length $h$ substituted into the ODE function $f(t, y)$. Then the solution over one step $t_{n+1} = t_n + h$ and $y_{n+1} = y(t_{n+1})$ is then calculated using $k_1, k_2, \ldots, k_s$.</p>
 
 </div>
@@ -13279,21 +13303,21 @@ $$\begin{array}{c|cc}
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="Example-2">Example 2<a class="anchor-link" href="#Example-2">&#182;</a></h4><p>Calculate the first two steps of the <a href="#rk2">RK2 method</a> to solve the following IVP</p>
-\begin{align*}
+<p>\begin{align*}
     y' &amp;= \sin^2(t)y, &amp; t &amp;\in [0, 5], &amp; y(0) &amp;= 1.
-\end{align*}<p>using a step length of $h=0.5$.</p>
+\end{align*}</p><p>using a step length of $h=0.5$.</p>
 <p>Step 1: $t_0=0$ and $y_0=1$</p>
-\begin{align*}
+<p>\begin{align*}
     k_1 &amp;= \sin^2(t_0)y_0  = \sin^2(0)(1) = 0, \\
     k_2 &amp;=  \sin^2(t_0 + h)(y_0 + hk_1) = \sin^2(0 + 0.5)(1 + 0.5(0)) = 0.2298, \\
     y_1 &amp;= y_0 + \frac{h}{2}(k_1 + k_2) = 1 + \frac{0.5}{2}(0 + 0.2298) = 1.0575, \\
     t_1 &amp;= t_0 + h = 0 + 0.5 = 0.5.
-\end{align*}<p>Step 2: $t_1 = 0.5$ and $y_1 = 1.0575$</p>
-\begin{align*}
+\end{align*}</p><p>Step 2: $t_1 = 0.5$ and $y_1 = 1.0575$</p>
+<p>\begin{align*}
     k_1 &amp;= \sin^2(t_1)y_1 = \sin^2(0.5)(1.0575) = 0.2431, \\
     k_2 &amp;= \sin^2(t_1 + h)(y_1 + hk_1) = \sin^2(0.5 + 0.5)(1.0575 + 0.5(0.2431)) = 0.8348, \\
     y_2 &amp;= y_1 + \frac{h}{2}(k_1 + k_2) = 1.0575 + \frac{0.5}{2}(0.2431 + 0.8349) = 1.3269.
-\end{align*}
+\end{align*}</p>
 </div>
 </div>
 </div>
@@ -13473,7 +13497,7 @@ $$y = e^{(t - \sin(t)\cos(t))/2}$$<p>The functions below defines the right-hand 
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr>
 <h2 id="Derivation-of-a-fourth-order-explicit-Runge-Kutta-method">Derivation of a fourth-order explicit Runge-Kutta method<a class="anchor-link" href="#Derivation-of-a-fourth-order-explicit-Runge-Kutta-method">&#182;</a></h2><p>The order conditions for a fourth-order ERK method are</p>
-\begin{align*}
+<p>\begin{align*}
     b_1 + b_2 + b_3 + b_4 &amp;= 1, \\
     b_2c_2 + b_3c_3 + b_4c_4 &amp;= \frac{1}{2}, \\
     b_2c_2^2 + b_3c_3^2 + b_4c_4^2 &amp;= \frac{1}{3}, \\
@@ -13482,13 +13506,13 @@ $$y = e^{(t - \sin(t)\cos(t))/2}$$<p>The functions below defines the right-hand 
     b_3a_{32} + b_4a_{42} &amp;= b_2(1 - c_2), \\
     b_4a_{43} &amp;= b_3(1 - c_3), \\
     0 &amp;= b_4(1 - c_4).
-\end{align*}<p>A feature of Runge-Kutta methods is the <strong>row sum condition</strong> that states</p>
+\end{align*}</p><p>A feature of Runge-Kutta methods is the <strong>row sum condition</strong> that states</p>
 $$c_i = \sum_{j=1}^s a_{ij},$$<p>i.e., the value of $c_i$ is equal to the sum of row $i$ of the matrix $A$. Therefore, the values of $a_{21}$, $a_{31}$ and $a_{41}$ are</p>
-\begin{align*}
+<p>\begin{align*}
     c_2 &amp;= a_{21}, \\
     c_3 &amp;= a_{31} + a_{32}, \\
     c_4 &amp;= a_{41} + a_{42} + a_{43}.
-\end{align*}<p>To solve for the unknowns we choose 4 values from $b_1$, $b_2$, $b_3$, $b_4$, $c_2$, $c_3$ and $c_4$ and solve the order conditions for the remaining unknowns.</p>
+\end{align*}</p><p>To solve for the unknowns we choose 4 values from $b_1$, $b_2$, $b_3$, $b_4$, $c_2$, $c_3$ and $c_4$ and solve the order conditions for the remaining unknowns.</p>
 
 </div>
 </div>
@@ -13568,7 +13592,7 @@ $$c_i = \sum_{j=1}^s a_{ij},$$<p>i.e., the value of $c_i$ is equal to the sum of
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>So $a_{21} = \frac{1}{2}$, $a_{31} = 0$, $a_{32} = \frac{1}{2}$, $a_{41} = 0$, $a_{42} = 0$, $a_{43} = 1$, $b_1 = \frac{1}{6}$, $b_3 = \frac{1}{3}$ and $b_4 = \frac{1}{6}$ and the method is</p>
 <p><a id="rk4"></a>
-\begin{align*}
+<p>\begin{align*}
     y_{n+1} &amp;= y_n + \frac{h}{6}(k_1 + 2  k_2 + 2  k_3 + k_4), \\
     k_1 &amp;= f(t_n, y_n), \\
     k_2 &amp;= f(t_n + \tfrac{1}{2}h, y_n + \tfrac{1}{2}hk_1), \\
@@ -13591,25 +13615,25 @@ $$\begin{array}{c|cccc}
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="Example-5">Example 5<a class="anchor-link" href="#Example-5">&#182;</a></h4><p>Calculate the first two steps of the RK4 method to calculate the solution of the IVP in <a href="#Example-2">example 2</a> using a step length of $h=0.5$</p>
-\begin{align*}
+<p>\begin{align*}
     y' &amp;= \sin^2(t)y, &amp; t &amp;\in [0, 5], &amp; y(0) &amp;= 1.
-\end{align*}<p>Step 1: $t_0 = 0$ and $y_0 = 1$</p>
-\begin{align*}
+\end{align*}</p><p>Step 1: $t_0 = 0$ and $y_0 = 1$</p>
+<p>\begin{align*}
     k_1 &amp;= \sin^2(t_0)y_0  = 1 \sin^2(0) = 0, \\
     k_2 &amp;= \sin^2(t_0 + \tfrac{1}{2} h)(y_0 + \tfrac{1}{2} h k_1)  = \sin^2(0 + \tfrac{1}{2} (0.5))(1 + \tfrac{1}{2} (0.5))  = 0.0612, \\
     k_3 &amp;= \sin^2(t_0 + \tfrac{1}{2} h)(y_0 + \tfrac{1}{2} h k_2) = \sin^2(0 + \frac{1}{2}(0.5))(1 + \tfrac{1}{2} (0.5) (0.0612)) = 0.0631, \\
     k_4 &amp;= \sin^2(t_0 + h)(y_0 + h k_3) = \sin^2(0 + 0.5)(1 + 0.5 (0.0621)) = 0.2443, \\
     y_1 &amp;= y_0 + \frac{h}{6}(k_1 + 2k_2 + 2k_3 + k_4) = 1 + \frac{0.5}{6}(0 + 2(0.0612) + 2(0.0621) + 0.2370) = 1.0411, \\
     t_1 &amp;= t_0 + h = 0 + 0.5 = 0.5.
-\end{align*}<p>Step 2: $t_1 = 0.5$ and $y_1 = 1.0411$</p>
-\begin{align*}
+\end{align*}</p><p>Step 2: $t_1 = 0.5$ and $y_1 = 1.0411$</p>
+<p>\begin{align*}
     k_1 &amp;= \sin^2(t_1)y_1 = 1.0411 \sin^2(0.5) = 0.2393, \\
     k_2 &amp;= \sin^2(t_1 + \tfrac{1}{2}h)(y_1 + \tfrac{1}{2}hk_1) = \sin^2(0.5 + \tfrac{1}{2}(0.5))(1.0411 + \tfrac{1}{2}(0.5)(0.2393)) = 0.5393, \\
     k_3 &amp;= \sin^2(t_1 + \tfrac{1}{2}h)(y_1 + \tfrac{1}{2}hk_2) = \sin^2(0.5 + \tfrac{1}{2}(0.5))(1.0411 + \tfrac{1}{2}(0.5)(0.5393)) = 0.6090, \\
     k_4 &amp;= \sin^2(t_1 + h)(y_1 + hk_3) = \sin^2(0.5 + 0.5)(1.0411 + (0.5)(0.6090)) = 1.1684, \\
     y_2 &amp;= y_1 + \frac{h}{6}(k_1 + 2k_2 + 2k_3 + k_4) = 1.0411 + \frac{0.5}{6}(0.2393 + 2(0.5393) + 2(0.6090) + 1.1684) = 1.3498, \\
     t_2 &amp;= t_1 + h = 0.5 + 0.5 = 1.0.
-\end{align*}
+\end{align*}</p>
 </div>
 </div>
 </div>
@@ -13767,107 +13791,43 @@ $$\begin{array}{c|cccc}
 <li>The coefficients of a Runge-Kutta methods are chosen to satisfy the <a href="#Derivation-of-a-fourth-order-explicit-Runge-Kutta-method">order conditions</a> which are derived by comparing the Taylor series expansion to the general form of the Runge-Kutta method to the equivalent Taylor series expandion of the first-order ODE $y'=f(t, y)$.</li>
 </ul>
 
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
 <hr>
-<h2 id="Exercises">Exercises<a class="anchor-link" href="#Exercises">&#182;</a></h2><ol>
+<h2 id="Exercises">Exercises<a class="anchor-link" href="#Exercises">&#182;</a></h2>
+<ol>
 <li>Write the following Runge-Kutta method in a Butcher tableau.</li>
-</ol>
-\begin{align*}
+<p>\begin{align*}
     y_{n+1} &amp;= y_n + \frac{h}{6}(k_1 + 4k_3 + k_4), \\
     k_1 &amp;= f(t_n, y_n), \\
     k_2 &amp;= f(t_n + \tfrac{1}{4}h, y_n + \tfrac{1}{4}hk_1), \\
     k_3 &amp;= f(t_n + \tfrac{1}{2}h, y_n + \tfrac{1}{2}hk_2), \\
     k_4 &amp;= f(t_n + h, y_n + h(k_1 - 2k_2 + 2k_3)).
-\end{align*}<ol>
+\end{align*}
+</p>
+<br>
 <li>Write out the equations for the following Runge-Kutta method.</li>
-</ol>
+<p>
 $$\begin{array}{c|cccc}
     0 \\
     \frac{1}{4} &amp; \frac{1}{4} \\
     \frac{1}{2} &amp; -\frac{1}{2} &amp; 1 \\
     1 &amp; \frac{1}{4} &amp; 0 &amp; \frac{3}{4} \\ \hline
     &amp; 0 &amp; \frac{4}{9} &amp; \frac{1}{3} &amp; \frac{2}{9}
-\end{array}$$<ol>
+\end{array}$$
+</p>
+<br>
 <li>Derive an explicit second-order Runge-Kutta method such that $b_1 = \tfrac{1}{3}$. Express your solution as a Butcher tableau. </li>
-</ol>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ol>
 <li>Derive an explicit fourth-order Runge-Kutta method such that $b_1=0$ and $c_2 = \tfrac{1}{5}$. Write your answer in the form of a Butcher tableau.</li>
-</ol>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ol>
 <li>Using pen and a calculator and working to 4 decimal places, apply your Runge-Kutta method derived in question 3 to solve the following IVP using a step length of $h=0.4$</li>
-</ol>
-\begin{align*}
+<p>\begin{align*}
     y' &amp;= ty, &amp; t &amp;\in [0, 2], &amp; y(0) &amp;= 1.
-\end{align*}<ol>
+\end{align*}</p>
+<br>
 <li><p>Repeat question 5 using the <a href="#rk4">RK4</a> method (the RK4 method is derived in <a href="#Example-4">example 4</a>).</p>
 </li>
 <li><p>Repeat question 5 using Python. The exact solution to this IVP is $y=e^{t^2/2}$. Produce a table comparing the numerical and exact solutions. Produce a plot of the numerical solutions and exact solution on the same set of axes.</p>
 </li>
 </ol>
 
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    </div>
-  </div>
 </body>
 
  

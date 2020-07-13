@@ -13233,13 +13233,14 @@ $$y_{n+1} = R(z)y_n.$$</p>
 </blockquote>
 <h4 id="Example-2">Example 2<a class="anchor-link" href="#Example-2">&#182;</a></h4><p>Determine the stability function for the Euler method.</p>
 <p>If the Euler method is used to solve and ODE of the form $y'=f(t, y)$ then the solution will be updated over one step using</p>
-$$y_{n+1} = y_n + hf(t_n, y_n),$$<p>then the local truncation errors will also update in the same step by</p>
-$$\tau_{n+1} = \tau_n + hf(t_n, \tau_n).$$<p>Applying the Euler method to the test ODE we have</p>
-$$y_{n+1} = y_n + h\lambda y_n.$$<p>Let $z = h\lambda$ then</p>
-\begin{align*}
+<p>$$y_{n+1} = y_n + hf(t_n, y_n),$$</p><p>then the local truncation errors will also update in the same step by</p>
+<p>$$\tau_{n+1} = \tau_n + hf(t_n, \tau_n).$$</p><p>Applying the Euler method to the test ODE we have</p>
+<p>$$y_{n+1} = y_n + h\lambda y_n.$$</p><p>Let $z = h\lambda$ then</p>
+<p>\begin{align*}
     y_{n+1} &amp;= y_n + zy_n \\
     &amp;= (1 + z) y_n.
-\end{align*}<p>So the stability function of the Euler method is $R(z) = 1 + z$.</p>
+\end{align*}</p>
+<p>So the stability function of the Euler method is $R(z) = 1 + z$.</p>
 
 </div>
 </div>
@@ -13341,11 +13342,11 @@ $$\text{region of absolute stability} = \{ z : z \in \mathbb{C}, |R(z)| \leq 1 \
 <blockquote><p><strong>Definition:</strong> The range of real values that the step length $h$ of a method can take that ensures a method remains absolutely stable is known as the <strong>interval of absolute stability</strong></p>
 </blockquote>
 <p>The region of absolute stability for the Euler method plotted above shows that the interval of absolute stability is</p>
-$$z \in [-2, 0],$$<p>i.e., the real part of the region of absolute stability.</p>
+<p>$$z \in [-2, 0],$$</p><p>i.e., the real part of the region of absolute stability.</p>
 <p>Since $z=h\lambda$ then
-\begin{align*}
+<p>\begin{align*}
     h \in \left[ -\frac{2}{\lambda}, 0\right],
-\end{align*}
+\end{align*}</p>
 so we have the condition</p>
 $$h \leq -\dfrac{2}{\lambda}.$$
 </div>
@@ -13355,7 +13356,7 @@ $$h \leq -\dfrac{2}{\lambda}.$$
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="Example-4">Example 4<a class="anchor-link" href="#Example-4">&#182;</a></h4><p>The step length for the Euler method when used to solve the ODE $y'=-2.3y$ must satisfy</p>
-$$h \leq \frac{2}{2.3} \approx 0.8696.$$<p>This is why in the first example the solution using $h=0.7$ was stable since $0.7 &lt; 0.8696$ and the solution using $h=1.0$ was unstable since $1 &gt; 0.8696$.</p>
+<p>$$h \leq \frac{2}{2.3} \approx 0.8696.$$</p><p>This is why in the first example the solution using $h=0.7$ was stable since $0.7 &lt; 0.8696$ and the solution using $h=1.0$ was unstable since $1 &gt; 0.8696$.</p>
 
 </div>
 </div>
@@ -13365,31 +13366,31 @@ $$h \leq \frac{2}{2.3} \approx 0.8696.$$<p>This is why in the first example the 
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr>
 <h3 id="Stability-function-of-a-Runge-Kutta-Method">Stability function of a Runge-Kutta Method<a class="anchor-link" href="#Stability-function-of-a-Runge-Kutta-Method">&#182;</a></h3><p>The general form of a Runge-Kutta method is</p>
-\begin{align*}
+<p>\begin{align*}
     y_{n+1} &amp;= y_n + h\sum_{i=1}^s b_i k_i, \\
     k_i &amp;= f(t_n + c_ih, y_n + h\sum_{j=1}^s a_{ij}k_j).
-\end{align*}<p>Let $Y_i = y_n + h\displaystyle\sum_{j=1}^s a_{ij}k_j$ and applying the method to the test ODE $y'=\lambda y$ the method becomes</p>
+\end{align*}</p><p>Let $Y_i = y_n + h\displaystyle\sum_{j=1}^s a_{ij}k_j$ and applying the method to the test ODE $y'=\lambda y$ the method becomes</p>
 <p><a id="yn+1"></a>
-\begin{align*}
+<p>\begin{align*}
     y_{n+1} &amp;= y_n + h\lambda \sum_{i=1}^s b_i Y_i, &amp;&amp; (1) \\
     Y_i &amp;= y_n + h\lambda \displaystyle\sum_{j=1}^s a_{ij} Y_j.
-\end{align*}</p>
+\end{align*}</p></p>
 <p>Let $z=h\lambda$ and expanding out the summations in the stage values gives</p>
-\begin{align*}
+<p>\begin{align*}
     Y_1 &amp;= y_n + z (a_{11}Y_1 + a_{12}Y_2 + \cdots + a_{1s}Y_s), \\
     Y_2 &amp;= y_n + z (a_{21}Y_1 + a_{22}Y_2 + \cdots + a_{2s}Y_s), \\
     &amp; \vdots \\
     Y_s &amp;= y_n + z (a_{s1}Y_1 + a_{s2}Y_2 + \cdots + a_{ss}Y_s).
-\end{align*}<p>Let $Y = (Y_1, Y_2, \ldots, Y_s)^T$ and $\mathbf{e} = (1, 1, \ldots, 1)^T$ then we can write the stage values in vector form as</p>
+\end{align*}</p><p>Let $Y = (Y_1, Y_2, \ldots, Y_s)^T$ and $\mathbf{e} = (1, 1, \ldots, 1)^T$ then we can write the stage values in vector form as</p>
 <p><a id="stage_values"></a>
-\begin{align*}
-    Y &amp;= \mathbf{e} y_n + z \,A \cdot Y. &amp;&amp; (2)
-\end{align*}</p>
-<p>Substituting $\displaystyle\sum_{i=1}^s b_iY_i = \mathbf{b}^T \cdot Y$ into equation <a href="#yn+1">(1)</a> gives the vector form of a Runge-Kutta method to solve the test ODE</p>
+<p>\begin{align*}
+    Y &amp;= \mathbf{e} y_n + z \,A  Y. &amp;&amp; (2)
+\end{align*}</p></p>
+<p>Substituting $\displaystyle\sum_{i=1}^s b_iY_i = \mathbf{b}^T  Y$ into equation <a href="#yn+1">(1)</a> gives the vector form of a Runge-Kutta method to solve the test ODE</p>
 <p><a id="update_y"></a>
-\begin{align*}
-    y_{n+1} &amp;= y_n + z\, \mathbf{b}^T \cdot Y. &amp;&amp; (3)
-\end{align*}</p>
+<p>\begin{align*}
+    y_{n+1} &amp;= y_n + z\, \mathbf{b}^T  Y. &amp;&amp; (3)
+\end{align*}</p></p>
 
 </div>
 </div>
@@ -13398,27 +13399,27 @@ $$h \leq \frac{2}{2.3} \approx 0.8696.$$<p>This is why in the first example the 
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Stability-function-of-an-explicit-Runge-Kutta-method">Stability function of an explicit Runge-Kutta method<a class="anchor-link" href="#Stability-function-of-an-explicit-Runge-Kutta-method">&#182;</a></h3><p>Rerranging equation <a href="#stage_values">(2)</a> we have</p>
-\begin{align*}
-    Y &amp;= (I - zA)^{-1} \cdot \mathbf{e} y_n,
-\end{align*}<p>and substituting into equation <a href="#update_y">(3)</a> gives</p>
-\begin{align*}
-    y_{n+1} &amp;= y_n + z\mathbf{b}^T \cdot (I - zA)^{-1} \cdot \mathbf{e} y_n\\
-    &amp;= (1 + z\mathbf{b}^T \cdot (I - zA)^{-1} \cdot \mathbf{e})y_n,
-\end{align*}<p>so the stability function is</p>
-$$R(z) = 1 + z\mathbf{b}^T \cdot (I - zA)^{-1} \cdot \mathbf{e}.$$<p></p>
+<p>\begin{align*}
+    Y &amp;= (I - zA)^{-1}  \mathbf{e} y_n,
+\end{align*}</p><p>and substituting into equation <a href="#update_y">(3)</a> gives</p>
+<p>\begin{align*}
+    y_{n+1} &amp;= y_n + z\mathbf{b}^T  (I - zA)^{-1}  \mathbf{e} y_n\\
+    &amp;= (1 + z\mathbf{b}^T  (I - zA)^{-1}  \mathbf{e})y_n,
+\end{align*}</p><p>so the stability function is</p>
+<p>$$R(z) = 1 + z\mathbf{b}^T  (I - zA)^{-1}  \mathbf{e}.$$</p>
 <p>Using the geometric series of matrices</p>
-$$(I - zA)^{-1} = \sum_{k=0}^\infty (zA)^k,$$<p>the stabilty function can be written as the infinite series</p>
+<p>$$(I - zA)^{-1} = \sum_{k=0}^\infty (zA)^k,$$</p><p>the stabilty function can be written as the infinite series</p>
 <p><a id="erk_stability_function"></a>
-\begin{align*}
-    R(z) &amp;= 1 + \sum_{k=0}^s \mathbf{b}^T \cdot A^k \cdot \mathbf{e} \, z^k. &amp;&amp; (4)
-\end{align*}</p>
+<p>\begin{align*}
+    R(z) &amp;= 1 + \sum_{k=0}^s \mathbf{b}^T  A^k  \mathbf{e} \, z^k. &amp;&amp; (4)
+\end{align*}</p></p>
 <p>Since the solution to the test ODE is $y=e^{\lambda t}$, over one step of an Explicit Runge-Kutta (ERK) method we would expect the local truncation errors to change at a rate of $e^z$,</p>
 <p><a id="e^z_expansion"></a>
-\begin{align*}
+<p>\begin{align*}
     e^z = \sum_{k=0}^\infty \frac{1}{k!}z^k = 1 + z + \frac{1}{2}z^2 + \frac{1}{6}z^3 + \frac{1}{24}z^4 + \cdots &amp;&amp; (5)
-\end{align*}</p>
+\end{align*}</p></p>
 <p>Comparing the coefficients of $z^k$ in $R(z)$ and $e^z$ we have</p>
-$$\frac{1}{k!} = \mathbf{b}^T\cdot A^{k-1} \cdot \mathbf{e},$$<p>which must be satisfied up to the $k$th term for an order $k$ ERK method to be stable.</p>
+<p>$$\frac{1}{k!} = \mathbf{b}^T A^{k-1}  \mathbf{e},$$</p><p>which must be satisfied up to the $k$th term for an order $k$ ERK method to be stable.</p>
 
 </div>
 </div>
@@ -13427,13 +13428,13 @@ $$\frac{1}{k!} = \mathbf{b}^T\cdot A^{k-1} \cdot \mathbf{e},$$<p>which must be s
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="Example-5">Example 5<a class="anchor-link" href="#Example-5">&#182;</a></h4><p>Determine the stability function for the following Runge-Kutta method and hences find its order.</p>
-$$\begin{array}{c|cccc}
+<p>$$\begin{array}{c|cccc}
     0 &amp; \cr
     \frac{1}{2} &amp; \frac{1}{2} \cr
     \frac{3}{4} &amp; 0 &amp; \frac{3}{4} \cr
     1 &amp; \frac{2}{9} &amp; \frac{1}{3} &amp; \frac{4}{9} \cr \hline
     &amp; \frac{7}{24} &amp; \frac{1}{4} &amp; \frac{1}{3} &amp; \frac{1}{8}
-    \end{array}$$<p>The code below calculates the coefficients and outputs the stability function $R(z)$ for this ERK method.</p>
+    \end{array}$$</p><p>The code below calculates the coefficients and outputs the stability function $R(z)$ for this ERK method.</p>
 
 </div>
 </div>
@@ -13486,7 +13487,7 @@ $$\begin{array}{c|cccc}
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>So the stability function is</p>
-$$R(z) = 1 + z + \frac{1}{2}z^2 + \frac{3}{16}z^3 + \frac{1}{48}z^4,$$<p>which agrees to the series expansion of $e^z$ up to and including the $z^2$ term. Therefore this ERK method is of order 2.</p>
+<p>$$R(z) = 1 + z + \frac{1}{2}z^2 + \frac{3}{16}z^3 + \frac{1}{48}z^4,$$</p><p>which agrees to the series expansion of $e^z$ up to and including the $z^2$ term. Therefore this ERK method is of order 2.</p>
 
 </div>
 </div>
@@ -13572,11 +13573,11 @@ $$R(z) = 1 + z + \frac{1}{2}z^2 + \frac{3}{16}z^3 + \frac{1}{48}z^4,$$<p>which a
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Stability-functions-of-implicit-methods">Stability functions of implicit methods<a class="anchor-link" href="#Stability-functions-of-implicit-methods">&#182;</a></h3><p>The simplest implicit method for solving ODEs is the <a href="https://en.wikipedia.org/wiki/Backward_Euler_method">Backwards Euler</a> method (also known as the implicit Euler method) which is</p>
 $$y_{n+1} = y_n + hf(t_n + h, y_{n+1}).$$<p>Applying this to solve the test ODE $y'=\lambda y$ and rerranging gives</p>
-\begin{align*}
+<p>\begin{align*}
     y_{n+1} &amp;= y_n + h\lambda y_{n+1} \\
     (1 - h\lambda)y_{n+1} &amp;= y_n \\
     y_{n+1} &amp;= \frac{1}{1-h\lambda} y_n,
-\end{align*}<p>therefore the stability function for the backwards Euler method is $R(z)=\dfrac{1}{1-z}$. Stability functions for implicit methods take the form of a rational fraction</p>
+\end{align*}</p><p>therefore the stability function for the backwards Euler method is $R(z)=\dfrac{1}{1-z}$. Stability functions for implicit methods take the form of a rational fraction</p>
 $$R(z) = \dfrac{P(z)}{Q(z)}.$$<h4 id="Example-7">Example 7<a class="anchor-link" href="#Example-7">&#182;</a></h4><p>The code below plots the region of absolute stability of the backwards Euler method.</p>
 
 </div>
@@ -13653,25 +13654,25 @@ $$R(z) = \dfrac{P(z)}{Q(z)}.$$<h4 id="Example-7">Example 7<a class="anchor-link"
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Stability-functions-for-an-implicit-Runge-Kutta-method">Stability functions for an implicit Runge-Kutta method<a class="anchor-link" href="#Stability-functions-for-an-implicit-Runge-Kutta-method">&#182;</a></h3><p>To determine the stability function for an Implicit Runge-Kutta (IRK) method we equations <a href="#stage_values">(2)</a> and <a href="update_y">(3)</a></p>
-\begin{align*}
-    y_{n+1} &amp;= y_n + z \mathbf{b}^T \cdot Y, \\
-    Y &amp;= \mathbf{e} y_n + z A \cdot Y.
-\end{align*}<p>Transposing these equations so that the terms not involving $y_n$ to the left-hand side gives</p>
-\begin{align*}
-    y_{n+1} - z \mathbf{b}^T \cdot Y &amp;= y_n, \\
-    (I - zA) \cdot Y &amp; = \mathbf{e}y_n.
-\end{align*}<p>which can be written as the matrix equation</p>
-$$
+<p>\begin{align*}
+    y_{n+1} &amp;= y_n + z \mathbf{b}^T Y, \\
+    Y &amp;= \mathbf{e} y_n + z A Y.
+\end{align*}</p><p>Transposing these equations so that the terms not involving $y_n$ to the left-hand side gives</p>
+<p>\begin{align*}
+    y_{n+1} - z \mathbf{b}^T  Y &amp;= y_n, \\
+    (I - zA)  Y &amp; = \mathbf{e}y_n.
+\end{align*}</p><p>which can be written as the matrix equation</p>
+<p>$$
 \pmatrix{ 1 &amp; -zb_1 &amp; -zb_2 &amp; \cdots &amp; -zb_s \\
-    0 &amp; 1 - za_{11} &amp; -za_{12} &amp; \cdots &amp; -za_{1s} \\
+    0 &amp; 1 - za_{11} &amp; -za_{12} &amp; s &amp; -za_{1s} \\
     0 &amp; -za_{21} &amp; 1 - za_{22} &amp; \cdots &amp; -za_{2s} \\
     0 &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots  \\
     0 &amp; -za_{s1} &amp; -za_{s2} &amp; \cdots &amp; 1-za_{ss}
     }
 \pmatrix{ y_{n+1} \\ Y_1 \\ Y_2 \\ \vdots \\ Y_s } = 
 \pmatrix{ y_n \\ y_n \\ \vdots \\ y_n \\ y_n}.
-$$<p>Using <a href="https://en.wikipedia.org/wiki/Cramer%27s_rule">Cramer's rule</a> to solve this system for $y_{n+1}$ we have</p>
-\begin{align*}
+$$</p><p>Using <a href="https://en.wikipedia.org/wiki/Cramer%27s_rule">Cramer's rule</a> to solve this system for $y_{n+1}$ we have</p>
+<p>\begin{align*}
 y_{n+1} &amp;= \frac{\det
 \pmatrix{ y_n &amp; -zb_1 &amp; -zb_2 &amp; \cdots &amp; -zb_s \\
     y_n &amp; 1 - za_{11} &amp; -za_{12} &amp; \cdots &amp; -za_{1s} \\
@@ -13679,8 +13680,8 @@ y_{n+1} &amp;= \frac{\det
     y_n &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots  \\
     y_m &amp; -za_{s1} &amp; -za_{s2} &amp; \cdots &amp; 1-za_{ss}
     }}{\det(I - zA)}.
-\end{align*}<p>Performing a row operation of subtracting the first row of matrix in the numerator from the other rows gives</p>
-\begin{align*}
+\end{align*}</p><p>Performing a row operation of subtracting the first row of matrix in the numerator from the other rows gives</p>
+<p>\begin{align*}
 y_{n+1} &amp;= \frac{\det
 \pmatrix{ y_n &amp; -zb_1 &amp; -zb_2 &amp; \cdots &amp; -zb_s \\
     0 &amp; 1 - za_{11} + zb_1 &amp; -za_{12} + zb_2 &amp; \cdots &amp; -za_{1s} + zb_s \\
@@ -13688,12 +13689,12 @@ y_{n+1} &amp;= \frac{\det
     0 &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots  \\
     0 &amp; -za_{s1} + zb_1 &amp; -za_{s2} + zb_2 &amp; \cdots &amp; 1-za_{ss} + zb_s
     }}{\det(I - zA)} \\
-    &amp;= \frac{y_n\det(I - z\,(A - \mathbf{e}\cdot \mathbf{b}^T))}{\det(I - z\,A)},
-\end{align*}<p>where $\mathbf{e}\cdot \mathbf{b}^T$ is a diagonal matrix with the elements of $\mathbf{b}$ on the main diagonal. Therefore the stability function of an Implicit Runge-Kutta (IRK) method can be written as</p>
+    &amp;= \frac{y_n\det(I - z\,(A - \mathbf{e} \mathbf{b}^T))}{\det(I - z\,A)},
+\end{align*}</p><p>where $\mathbf{e} \mathbf{b}^T$ is a diagonal matrix with the elements of $\mathbf{b}$ on the main diagonal. Therefore the stability function of an Implicit Runge-Kutta (IRK) method can be written as</p>
 <p><a id="irk_stability_function"></a>
-\begin{align*}
-    R(z) = \frac{\det(I - z\,(A - \mathbf{e}\cdot \mathbf{b}^T))}{\det(I - z\,A)}. &amp;&amp; (6)
-\end{align*}</p>
+<p>\begin{align*}
+    R(z) = \frac{\det(I - z\,(A - \mathbf{e} \mathbf{b}^T))}{\det(I - z\,A)}. &amp;&amp; (6)
+\end{align*}</p></p>
 
 </div>
 </div>
@@ -13726,13 +13727,13 @@ then the method is A-stable if and only if the following are satisfied
 </ol>
 </blockquote>
 <h4 id="Example-8">Example 8<a class="anchor-link" href="#Example-8">&#182;</a></h4><p>Determine the stability function of the following IRK and determine whether it is A-stable or not.</p>
-\begin{align*}
+<p>\begin{align*}
     \begin{array}{c|cc}
         \frac{1}{3} &amp; \frac{5}{12} &amp; -\frac{1}{12} \\
         1 &amp; \frac{3}{4} &amp; \frac{1}{4} \\ \hline
         &amp; \frac{3}{4} &amp; \frac{1}{4}
     \end{array}
-\end{align*}
+\end{align*}</p>
 </div>
 </div>
 </div>
@@ -13876,23 +13877,23 @@ If a numerical method is forced to use, in a certain interval of integration, a 
 <p>The stiffness of a problem depends on the system ODEs and the solver being applied to solve them and stiffness usually arises when there is a large variation in the behaviour of the individual ODEs in the system. Stiff systems require methods which are stable for larger values of the step length $h$ , e.g., implicit or A-stable methods.</p>
 <h3 id="Stiffness-ratio">Stiffness ratio<a class="anchor-link" href="#Stiffness-ratio">&#182;</a></h3><p>Consider a system of linear ODEs of the form</p>
 $$\mathbf{y}' = A \mathbf{y},$$<p>where $A$ is a coefficient matrix. We use the test ODE $y'=\lambda y$ to examine the stability of a numerical method so we need to transform our system into this form. Let $u_i$ be a transformation of $y_i$ and $u_i' = \lambda_iu_i$ where $\lambda$ is an <a href="https://en.wikipedia.org/wiki/Eigenvalues_and_eigenvectors">eigenvalue</a> of $A$ then</p>
-$$\pmatrix{ u_1' \cr u_2' \cr \vdots \cr u_N'} = 
+<p>$$\pmatrix{ u_1' \cr u_2' \cr \vdots \cr u_N'} = 
 \pmatrix{\lambda_1 \cr &amp; \lambda_2 \cr &amp; &amp; \ddots \cr &amp; &amp; &amp; \lambda_N} 
-\pmatrix{u_1 \cr u_2 \cr \vdots \cr u_N}$$<p>Let $V = (\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_N)$ be a matrix containing the <a href="https://en.wikipedia.org/wiki/Eigenvalues_and_eigenvectors">eigenvectors</a> $\mathbf{v}_i$ corresponding to the eigenvalues $\lambda_i$ of $A$ then</p>
+\pmatrix{u_1 \cr u_2 \cr \vdots \cr u_N}$$</p><p>Let $V = (\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_N)$ be a matrix containing the <a href="https://en.wikipedia.org/wiki/Eigenvalues_and_eigenvectors">eigenvectors</a> $\mathbf{v}_i$ corresponding to the eigenvalues $\lambda_i$ of $A$ then</p>
 <p>$AV = (A\mathbf{v}_1, A\mathbf{v}_2, \ldots, A\mathbf{v}_N),$</p>
 <p>and since $\lambda_i = A\mathbf{v}_i$</p>
-\begin{align*}
+<p>\begin{align*}
 \quad \,\,\,\,AV &amp;= (\lambda_1 \mathbf{v}_1, \lambda_2 \mathbf{v}_2, \ldots, \lambda_N\mathbf{v}_N) = V\Lambda \\
 V^{-1}AV &amp;= \Lambda.
-\end{align*}<p>So $\Lambda = V^{-1}AV$ is a linear transformation that diagonalises $A$ and the stability behaviour of $\mathbf{y}'=A\mathbf{y}$ can be analysed by considering $\mathbf{y}' = \Lambda \mathbf{y}$ . Since a stiff system will have a large variation in the step length and hence the values of $\lambda_i$ we can define a <strong>stiffness ratio</strong></p>
+\end{align*}</p><p>So $\Lambda = V^{-1}AV$ is a linear transformation that diagonalises $A$ and the stability behaviour of $\mathbf{y}'=A\mathbf{y}$ can be analysed by considering $\mathbf{y}' = \Lambda \mathbf{y}$ . Since a stiff system will have a large variation in the step length and hence the values of $\lambda_i$ we can define a <strong>stiffness ratio</strong></p>
 $$S = \frac{\max |\mathrm{Re}(\lambda_i)|}{\min |\mathrm{Re}(\lambda_i)|}.$$<h4 id="Example-9">Example 9<a class="anchor-link" href="#Example-9">&#182;</a></h4><p>Determine the stiffness ratio of the following ODE</p>
-$$y'' - 1001 y' - 1000 y = 0.$$<p>Writing this as a system of first-order ODEs</p>
-\begin{align*}
+<p>$$y'' - 1001 y' - 1000 y = 0.$$</p><p>Writing this as a system of first-order ODEs</p>
+<p>\begin{align*}
     y_1' &amp;= y_2',\\
     y_2' &amp;= 1001y_2 - 1000 y_1,
-\end{align*}<p>which can be written as the matrix equation</p>
-$$\pmatrix{y_1'\cr y_2'} = \pmatrix{0&amp;1\cr -1000 &amp; 1001}\pmatrix{y_1 \cr y_2}.$$<p>The eigenvalues of the coefficient matrix are $\lambda_1=1$ and $\lambda_2=1000$ so</p>
-$$S = \frac{1000}{1} = 1000$$<p>and this ODE can be considered stiff.</p>
+\end{align*}</p><p>which can be written as the matrix equation</p>
+<p>$$\pmatrix{y_1'\cr y_2'} = \pmatrix{0&amp;1\cr -1000 &amp; 1001}\pmatrix{y_1 \cr y_2}.$$</p><p>The eigenvalues of the coefficient matrix are $\lambda_1=1$ and $\lambda_2=1000$ so</p>
+<p>$$S = \frac{1000}{1} = 1000$$</p><p>and this ODE can be considered stiff.</p>
 
 </div>
 </div>
@@ -13924,47 +13925,42 @@ $$S = \frac{1000}{1} = 1000$$<p>and this ODE can be considered stiff.</p>
 <hr>
 <h2 id="Exercises">Exercises<a class="anchor-link" href="#Exercises">&#182;</a></h2><ol>
 <li>Determine the stability function of the following Runge-Kutta method</li>
-</ol>
-$$\begin{array}{c|ccccc}
+<p>$$\begin{array}{c|ccccc}
 0 \\
 \frac{1}{4} &amp; \frac{1}{4} \\
 \frac{1}{2} &amp; \frac{1}{2} &amp; 0 \\
 \frac{3}{4} &amp; \frac{1}{2} &amp; \frac{1}{4} \\
 0 &amp; 0 &amp; \frac{1}{6} &amp; -\frac{1}{3} &amp; \frac{1}{6} \\ \hline
 &amp; -1 &amp; \frac{2}{3} &amp; -\frac{1}{3} &amp; \frac{2}{3} &amp; 1
-\end{array}$$<ol>
+\end{array}$$</p>
+<br>
 <li>Determine the stability function of the following Runge-Kutta method. Is this an A-stable method?</li>
-</ol>
-$$\begin{array}{c|cc}
+<p>$$\begin{array}{c|cc}
 \frac{1}{4} &amp; \frac{7}{24} &amp; -\frac{1}{24} \\
 \frac{3}{4} &amp; \frac{13}{24} &amp; \frac{5}{24} \\  \hline
 &amp; \frac{1}{2} &amp; \frac{1}{2}
-\end{array}$$<ol>
+\end{array}$$</p>
+<br>
 <li>Plot the region of absolute stability for the following Runge-Kutta method.</li>
-</ol>
-$$\begin{array}{c|cc}
+<p>$$\begin{array}{c|cc}
 \frac{1}{3} &amp; \frac{1}{3} &amp; 0 \\
 1 &amp; 1 &amp; 0 \\ \hline
 &amp; \frac{3}{4} &amp; \frac{1}{4}
-\end{array}$$<ol>
+\end{array}$$</p>
+<br>
 <li>Determine the stability function of the following Runge-Kutta method. What is the order of the method?</li>
-</ol>
-$$\begin{array}{c|ccccc}
+<p>$$\begin{array}{c|ccccc}
 0 \\
 \frac{2}{7} &amp; \frac{2}{7} \\
 \frac{4}{7} &amp; -\frac{8}{35} &amp; \frac{4}{5} \\
 \frac{6}{7} &amp; \frac{29}{42} &amp; -\frac{2}{3} &amp; \frac{5}{6} \\
 1 &amp; \frac{1}{6} &amp; \frac{1}{6} &amp; \frac{5}{12} &amp; \frac{1}{4} \\ \hline
 &amp; \frac{11}{96} &amp; \frac{7}{24} &amp; \frac{35}{96} &amp; \frac{7}{48} &amp; \frac{1}{12}
-\end{array}$$<ol>
+\end{array}$$</p>
+<br>
 <li>Calculate the stiffness ratio for the following system of ODEs. What are the maximum step lengths that the Euler method is stable for solving each equation?</li>
-</ol>
-$$y_1' = -80.6y_1 + 119.4y_2, \\ y_2' = 79.6y_1 - 120.4y_2.$$
-</div>
-</div>
-</div>
-    </div>
-  </div>
+<p>$$y_1' = -80.6y_1 + 119.4y_2, \\ y_2' = 79.6y_1 - 120.4y_2.$$</p>
+
 </body>
 
  

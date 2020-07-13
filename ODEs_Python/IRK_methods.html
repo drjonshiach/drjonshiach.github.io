@@ -13101,10 +13101,10 @@ div#notebook {
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Implicit Runge-Kutta</strong> (IRK) methods and <strong>Explicit Runge-Kutta</strong> (ERK) methods are the two main types of the family of Runge-Kutta methods. ERK methods are straightforward to apply to solve an ordinary differential equation but are not suitable for <strong>stiff</strong> systems. This is why we need to also consider IRK methods.</p>
 <p>The general form of an IRK method to solve a first-order ODE $y'=f(t, y)$</p>
-\begin{align*}
+<p></p>\begin{align*}
     y_{n+1} &amp;= y_n + h\sum_{i=1}^s b_i k_i, \\
     k_i &amp;= f(t_n + c_ih, y_n + h\sum_{j=1}^s a_{ij}k_j).
-\end{align*}<p>Here $y_n = y(t_n)$ is the solution at a discrete point in the domain $t_n$, $y_{n+1} = y(t_n + h)$ is the solution at some small step $h$ along the domain, $a_{ij}$, $b_i$ and $c_i$ are coefficients that define a particular method and $k_i$ are intermediate <strong>stage values</strong> used to calculate $y_{n+1}$.</p>
+\end{align*}</p><p>Here $y_n = y(t_n)$ is the solution at a discrete point in the domain $t_n$, $y_{n+1} = y(t_n + h)$ is the solution at some small step $h$ along the domain, $a_{ij}$, $b_i$ and $c_i$ are coefficients that define a particular method and $k_i$ are intermediate <strong>stage values</strong> used to calculate $y_{n+1}$.</p>
 <p>It is common to represent the $a_{ij}$, $b_i$ and $c_i$ coefficients in a <strong>Butcher tableau</strong></p>
 $$\begin{array}{c|cccc}
 c_1 &amp; a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1s} \\
@@ -13115,12 +13115,15 @@ c_s &amp; a_{s1} &amp; a_{s2} &amp; \cdots &amp; a_{ss} \\ \hline
 \end{array}$$<p>Note that the $A$ matrix of an IRK method has non-zero elements in the upper triangular region and on the main diagonal whereas the $A$ method for an ERK method only has non-zero elements in the lower triangular region.</p>
 <h2 id="Determining-the-order-of-an-implicit-Runge-Kutta-method">Determining the order of an implicit Runge-Kutta method<a class="anchor-link" href="#Determining-the-order-of-an-implicit-Runge-Kutta-method">&#182;</a></h2><p><a id="order_conditions"></a>
 One of the differences between IRK and ERK methods is that an IRK method can achieve the same accuracy as an ERK method but using fewer stages. To determine the order of an IRK method we need to consider the <strong>order conditions</strong> that govern the values of $A$, $\mathbf{b}$ and $\mathbf{c}$ which are</p>
-\begin{align*}
+<p>\begin{align*}
     B(k):&amp; &amp; \sum_{i=1}^s b_ic_i^{j-1} &amp;= \frac{1}{j}, &amp; j &amp;= 1, 2, \ldots, k, &amp;&amp;&amp; (1) \\
     C(k):&amp; &amp; \sum_{j=1}^s a_{ij}c_j^{\ell-1} &amp;= \frac{1}{\ell}c_i^{\ell}, &amp; i &amp;= 1, 2, \ldots s, &amp; \ell &amp;= 1, 2, \ldots , k, &amp; (2) \\
     D(k):&amp; &amp; \sum_{i=1}^s b_ic_i^{\ell-1} a_{ij} &amp;= \frac{1}{\ell} b_j (1 - c_j^\ell), &amp; j &amp;= 1, 2, \ldots, s, &amp; \ell &amp;= 1, 2, \ldots, k. &amp; (3)
-\end{align*}<p>Let $G(k)$ represent a given IRK method has order $k$, then it can be shown that</p>
-$$B(k) \text{ and } C(\lfloor \tfrac{k}{2} \rfloor) \text{ and } D(\lfloor \tfrac{k}{2} \rfloor) \implies G(k).$$<p>So to determine the order of an IRK method we need to find the highest value of $k$ for which equation (1) is satisfied and which equations (2) and (3) are satisfied for $\lfloor \frac{k}{2} \rfloor$ (i.e. the integer part of $\frac{k}{2}$).</p>
+\end{align*}</p><p>Let $G(k)$ represent a given IRK method has order $k$, then it can be shown that</p>
+<p>
+$$B(k) \text{ and } C(\lfloor \tfrac{k}{2} \rfloor) \text{ and } D(\lfloor \tfrac{k}{2} \rfloor) \implies G(k).$$
+</p>
+<p>So to determine the order of an IRK method we need to find the highest value of $k$ for which equation (1) is satisfied and which equations (2) and (3) are satisfied for $\lfloor \frac{k}{2} \rfloor$ (i.e. the integer part of $\frac{k}{2}$).</p>
 
 </div>
 </div>
@@ -13134,21 +13137,21 @@ $$\begin{array}{c|cc}
 \frac{3}{4} &amp; \frac{1}{2} &amp; \frac{1}{4} \\ \hline
 &amp; \frac{1}{2} &amp; \frac{1}{2}
 \end{array} $$<p>Checking the $B(k)$ order condition:</p>
-\begin{align*}
+<p>\begin{align*}
     j &amp;= 1, &amp; \mathrm{LHS} &amp;= b_1c_1^0 + b_2c_2^0 = \frac{1}{2}\cdot 1 + \frac{1}{2}\cdot 1  = 1, &amp; \mathrm{RHS} &amp; = 1, \\
     j &amp;= 2, &amp; \mathrm{LHS} &amp;= b_1c_1^1 + b_2c_2^1 = \frac{1}{2} \cdot \frac{1}{4} + \frac{1}{2} \cdot \frac{3}{4} = \frac{1}{2}, &amp; \mathrm{RHS} &amp;= \frac{1}{2}, \\
     j &amp;= 3, &amp; \mathrm{LHS} &amp;= b_1c_1^2 + b_2c_2^2 = \frac{1}{2} \cdot \frac{1}{16} + \frac{1}{2} \cdot \frac{9}{16} = \frac{5}{16}, &amp; \mathrm{RHS} &amp;= \frac{1}{3}.
-\end{align*}<p>So the $B(k)$ order condition is satisfied up to $k=j=2$. Now we need to check whether $C(k)$ order condition is satisfied up to $k = 1$.</p>
-\begin{align*}
+\end{align*}</p><p>So the $B(k)$ order condition is satisfied up to $k=j=2$. Now we need to check whether $C(k)$ order condition is satisfied up to $k = 1$.</p>
+<p>\begin{align*}
     \ell &amp;= 1, &amp; i &amp;= 1, &amp; \mathrm{LHS} &amp;= a_{11}c_1^0 + a_{12}c_2^0 = \frac{1}{4} \cdot 1 + 0 \cdot 1 = \frac{1}{4}, &amp; \mathrm{RHS} &amp;= \frac{1}{\ell}c_1^\ell = \frac{1}{4}, \\
     \ell &amp;= 1, &amp; i &amp;= 2, &amp; \mathrm{LHS} &amp;= a_{21}c_1^0 + a_{22}c_2^0 = \frac{1}{2} \cdot 1 + \frac{1}{4} \cdot 1 = \frac{3}{4}, &amp; \mathrm{RHS} &amp;= \frac{1}{\ell}c_2^\ell = \frac{3}{4}
-\end{align*}<p>So the $C(k)$ order condition is satisfied up to $k=1$. Now we need to check whether the $D(k)$ order condition is satisfied up to $k=1$</p>
-\begin{align*}
+\end{align*}</p><p>So the $C(k)$ order condition is satisfied up to $k=1$. Now we need to check whether the $D(k)$ order condition is satisfied up to $k=1$</p>
+<p>\begin{align*}
     \ell &amp;= 1, &amp; j &amp;= 1, &amp; \mathrm{LHS} &amp;= b_1c_1^0a_{11} + b_2c_2^0 a_{21} = \frac{1}{2} \cdot 1 \cdot \frac{1}{4} + \frac{1}{2} \cdot 1 \cdot \frac{1}{2} = \frac{3}{8}, \\
     &amp; &amp; &amp; &amp; \mathrm{RHS} &amp;= \frac{1}{\ell}b_1(1 - c_1^\ell) = \frac{1}{2}\left(1 - \frac{1}{4}\right) = \frac{3}{8}, \\
     \ell &amp;= 1, &amp; j &amp;= 2, &amp; \mathrm{LHS} &amp;= b_1c_1^0a_{12} + b_2c_2^0a_{22} = \frac{1}{2}\cdot 1 \cdot 0 + \frac{1}{2} \cdot 1 \cdot \frac{1}{4} = \frac{1}{8}, \\
     &amp; &amp; &amp; &amp; \mathrm{RHS} &amp;= \frac{1}{\ell}b_2(1 - c_2^\ell) = \frac{1}{2}\left( 1 - \frac{3}{4} \right) = \frac{1}{8}.
-\end{align*}<p>So the $D(k)$ order condition is satisfied up to $k=1$. Therefore since $B(2)$, $C(1)$ and $D(1)$ are all satisfied this IRK method is order 2.</p>
+\end{align*}</p><p>So the $D(k)$ order condition is satisfied up to $k=1$. Therefore since $B(2)$, $C(1)$ and $D(1)$ are all satisfied this IRK method is order 2.</p>
 
 </div>
 </div>
@@ -13158,9 +13161,9 @@ $$\begin{array}{c|cc}
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr>
 <h2 id="Deriving-implicit-Runge-Kutta-methods">Deriving implicit Runge-Kutta methods<a class="anchor-link" href="#Deriving-implicit-Runge-Kutta-methods">&#182;</a></h2><h3 id="Gauss-Legendre-methods">Gauss-Legendre methods<a class="anchor-link" href="#Gauss-Legendre-methods">&#182;</a></h3><p><a href="https://en.wikipedia.org/wiki/Gauss%E2%80%93Legendre_method"><strong>Gauss-Legendre</strong></a> IRK methods are a family of methods that are derived using Gauss-Legendre quadrature. An $s$-stage Gauss-Legendre method has order $k=2s$. They are derived using <a href="https://en.wikipedia.org/wiki/Legendre_polynomials">Legendre polynomials</a> which can take the form</p>
-\begin{align*}
+<p>\begin{align*}
 P_n(t) = \sum_{k=0}^n {n \choose k}{n+k \choose k}(t - 1)^k. &amp; &amp; (4)
-\end{align*}<p>where ${n \choose k}$ is the <a href="https://en.wikipedia.org/wiki/Binomial_coefficient">Binomial coefficient</a>. The values of the $c_i$ coefficients are the roots of $P_{s}(t)$, the values of the $b_i$ coefficents are chosen to satisfy the $B(k)$ condition and the $a_{ij}$ coefficients are chosen to satisfy the $C(\lfloor \frac{k}{2} \rfloor)$ condition.</p>
+\end{align*}</p><p>where ${n \choose k}$ is the <a href="https://en.wikipedia.org/wiki/Binomial_coefficient">Binomial coefficient</a>. The values of the $c_i$ coefficients are the roots of $P_{s}(t)$, the values of the $b_i$ coefficents are chosen to satisfy the $B(k)$ condition and the $a_{ij}$ coefficients are chosen to satisfy the $C(\lfloor \frac{k}{2} \rfloor)$ condition.</p>
 
 </div>
 </div>
@@ -13170,19 +13173,19 @@ P_n(t) = \sum_{k=0}^n {n \choose k}{n+k \choose k}(t - 1)^k. &amp; &amp; (4)
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="Example-2">Example 2<a class="anchor-link" href="#Example-2">&#182;</a></h4><p>Derive a fourth-order Gauss-Legendre method.</p>
 <p>A fourth-order Gauss-Legendre method will have $s=2$ stages and the $c_i$ coefficients are chosen to satisfy $0 = P_{2}(t)$</p>
-\begin{align*}
+<p>\begin{align*}
     0 &amp;= {2 \choose 0}{2 \choose 0}(t - 1)^0 + {2 \choose 1}{3 \choose 1}(t - 1)^1 + {2 \choose 2}{4 \choose 2}(t - 1)^2 \\
     &amp;= 1 + 6t - 6 + 6t^2 - 12t + 6 \\
     &amp;= 6t^2 - 6t + 1,
-\end{align*}<p>therefore $c_1 = \frac{1}{2} - \frac{\sqrt{3}}{6}$ and $c_2 = \frac{1}{2} + \frac{\sqrt{3}}{6}$. The $b_i$ and $a_{ij}$ coefficients are chosen to satisfy the $B(4)$ and $C(2)$ order conditions respectively</p>
-\begin{align*}
+\end{align*}</p><p>therefore $c_1 = \frac{1}{2} - \frac{\sqrt{3}}{6}$ and $c_2 = \frac{1}{2} + \frac{\sqrt{3}}{6}$. The $b_i$ and $a_{ij}$ coefficients are chosen to satisfy the $B(4)$ and $C(2)$ order conditions respectively</p>
+<p>\begin{align*}
     b_1 + b_2 &amp;= 1, \\
     b_1c_1 + b_2c_2 &amp;= \frac{1}{2}, \\
     a_{11} + a_{12} &amp;= c_1, \\
     a_{21} + a_{22} &amp;= c_2, \\
     a_{11}c_1 + a_{12}c_2 &amp;= \frac{1}{2}c_1^2, \\
     a_{21}c_1 + a_{22}c_2 &amp;= \frac{1}{2}c_2^2.
-\end{align*}<p>The code below uses the <a href="https://docs.sympy.org/latest/modules/solvers/solvers.html"><code>solve</code></a> command from the <code>sympy</code> library to solve these order conditions for the coefficients $a_{ij}$ and $b_i$.</p>
+\end{align*}</p><p>The code below uses the <a href="https://docs.sympy.org/latest/modules/solvers/solvers.html"><code>solve</code></a> command from the <code>sympy</code> library to solve these order conditions for the coefficients $a_{ij}$ and $b_i$.</p>
 
 </div>
 </div>
@@ -13245,11 +13248,13 @@ P_n(t) = \sum_{k=0}^n {n \choose k}{n+k \choose k}(t - 1)^k. &amp; &amp; (4)
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>So $b_1 = \frac{1}{2}$, $b_2 = \frac{1}{2}$, $a_{11} = \frac{1}{4}$, $a_{12} = \frac{1}{4} - \frac{\sqrt{3}}{6}$, $a_{21} = \frac{1}{4} + \frac{\sqrt{3}}{6}$ and $a_{22} = \frac{1}{4}$. So the fourth-order Gauss-Legendre method is</p>
+<p>
 $$\begin{array}{c|cc}
 \frac{1}{2} - \frac{\sqrt{3}}{6} &amp; \frac{1}{4} &amp; \frac{1}{4} - \frac{\sqrt{3}}{6} \\
 \frac{1}{2} + \frac{\sqrt{3}}{6} &amp; \frac{1}{4} + \frac{\sqrt{3}}{6} &amp; \frac{1}{4} \\ \hline
 &amp; \frac{1}{2} &amp; \frac{1}{2}
 \end{array}$$
+</p>
 </div>
 </div>
 </div>
@@ -13258,9 +13263,9 @@ $$\begin{array}{c|cc}
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Radau-methods">Radau methods<a class="anchor-link" href="#Radau-methods">&#182;</a></h3><p>Gauss-Legendre methods give us maximal order for the number of stages, however sometimes it is better the sacrifice order to gain better stability properties (see <a href="stability.ipynb">Stability of Runge-Kutta Methods</a>). An $s$-stage <a href="https://en.wikipedia.org/wiki/List_of_Runge%E2%80%93Kutta_methods#Radau_methods"><strong>Radau</strong></a> IRK method has order $k=2s-1$ and is A-stable. The are two types of Radau methods: Radau IA and Radau IIA.</p>
 <h4 id="Radau-IA:">Radau IA:<a class="anchor-link" href="#Radau-IA:">&#182;</a></h4><p>Let $c_1=0$ and the other $c_i$ coefficients are the roots of</p>
-$$0 = P_s(t) + P_{s-1}(t)$$<p>The coefficients $b_i$ are chosen to satisfy the $B(2s)$ order condition and the coefficients $a_{ij}$ are chosen to satisfy the $C(s)$ order condition.</p>
+<p>$$0 = P_s(t) + P_{s-1}(t)$$</p><p>The coefficients $b_i$ are chosen to satisfy the $B(2s)$ order condition and the coefficients $a_{ij}$ are chosen to satisfy the $C(s)$ order condition.</p>
 <h4 id="Radau-IIA">Radau IIA<a class="anchor-link" href="#Radau-IIA">&#182;</a></h4><p>Let $c_2 = 1$ and the other $c_i$ coefficients are the roots of</p>
-$$0=P_s(t) - P_{s-1}(t)$$<p>The coefficients $b_i$ are chosen to satisfy the $B(2s)$ order condition and the coefficients $a_{ij}$ are chosen to satisfy the $C(s)$ order condition.</p>
+<p>$$0=P_s(t) - P_{s-1}(t)$$</p><p>The coefficients $b_i$ are chosen to satisfy the $B(2s)$ order condition and the coefficients $a_{ij}$ are chosen to satisfy the $C(s)$ order condition.</p>
 
 </div>
 </div>
@@ -13270,9 +13275,9 @@ $$0=P_s(t) - P_{s-1}(t)$$<p>The coefficients $b_i$ are chosen to satisfy the $B(
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="Example-3">Example 3<a class="anchor-link" href="#Example-3">&#182;</a></h4><p>Derive a third-order Radau IA method.</p>
 <p>A $k=3$ order Radau IA method will have $s=2$ stages. Let $c_1=0$ then the value of $c_2$ is the root of $0 = P_2(t) + P_1(t)$</p>
-\begin{align*}
+<p>\begin{align*}
     0 = (6t^2 - 6t + 1) + (2t - 1) = 6t^2 - 4t,
-\end{align*}<p>which is $c_2 = \frac{2}{3}$. The values of $b_i$ and $a_{ij}$ need to satisfy the $B(4)$ and $C(2)$ order conditions respectively with $k=2$ (same as in <a href="#Example-2">example 2</a>).</p>
+\end{align*}</p><p>which is $c_2 = \frac{2}{3}$. The values of $b_i$ and $a_{ij}$ need to satisfy the $B(4)$ and $C(2)$ order conditions respectively with $k=2$ (same as in <a href="#Example-2">example 2</a>).</p>
 
 </div>
 </div>
@@ -13328,11 +13333,12 @@ $$0=P_s(t) - P_{s-1}(t)$$<p>The coefficients $b_i$ are chosen to satisfy the $B(
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>So $a_{11} = 0$, $a_{12} = 0$, $a_{21} = \frac{1}{3}$,  $a_{22} = \frac{1}{3}$, $b_1 = \frac{1}{4}$ and $b_2 = \frac{3}{4}$ and the third-order Radau IA method is</p>
-$$\begin{array}{c|cc}
+<p>$$\begin{array}{c|cc}
 0 &amp; 0 &amp; 0 \\ 
 \frac{2}{3} &amp; \frac{1}{3} &amp; \frac{1}{3} \\ \hline
 &amp; \frac{1}{4} &amp; \frac{3}{4}
 \end{array}$$
+</p>
 </div>
 </div>
 </div>
@@ -13348,7 +13354,7 @@ c_s &amp; a_{s1} &amp; a_{s2} &amp; \cdots &amp; a_{ss} \\ \hline
 &amp; b_1 &amp; b_2 &amp; \cdots &amp; b_s
 \end{array}$$<p>The advantage of DIRK methods is that although the stage values $k_1, k_2, \ldots, k_s$ are defined using implicit equations, the solutions to these can be obtained sequentially since the equation for $k_i$ does not include $k_{i+1}, k_{i+2}, \ldots, k_s$.</p>
 <p>The coefficients of a $k$th-order DIRK method are chosen to satisfy the $B(k)$ and $C(\lfloor \frac{k}{2} \rfloor)$ order conditions along with</p>
-$$ \mathbf{b}^T \cdot A \cdot \mathbf{c} = \frac{1}{k!}$$
+<p>$$ \mathbf{b}^T \cdot A \cdot \mathbf{c} = \frac{1}{k!}$$</p>
 </div>
 </div>
 </div>
@@ -13357,14 +13363,14 @@ $$ \mathbf{b}^T \cdot A \cdot \mathbf{c} = \frac{1}{k!}$$
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="Example-4">Example 4<a class="anchor-link" href="#Example-4">&#182;</a></h4><p>Derive a 2-stage third-order DIRK method.</p>
 <p>Since $k=3$ the order conditions are (remembering that $a_{12}=0$)</p>
-\begin{align*}
+<p>\begin{align*}
     b_1 + b_2 &amp;= 1, \\
     b_1c_1 + b_2c_2 &amp;= \frac{1}{2}, \\
     b_1c_1^2 + b_2c_2^2 &amp;= \frac{1}{3}, \\
     a_{11} &amp;= c_1, \\
     a_{21} + a_{22} &amp;= c_2, \\
     b_1a_{11}c_1 + b_2(a_{21}c_1 + a_{22}c_2) &amp;= \frac{1}{6}
-\end{align*}<p>Here we have a system of 6 equations in 7 unknowns. Choosing $c_1=\frac{1}{4}$ and solving for the other coefficients.</p>
+\end{align*}</p><p>Here we have a system of 6 equations in 7 unknowns. Choosing $c_1=\frac{1}{4}$ and solving for the other coefficients.</p>
 
 </div>
 </div>
@@ -13448,13 +13454,13 @@ c_s &amp; a_{s1} &amp; a_{s2} &amp; \cdots &amp; c_1 \\ \hline
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="Example-5">Example 5<a class="anchor-link" href="#Example-5">&#182;</a></h4><p>Derive 2-stage third-order SDIRK method.</p>
 <p>Since $a_{11} = a_{22} = c_1$ the order conditions used in <a href="#Example-4">example 4</a> become</p>
-\begin{align*}
+<p>\begin{align*}
     b_1 + b_2 &amp;= 1, \\
     b_1c_1 + b_2c_2 &amp;= \frac{1}{2}, \\
     b_1c_1^2 + b_2c_2^2 &amp;= \frac{1}{3}, \\
     a_{21} + c_1 &amp;= c_2, \\
     b_1c_1^2 + b_2(a_{21}c_1 + c_1c_2) &amp;= \frac{1}{6}
-\end{align*}<p>Here we have 5 equations in 5 unknowns. Solving these order conditions:</p>
+\end{align*}</p><p>Here we have 5 equations in 5 unknowns. Solving these order conditions:</p>
 
 </div>
 </div>
@@ -13508,11 +13514,11 @@ c_s &amp; a_{s1} &amp; a_{s2} &amp; \cdots &amp; c_1 \\ \hline
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>So $a_{21} = \mp \frac{\sqrt{3}}{3}$, $b_1 = \frac{1}{2}$, $b_2 = \frac{1}{2}$, $c_1 = \frac{1}{2} \pm \frac{\sqrt{3}}{6}$ $c_2 = \mp \frac{\sqrt{3}}{6}$ and the third-order SDIRK method is</p>
-$$\begin{array}{c|cc}
+<p>$$\begin{array}{c|cc}
     \frac{1}{2} \pm \frac{\sqrt{3}}{6} &amp; \frac{1}{2} \pm \frac{\sqrt{3}}{6} \\
     \frac{1}{2} \mp \frac{\sqrt{3}}{6} &amp; \mp \frac{\sqrt{3}}{3} &amp; \frac{1}{2} \pm \frac{\sqrt{3}}{6} \\ \hline
     &amp; \frac{1}{2} &amp; \frac{1}{2}
-\end{array}$$
+\end{array}$$</p>
 </div>
 </div>
 </div>
@@ -13521,31 +13527,31 @@ $$\begin{array}{c|cc}
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr>
 <h2 id="Implementation-of-implicit-Runge-Kutta-methods">Implementation of implicit Runge-Kutta methods<a class="anchor-link" href="#Implementation-of-implicit-Runge-Kutta-methods">&#182;</a></h2><p>Recall that the general form of an IRK method is</p>
-\begin{align*}
+<p>\begin{align*}
     y_{n+1} &amp;= y_n + h\sum_{i=1}^s b_i k_i, \\
     k_i &amp;= f(t_n + c_ih, y_n + h\sum_{j=1}^s a_{ij}k_j).
-\end{align*}<p>Let $Y_i = y_n + h\displaystyle\sum_{j=1}^s a_{ij}k_j$ then</p>
-\begin{align*}
+\end{align*}</p><p>Let $Y_i = y_n + h\displaystyle\sum_{j=1}^s a_{ij}k_j$ then</p>
+<p>\begin{align*}
     y_{n+1} &amp;= y_n + h \sum_{i=1}^s b_i f(t_n + c_ih, Y_i), \\
     Y_i &amp;= y_n + h \sum_{j=1}^s a_{ij} f(t_n + c_jh, Y_j).
-\end{align*}<p>Expanding the summation in the expression for $Y_i$ gives</p>
-\begin{align*}
+\end{align*}</p><p>Expanding the summation in the expression for $Y_i$ gives</p>
+<p>\begin{align*}
     Y_1 &amp;= y_n + h (a_{11} f(t_n + c_1h, Y_1) + a_{12} f(t_n + c_2h, Y_2) + \cdots + a_{1s} f(t_n + c_sh, Y_s)), \\
     Y_2 &amp;= y_n + h (a_{21} f(t_n + c_1h, Y_1) + a_{22} f(t_n + c_2h, Y_2) + \cdots + a_{2s} f(t_n + c_sh, Y_s)), \\
     &amp; \vdots \\
     Y_s &amp;= y_n + h (a_{s1} f(t_n + c_1h, Y_1) + a_{s2} f(t_n + c_2h, Y_2) + \cdots + a_{ss} f(t_n + c_sh, Y_s)).
-\end{align*}<p>Let $Y = (Y_1, Y_2, \ldots, Y_s)^T$ then we can write</p>
+\end{align*}</p><p>Let $Y = (Y_1, Y_2, \ldots, Y_s)^T$ then we can write</p>
 <p><a id="irk_vector"></a>
-\begin{align*}
+<p>\begin{align*}
     Y =  y_n + h A \cdot f(t_n + \mathbf{c}h, Y),
-\end{align*}</p>
+\end{align*}</p></p>
 <p>and</p>
-\begin{align*}
+<p>\begin{align*}
     y_{n+1} = y_n + h \mathbf{b}^T \cdot f( t_n + \mathbf{c}h, Y). &amp;&amp; (5)
-\end{align*}<p>Since the equation for the stage values $Y$ is an implict equation we need to use an iterative method to solve this. The simplest iterative method is the <a id="jacobi"></a><a href="https://en.wikipedia.org/wiki/Jacobi_method">Jacobi method</a>. Let $Y^{k}$ denote an estimate of $Y$ and $Y^{k+1}$ denote an improved estimate. Using non-zero starting values for $Y^0$ the Jacobi method applied to calculate the stage values of an IRK is</p>
-\begin{align*}
+\end{align*}</p><p>Since the equation for the stage values $Y$ is an implict equation we need to use an iterative method to solve this. The simplest iterative method is the <a id="jacobi"></a><a href="https://en.wikipedia.org/wiki/Jacobi_method">Jacobi method</a>. Let $Y^{k}$ denote an estimate of $Y$ and $Y^{k+1}$ denote an improved estimate. Using non-zero starting values for $Y^0$ the Jacobi method applied to calculate the stage values of an IRK is</p>
+<p>\begin{align*}
     Y^{k+1} = y_n + h A \cdot f(t_n + \mathbf{c}h, Y^k). &amp;&amp; (6)
-\end{align*}<p>The method is iterated until the largest absolute difference between two successive iterations of the method is less than some small number $tol$, i.e.,</p>
+\end{align*}</p><p>The method is iterated until the largest absolute difference between two successive iterations of the method is less than some small number $tol$, i.e.,</p>
 $$\max |Y^{k+1} - Y^{k}| &lt; tol.$$<p>Note that the Jacobi method is computationally inefficient and in practice <a href="https://en.wikipedia.org/wiki/Newton%27s_method">Newton's method</a> is most commonly used to calculate $Y$. This requires calculation of a <a href="https://en.wikipedia.org/wiki/Jacobian_matrix_and_determinant">Jacobian matrix</a> and the solution to a linear system of equations and is outside of the scope of this course.</p>
 
 </div>
@@ -13560,18 +13566,18 @@ $$\begin{array}{c|cc}
 \frac{2}{3} &amp; \frac{1}{4} &amp; \frac{5}{12} \\ \hline
 &amp; \frac{1}{4} &amp; \frac{3}{4}
 \end{array}$$<p>to solve the IVP</p>
-\begin{align*}
+<p>\begin{align*}
     y' &amp;= \sin^2(t)y, &amp; t &amp;\in [0, 5], &amp; y(0) &amp;= 1,
-\end{align*}<p>using a step length of $h=0.5$.</p>
+\end{align*}</p><p>using a step length of $h=0.5$.</p>
 <p>Since $t_0=0$ and $y_0=1$ we need to iterate equation <a href="#jacobi">(6)</a> to solve for the stage values $Y$. Using $Y^0 = (1, 1)^T$:</p>
-\begin{align*}
+<p>\begin{align*}
     Y^1 &amp;= y_0 + h A f(t_0 + \mathbf{c}h, Y^0) = 1 + 0.5\pmatrix{\frac{1}{4} &amp; -\frac{1}{4} \\ \frac{1}{4} &amp; \frac{5}{12}} \pmatrix{\sin^2(0+0(0.5))(1) \\ \sin^2(0+\frac{2}{3}(0.5))(1)} = \pmatrix{0.9866 \\ 1.0223},  \\
     Y^2 &amp;= y_0 + h A f(t_0 + \mathbf{c}h, Y^1) = 1 + 0.5\pmatrix{\frac{1}{4} &amp; -\frac{1}{4} \\ \frac{1}{4} &amp; \frac{5}{12}} \pmatrix{\sin^2(0+0(0.5))(0.9866) \\ \sin^2(0 + \frac{2}{3}(0.5))(1.0223)} = \pmatrix{0.9863 \\ 1.0228}, \\
     Y^3 &amp;= y_0 + h A f(t_0 + \mathbf{c}h, Y^2) = 1 + 0.5\pmatrix{\frac{1}{4} &amp; -\frac{1}{4} \\ \frac{1}{4} &amp; \frac{5}{12}} \pmatrix{\sin^2(0+0(0.5))(0.9863) \\ \sin^2(0+\frac{2}{3}(0.5))(1.0228)} = \pmatrix{0.9863 \\ 1.0228}, \\
-\end{align*}<p>Here the values of $Y^2$ and $Y^3$ agree to 4 decimal places. Substituting these into equation <a href="#irk_vector">(5)</a></p>
-\begin{align*}
+\end{align*}</p><p>Here the values of $Y^2$ and $Y^3$ agree to 4 decimal places. Substituting these into equation <a href="#irk_vector">(5)</a></p>
+<p>\begin{align*}
     y_1 &amp;= y_0 + h \mathbf{b}^T \cdot f(t_0 + \mathbf{c}h, Y) = 1 + 0.5 \pmatrix{ \frac{1}{2} &amp; \frac{1}{2}} \pmatrix{ \sin^2(0+0(0.5))(0.9863) \\ \sin^2(0+\frac{2}{3}(0.5))(1.0228)} = 1.0411.
-\end{align*}
+\end{align*}</p>
 </div>
 </div>
 </div>
@@ -13788,87 +13794,25 @@ $$y = e^{(t - \sin(t)\cos(t))/2}$$<p>The functions below defines the right-hand 
 <h2 id="Exercises">Exercises<a class="anchor-link" href="#Exercises">&#182;</a></h2><ol>
 <li>Show that the Radau IA method derived in <a href="#Example-3">example 3</a> is a third-order method.</li>
 <li>Determine the order of the followign IRK method</li>
-</ol>
-\begin{align*}
+<p>\begin{align*}
 \begin{array}{c|ccc}
 0 &amp; 0 &amp; 0 \\
 \frac{1}{2} &amp; \frac{1}{4} &amp; \frac{1}{4} &amp; 0 \\
 1 &amp; 0 &amp; 1 &amp; 0 \\ \hline
 &amp; \frac{1}{6} &amp; \frac{2}{3} &amp; \frac{1}{6}
 \end{array}
-\end{align*}<ol>
+\end{align*}</p>
 <li>Derive a third-order Radau IIA method.</li>
-</ol>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ol>
 <li>Derive a two-stage second-order SDIRK method with $c_1=\frac{1}{4}$.</li>
-</ol>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ol>
-<li>Using pen and a calculator and working to 4 decimal places, calculate the first step of your IRK method derived in question 4 to solve the following IVP using a step length of $h=0.4$</li>
-</ol>
-\begin{align*}
+<li>Using pen and a calculator and working to 4 decimal places, calculate the first step of your IRK method derived in question 4 to solve the following IVP using a step length of $h=0.4$
+</li>
+<p>\begin{align*}
     y' &amp;= ty, &amp; t &amp;\in [0, 2], &amp; y(0) &amp;= 1.
-\end{align*}<ol>
+\end{align*}</p>
+<br>
 <li>The exact solution to the IVP in question 5 is $y=e^{t^2/2}$. Using Python repeat question 5 for the full domain and produce a table comparing the numerical and exact solutions and plot the numerical solutions and exact solutions on the same set of axes.</li>
 </ol>
 
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    </div>
-  </div>
 </body>
 
  
