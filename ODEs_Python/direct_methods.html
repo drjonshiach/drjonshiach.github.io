@@ -13088,15 +13088,15 @@ div#notebook {
 <hr>
 <h1 id="Direct-Methods-for-Solving-Linear-Systems-of-Equations">Direct Methods for Solving Linear Systems of Equations<a class="anchor-link" href="#Direct-Methods-for-Solving-Linear-Systems-of-Equations">&#182;</a></h1><h4 id="Learning-outcomes">Learning outcomes<a class="anchor-link" href="#Learning-outcomes">&#182;</a></h4><p>On successful completion of this page readers will be able to:</p>
 <ul>
-<li>Apply <a href="#LU-decomposition">LU decomposition</a> to factorise a square matrix into a product of a lower triangular and upper triangular matrices.</li>
+<li>Apply <a href="#LU-decomposition">LU decomposition</a> to decompose a square matrix into a product of a lower triangular and upper triangular matrices.</li>
 <li>Apply <a href="#Crout&#39;s-method">Crout's method</a> for solving a system of linear equations using LU decomposition.</li>
 <li>Solve a system of linear equations using LU decomposition with <a href="#Partial-pivoting">partial pivoting</a>.</li>
-<li>Apply <a href="#Cholesky-decomposition">Cholesky decomposition</a> to factorise a positive definite matrix into a product of a lower triangular matrix and its transpose.</li>
+<li>Apply <a href="#Cholesky-decomposition">Cholesky decomposition</a> to decompose a positive definite matrix into a product of a lower triangular matrix and its transpose.</li>
 <li>Solve a system of linear equations using the <a href="#The-Cholesky-Crout-method">Cholesky-Crout method</a>.</li>
-<li>Apply <a href="#QR-decomposition">QR decomposition</a> to factorise an $m\times n$ matrix into the product of an orthogonal matrix and an upper triangular matrix.</li>
+<li>Apply <a href="#QR-decomposition">QR decomposition</a> to decompose an $m\times n$ matrix into the product of an orthogonal matrix and an upper triangular matrix.</li>
 <li>Solve a <a href="#Solving-systems-of-linear-equations-using-QR-decomposition">systems of linear equations using QR decomposition</a>.</li>
 </ul>
-<h2 id="Systems-of-linear-equations">Systems of linear equations<a class="anchor-link" href="#Systems-of-linear-equations">&#182;</a></h2><p>Linear systems of equations appear often in the topics of numerical analysis and numerical solutions to differential equations. The methods that are applied to solve systems of linear equations fall into one of two categories: <strong>direct methods</strong> that use an algebraic approach and <strong>indirect methods</strong> that use an interative approach. On this page we will look at some common direct methods (indirect methods are covered in <a href="indirect_methods.ipynb">Indirect Methods</a>).</p>
+<h2 id="Systems-of-linear-equations">Systems of linear equations<a class="anchor-link" href="#Systems-of-linear-equations">&#182;</a></h2><p>Linear systems of equations appear often in the topics of numerical analysis and numerical solutions to differential equations. The methods that are applied to solve systems of linear equations fall into one of two categories: <strong>direct methods</strong> that use an algebraic approach and <strong>indirect methods</strong> that use an iterative approach. On this page we will look at some common direct methods (indirect methods are covered in <a href="indirect_methods.ipynb">Indirect Methods</a>).</p>
 <p>A <a href="https://en.wikipedia.org/wiki/System_of_linear_equations"><strong>system of linear equations</strong></a> with $m$ equations and $n$ unknowns can be expressed as</p>
 \begin{align*}
     a_{11} x_1 + a_{12} x_2 + \cdots + a_{1n} x_n &amp;= b_1, \\
@@ -13121,7 +13121,7 @@ div#notebook {
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr>
-<h2 id="LU-decomposition">LU decomposition<a class="anchor-link" href="#LU-decomposition">&#182;</a></h2><p><a href="https://en.wikipedia.org/wiki/LU_decomposition"><strong>LU decomposition</strong></a> (also known as <strong>LU factorisation</strong>) is a procedure for factorising a square matrix $A$ into the product of a <strong>lower triangular</strong> matrix $L$ and an <strong>upper triangular</strong> matrix $U$ such that</p>
+<h2 id="LU-decomposition">LU decomposition<a class="anchor-link" href="#LU-decomposition">&#182;</a></h2><p><a href="https://en.wikipedia.org/wiki/LU_decomposition"><strong>LU decomposition</strong></a> (also known as <strong>LU factorisation</strong>) is a procedure for decomposing a square matrix $A$ into the product of a <strong>lower triangular</strong> matrix $L$ and an <strong>upper triangular</strong> matrix $U$ such that</p>
 $$A = L U.$$<p>The advantage of writing a matrix as a product of $L$ and $U$ is that the solution to a triangular set of equations is easy to calculate using forward and back substitution.</p>
 <p>Consider the LU decomposition of a $3\times 3$ matrix</p>
 \begin{align*}
@@ -13156,13 +13156,13 @@ $$\begin{pmatrix}
         \ell_{21} u_{11} &amp; \ell_{21} u_{12} + u_{22} &amp; \ell_{21}u_{13} + u_{23} \\
         \ell_{31} u_{11} &amp; \ell_{31} u_{12} + \ell_{32} u_{22} &amp; \ell_{31} u_{13} + \ell_{32} u_{23} + u_{33}
     \end{pmatrix}.$$<p>The elements in the lower triangular region ($i&gt;j$) are</p>
-$$a_{ij} = \sum_{k=1}^j \ell_{ik}u_{kj} = \ell_{ij}u_{jj} + \sum_{k=1}^{j-1} \ell_{ik}u_{kj},$$<p>which is rerranged to</p>
+$$a_{ij} = \sum_{k=1}^j \ell_{ik}u_{kj} = \ell_{ij}u_{jj} + \sum_{k=1}^{j-1} \ell_{ik}u_{kj},$$<p>which is rearranged to</p>
 <p><a id="LU_lij"></a>
 \begin{align*}
     \ell_{ij} &amp;= \frac{1}{u_{jj}} \left( a_{ij} - \sum_{k=1}^{j-1} \ell_{ik} u_{kj}\right). &amp;&amp; (1)
 \end{align*}</p>
 <p>For the elements in the upper triangular region ($i\leq j$) we have</p>
-$$a_{ij} = u_{ij} + \sum_{k=1}^{i-1} \ell_{ik}u_{kj},$$<p>which is rerranged to</p>
+$$a_{ij} = u_{ij} + \sum_{k=1}^{i-1} \ell_{ik}u_{kj},$$<p>which is rearranged to</p>
 <p><a id="LU_uij"></a>
 \begin{align*}
     u_{ij} &amp;= a_{ij} - \sum_{k=1}^{i-1} \ell_{ik}u_{kj}. &amp;&amp; (2)
@@ -13184,14 +13184,7 @@ $$a_{ij} = u_{ij} + \sum_{k=1}^{i-1} \ell_{ik}u_{kj},$$<p>which is rerranged to<
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="Example-1">Example 1<a class="anchor-link" href="#Example-1">&#182;</a></h4><p>Determine the LU decomposition of the following matrix</p>
-$$A = \begin{pmatrix} 1 &amp; 3 &amp; 0 \\ 2 &amp; -4 &amp; -1 \\ -3 &amp; 1 &amp; 2 \end{pmatrix}.$$
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Stepping through the columns of $A$</p>
+$$A = \begin{pmatrix} 1 &amp; 3 &amp; 0 \\ 2 &amp; -4 &amp; -1 \\ -3 &amp; 1 &amp; 2 \end{pmatrix}.$$<p>Stepping through the columns of $A$</p>
 \begin{align*}
     j &amp;= 1: &amp; u_{11} &amp;= a_{11} = 1, \\
     &amp;&amp; \ell_{21} &amp;= \frac{1}{u_{11}}(a_{21}) = \frac{1}{1}(2) = 2, \\
@@ -13508,7 +13501,7 @@ x_3 = 5.0
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Example-5">Example 5<a class="anchor-link" href="#Example-5">&#182;</a></h4><p>Apply partial pivotting the following matrix and determine the permutation matrix $P$</p>
+<h4 id="Example-5">Example 5<a class="anchor-link" href="#Example-5">&#182;</a></h4><p>Apply partial pivoting the following matrix and determine the permutation matrix $P$</p>
 $$A = \begin{pmatrix} 0 &amp; 1 &amp; -2 \\ 1 &amp; 0 &amp; 2 \\ 3 &amp; -2 &amp; 2 \end{pmatrix}.$$<p>Using row operations</p>
 \begin{align*}
     \begin{pmatrix} 0 &amp; 1 &amp; -2 \\ 1 &amp; 0 &amp; 2 \\ 3 &amp; -2 &amp; 2 \end{pmatrix}
@@ -13630,7 +13623,7 @@ $$\begin{pmatrix} 0 &amp; 0 &amp; 1 \\1 &amp; 0 &amp; 0 \\ 0 &amp; 1 &amp; 0 \en
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr>
-<h2 id="LU-decomposition-with-partial-pivoting">LU decomposition with partial pivoting<a class="anchor-link" href="#LU-decomposition-with-partial-pivoting">&#182;</a></h2><p>To calculate <strong>LU decomposition with partial pivoting</strong> uses the process as before with the exception that the coefficient matrix has partial pivotting applied prior to the calculation of $L$ and $U$, i.e.,</p>
+<h2 id="LU-decomposition-with-partial-pivoting">LU decomposition with partial pivoting<a class="anchor-link" href="#LU-decomposition-with-partial-pivoting">&#182;</a></h2><p>To calculate <strong>LU decomposition with partial pivoting</strong> uses the process as before with the exception that the coefficient matrix has partial pivoting applied prior to the calculation of $L$ and $U$, i.e.,</p>
 $$LU = PA.$$<p>Using partial pivoting on the coefficient matrix $A$ when solving the system of linear equations $A\mathbf{x}=\mathbf{b}$ results in</p>
 $$PA \mathbf{x} = \mathbf{b},$$<p>and since $P^{-1}=P$ (the inverse operation of swapping any two rows is to simply swap them back) then</p>
 $$A \mathbf{x} = P\mathbf{b}.$$<p>So Crout's algorithm when using LU decomposition with partial pivoting requires solving the following for $\mathbf{y}$ and $\mathbf{x}$</p>
@@ -13644,7 +13637,7 @@ $$A \mathbf{x} = P\mathbf{b}.$$<p>So Crout's algorithm when using LU decompositi
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Example-7">Example 7<a class="anchor-link" href="#Example-7">&#182;</a></h4><p>Solve the following system of linear equations using Crout's algorithm with LUP decomposition</p>
+<h4 id="Example-7">Example 7<a class="anchor-link" href="#Example-7">&#182;</a></h4><p>Solve the following system of linear equations using Crout's algorithm using LU decomposition with partial pivoting</p>
 \begin{align*}
 \begin{pmatrix} 0 &amp; 1 &amp; -2 \\ 1 &amp; 0 &amp; 2 \\ 3 &amp; -2 &amp; 2 \end{pmatrix}
 \begin{pmatrix} x_1 \\ x_2 \\ x_3 \end{pmatrix} = 
@@ -13704,7 +13697,7 @@ $$A \mathbf{x} = P\mathbf{b}.$$<p>So Crout's algorithm when using LU decompositi
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Define system of linear equations</span>
@@ -13760,9 +13753,9 @@ x_3 = -3.0
 <hr>
 <h2 id="Cholesky-decomposition">Cholesky decomposition<a class="anchor-link" href="#Cholesky-decomposition">&#182;</a></h2><p><a href="https://en.wikipedia.org/wiki/Cholesky_decomposition">Cholesky decomposition</a> is an efficient decomposition method that can be used when a square matrix is <a href="https://en.wikipedia.org/wiki/Definite_symmetric_matrix"><strong>positive definite</strong></a>.</p>
 <p><a id="positive_definite"></a></p>
-<blockquote><p><strong>Definition</strong> A symmetrix square matrix $A$ is said to be positive definite if $\mathbf{x}^T A \mathbf{x}$ is positive for any non-zero column vector $\mathbf{x}$.</p>
+<blockquote><p><strong>Definition</strong> A symmetric square matrix $A$ is said to be positive definite if $\mathbf{x}^T A \mathbf{x}$ is positive for any non-zero column vector $\mathbf{x}$.</p>
 </blockquote>
-<p>Given a positive definite matrix $A$ then Cholesky decomposition factorises $A$ into the product of a lower triangular matrix $L$ and its transpose, i.e.,</p>
+<p>Given a positive definite matrix $A$ then Cholesky decomposition is used to decompose $A$ into the product of a lower triangular matrix $L$ and its transpose, i.e.,</p>
 $$A = LL^T.$$<p>Consider the Cholesky decomposition of a $3\times 3$ matrix</p>
 \begin{align*}
     \begin{pmatrix}
@@ -13787,7 +13780,7 @@ $$A = LL^T.$$<p>Consider the Cholesky decomposition of a $3\times 3$ matrix</p>
     \end{pmatrix}.
 \end{align*}<p>The elements on the main diagonal are</p>
 $$a_{jj} = \ell_{jj}^2 + \sum_{k=1}^{j-1} \ell_{jk}^2,$$<p>and the other elements are</p>
-$$a_{ij} = \sum_{k=1}^j \ell_{ik}\ell_{jk} = \ell_{jj}\ell_{ij} + \sum_{k=1}^{j-1} \ell_{ik} \ell_{jk},$$<p>Rerranging these two expressions gives</p>
+$$a_{ij} = \sum_{k=1}^j \ell_{ik}\ell_{jk} = \ell_{jj}\ell_{ij} + \sum_{k=1}^{j-1} \ell_{ik} \ell_{jk},$$<p>Rearranging these two expressions gives</p>
 \begin{align*}
     \ell_{ij} &amp;= 
     \begin{cases}
@@ -14022,18 +14015,18 @@ x_2 = 1.0
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr>
-<h2 id="QR-decomposition">QR decomposition<a class="anchor-link" href="#QR-decomposition">&#182;</a></h2><p>The methods of LU and Cholesky decomposition can be used to solve a system of linear equations where the number of equations is the same as the number of unknowns so it has a single unique solution (if it exists). QR factorisation can be used to solve an <a href="https://en.wikipedia.org/wiki/Overdetermined_system"><strong>overdetermined</strong></a> system where the number of equations exceeds the number of unknowns. Overdetermined systems rarely have a unique solution but we can calculate an approximation that most closely satisfies all equations in the system.</p>
-<p>The $m\times n$ coefficient matrix $A$ is factorised into the product of two matrices such that</p>
+<h2 id="QR-decomposition">QR decomposition<a class="anchor-link" href="#QR-decomposition">&#182;</a></h2><p>The methods of LU and Cholesky decomposition can be used to solve a system of linear equations where the number of equations is the same as the number of unknowns so it has a single unique solution (if it exists). QR decomposition can be used to solve an <a href="https://en.wikipedia.org/wiki/Overdetermined_system"><strong>overdetermined</strong></a> system where the number of equations exceeds the number of unknowns. Overdetermined systems rarely have a unique solution but we can calculate an approximation that most closely satisfies all equations in the system.</p>
+<p>The $m\times n$ coefficient matrix $A$ is decomposed into the product of two matrices such that</p>
 $$A = QR,$$<p>where $Q$ is an orthogonal matrix and $R$ is an upper triangular matrix.</p>
 <blockquote><p><strong>Definition</strong> A set of vectors $\{\mathbf{v}_1, \mathbf{v}_2, \mathbf{v}_3, \ldots \}$ is said to be <strong>orthogonal</strong> if $\mathbf{v}_i \cdot \mathbf{v}_j = 0$ for $i \neq j$. Furthermore the set is said to be <strong>orthonormal</strong> if
-<br>
+<br><br>
 \begin{align*}
     \mathbf{v}_i \cdot \mathbf{v}_j = \begin{cases} 1, &amp; i=j, \\ 0, &amp; i\neq j. \end{cases}
 \end{align*}</p>
 </blockquote>
-<p><a id="orthongonal_matrix"></a></p>
-<blockquote><p><strong>Definition</strong> An <strong>orthgonal matrix</strong> is a matrix where the columns are a set of orthonormal vectors. If $A$ is an orthongal matrix if 
-<br>
+<p><a id="orthogonal_matrix"></a></p>
+<blockquote><p><strong>Definition</strong> An <strong>orthogonal matrix</strong> is a matrix where the columns are a set of orthonormal vectors. If $A$ is an orthogonal matrix if 
+<br><br>
 $$A^T A = I.$$</p>
 </blockquote>
 
@@ -14088,7 +14081,7 @@ $$A^T A = I.$$</p>
         \vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
         0 &amp; 0 &amp; 0 &amp; \cdots &amp; \mathbf{q}_n \cdot \mathbf{a}_n
     \end{pmatrix}
-\end{align*}<p>To calculate the QR decomposition of an $m \times n$ matrix $A$ using the Gram-Scmidt process we use the following steps.</p>
+\end{align*}<p>To calculate the QR decomposition of an $m \times n$ matrix $A$ using the Gram-Schmidt process we use the following steps.</p>
 <p>For column 1 only:</p>
 \begin{align*}
     r_{11} &amp;= \|\mathbf{a}_1\|, \\
@@ -14141,7 +14134,7 @@ $$A^T A = I.$$</p>
     \mathbf{q}_3 &amp;= \frac{\mathbf{u}_3}{r_{33}} = \frac{1}{4}
     \begin{pmatrix} 2 \\ -2 \\ 2 \\ -2 \end{pmatrix} = 
     \begin{pmatrix} 1/2 \\ -1/2 \\ 1/2 \\ -1/2 \end{pmatrix}.
-\end{align*}<p>Therefore the QR factorisation of $A$ is</p>
+\end{align*}<p>Therefore the QR decomposition of $A$ is</p>
 \begin{align*}
     Q &amp;= \begin{pmatrix} 1/2 &amp; -1/2 &amp; 1/2 \\ 1/2 &amp; 1/2 &amp; -1/2 \\ 1/2 &amp; 1/2 &amp; 1/2 \\ 1/2 &amp; -1/2 &amp; -1/2 \end{pmatrix}, &amp;
     R &amp;= \begin{pmatrix} 2 &amp; 3 &amp; 2 \\ 0 &amp; 5 &amp; -2 \\ 0 &amp; 0 &amp; 4 \end{pmatrix}.
@@ -14386,13 +14379,13 @@ x_2 = 3.0
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr>
 <h2 id="Summary">Summary<a class="anchor-link" href="#Summary">&#182;</a></h2><ul>
-<li><a href="#LU-decomposition">LU decomposition</a> factorises a square matrix in the product of a lower triangular matrix $L$ and an upper triangular matrix $U$.</li>
+<li><a href="#LU-decomposition">LU decomposition</a> decomposes a square matrix in the product of a lower triangular matrix $L$ and an upper triangular matrix $U$.</li>
 <li><a href="#Crout&#39;s-method">Crout's method</a> is used to solve a system of linear equations using LU decomposition by apply forward and back substitution.</li>
 <li><a href="#Partial-pivoting">Partial pivoting</a> ensures that the pivot element has a larger absolute value than the elements in the column below the pivot. This eliminates the problems caused when the pivot element is small resulting in computational rounding errors.</li>
-<li><a href="#Cholesky-decomposition">Cholesky decomposition</a> can be applied to factorise a <a href="#positive_definite">positive definite</a> matrix into the product of a lower triangular matrix $L$ and its transpose. Cholesky decomposition of a $n\times n$ matrix requires fewer operations than the equivalent LU decomposition.</li>
-<li><a href="#QR-Decomposition">QR decomposition</a> can be applied to factorise an $m\times n$ matrix into  the product of an $m \times n$ <a href="#orthogonal_matrix">orthogonal matrix</a> $Q$ and an $n\times n$ upper triangular matrix $R$. QR decomposition can be calculated using the <a href="#Calculating-QR-decomposition-using-the-Gram-Schmidt-process">Gram-Scmidt</a> where an orthonormal basis is determined by recursively subtracting the vector projection of non-orthogonal vectors onto known basis vectors.</li>
+<li><a href="#Cholesky-decomposition">Cholesky decomposition</a> can be applied to decompose a <a href="#positive_definite">positive definite</a> matrix into the product of a lower triangular matrix $L$ and its transpose. Cholesky decomposition of a $n\times n$ matrix requires fewer operations than the equivalent LU decomposition.</li>
+<li><a href="#QR-Decomposition">QR decomposition</a> can be applied to decompose an $m\times n$ matrix into  the product of an $m \times n$ <a href="#orthogonal_matrix">orthogonal matrix</a> $Q$ and an $n\times n$ upper triangular matrix $R$. QR decomposition can be calculated using the <a href="#Calculating-QR-decomposition-using-the-Gram-Schmidt-process">Gram-Schmidt</a> where an orthonormal basis is determined by recursively subtracting the vector projection of non-orthogonal vectors onto known basis vectors.</li>
 <li>QR decomposition can be used to calculate a solution to an overdetermined system when the number of equations is bigger than the number of unknowns.</li>
-<li>The advantage of using decomposition methods for solving systems of linear equations is that a change in the constant values do not require a reclalculation of the decomposition as opposed to <a href="https://en.wikipedia.org/wiki/Gaussian_elimination">Gaussian elimination</a>.</li>
+<li>The advantage of using decomposition methods for solving systems of linear equations is that a change in the constant values do not require a recalculation of the decomposition as opposed to <a href="https://en.wikipedia.org/wiki/Gaussian_elimination">Gaussian elimination</a>.</li>
 </ul>
 <p>Next: <a href="indirect_methods.ipynb">Indirect Methods</a></p>
 
@@ -14437,7 +14430,7 @@ x_2 = 3.0
 \end{align*}
 <br></p>
 </li>
-<li><p>Solve the systems from question 1 using <a href="#Partial-pivoting">LU decomposition with partial pivotting</a> with a pen and calculator.</p>
+<li><p>Solve the systems from question 1 using <a href="#Partial-pivoting">LU decomposition with partial pivoting</a> with a pen and calculator.</p>
 </li>
 </ol>
 <ol>
