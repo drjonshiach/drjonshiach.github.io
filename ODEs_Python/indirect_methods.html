@@ -13127,7 +13127,7 @@ x_i^{(k+1)} &amp;= \frac{1}{a_{ii}} \left( b_i - \sum_{j=1, j\neq i}^N a_{ij} x_
     \mathbf{r} &amp;= \mathbf{b} - A \mathbf{x}^{(k)}, &amp;&amp; (3)
 \end{align*}</p>
 <p>so that as $\mathbf{x}^{(k)} \to \mathbf{x}$, $\mathbf{r} \to \mathbf{0}$. The convergence criteria used is</p>
-$$|\mathbf{r}| &lt; tol,$$<p>where $tol$ is some small number. The smaller $tol$ is, the closer $\mathbf{x}^{(k)}$ is to the exact solution but this will require more iterations. In practice a compromise is made between the accuracy required and the computational resources available. Typical values of $tol$ are around $10^{-4}$ or maybe even $10^{-6}$.</p>
+$$\|\mathbf{r}\| &lt; tol,$$<p>where $tol$ is some small number. The smaller $tol$ is, the closer $\mathbf{x}^{(k)}$ is to the exact solution but this will require more iterations. In practice a compromise is made between the accuracy required and the computational resources available. Typical values of $tol$ are around $10^{-4}$ or maybe even $10^{-6}$.</p>
 <h4 id="Example-1">Example 1<a class="anchor-link" href="#Example-1">&#182;</a></h4><p>Calculate the first iteration of the Jacobi method to solve the following system of linear equations and calculate the norm of the residual.</p>
 \begin{align*}
     4x_1 + 3x_2 &amp;= -2, \\
@@ -13148,9 +13148,9 @@ $$\mathbf{r}^{(1)} = \mathbf{b} - A \mathbf{x}^{(1)}
 = \pmatrix{-2 \cr -8 \cr 14}  - 
 \pmatrix{4 &amp; 3 &amp; 0 \cr 3 &amp; 4 &amp; -1 \cr 0 &amp; -1 &amp; 4} 
 \pmatrix{-0.5 \cr -2 \cr 3} = 
-\pmatrix{ 6 \cr 5 \cr -2 },$$<p>and the norm of the residual is $|\mathbf{r}^{(1)}|=\sqrt{6^2 + 5^2 + (-2)^2} = 8.06226$.</p>
-<h4 id="Example-2">Example 2<a class="anchor-link" href="#Example-2">&#182;</a></h4><p>Write a MATLAB program to solve the system of linear equations from <a href="#Example-1">example 1</a> using the Jacobi method ceasing iterations when $|\mathbf{r}| &lt; 10^{-4}$.</p>
-<p>The function called <code>jacobi</code> below solves a linear system of equations defined by the arrays <code>A</code> and <code>b</code>. Iterations cease when $|\mathbf{r}|&lt;tol$ or <code>maxiter</code> is exceeded.</p>
+\pmatrix{ 6 \cr 5 \cr -2 },$$<p>and the norm of the residual is $\|\mathbf{r}^{(1)}\|=\sqrt{6^2 + 5^2 + (-2)^2} = 8.06226$.</p>
+<h4 id="Example-2">Example 2<a class="anchor-link" href="#Example-2">&#182;</a></h4><p>Write a MATLAB program to solve the system of linear equations from <a href="#Example-1">example 1</a> using the Jacobi method ceasing iterations when $\|\mathbf{r}\| &lt; 10^{-4}$.</p>
+<p>The function called <code>jacobi</code> below solves a linear system of equations defined by the arrays <code>A</code> and <code>b</code>. Iterations cease when $\|\mathbf{r}\|&lt;tol$ or <code>maxiter</code> is exceeded.</p>
 
 </div>
 </div>
@@ -13219,10 +13219,10 @@ $$\mathbf{r}^{(1)} = \mathbf{b} - A \mathbf{x}^{(1)}
 <span class="sd">    indirect method</span>
 <span class="sd">    &#39;&#39;&#39;</span>
     <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  k      &#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  k&#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;x_</span><span class="si">{}</span><span class="s1">       &#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;|r|</span><span class="se">\n</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;-&#39;</span> <span class="o">*</span> <span class="p">(</span><span class="mi">4</span> <span class="o">+</span> <span class="p">(</span><span class="n">N</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="mi">10</span><span class="p">)))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;      x_</span><span class="si">{}</span><span class="s1"> &#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;    ||r||</span><span class="se">\n</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;-&#39;</span> <span class="o">*</span> <span class="p">(</span><span class="mi">4</span> <span class="o">+</span> <span class="p">(</span><span class="n">N</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="mi">10</span><span class="p">)))</span>
     <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{:4d}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">k</span><span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
@@ -13257,7 +13257,7 @@ $$\mathbf{r}^{(1)} = \mathbf{b} - A \mathbf{x}^{(1)}
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>  k      x_0       x_1       x_2       |r|
+<pre>  k      x_0       x_1       x_2     ||r||
 --------------------------------------------
    0   0.00000   0.00000   0.00000  16.24808
    1  -0.50000  -2.00000   3.50000   8.06226
@@ -13357,9 +13357,9 @@ x_2^{(1)} &amp;= \frac{1}{4}(-8 - 3(-0.5) + 0) = -1.625 \\
 x_3^{(1)} &amp;= \frac{1}{4}(14 - 1.625) = 3.09375. 
 \end{align*}<p>Calculate the residual using equation <a href="#residual">(3)</a></p>
 $$\mathbf{r}^{(1)} = \mathbf{b} - A \mathbf{x}^{(1)} = 
-\pmatrix{ -2 \cr -8 \cr 14} - \pmatrix{4 &amp; 3 &amp; 0 \cr 3 &amp; 4 &amp; -1 \cr 0 &amp; -1 &amp; 4}\pmatrix{-0.5 \cr -1.625 \cr 3.09375} = \pmatrix{4.875 \cr 3.09375 \cr 0},$$<p>and the norm of the residual is $|\mathbf{r}^{(1)}|=\sqrt{4.875^2 + 3.09375^2 + 0^2} = 5.77381$.</p>
+\pmatrix{ -2 \cr -8 \cr 14} - \pmatrix{4 &amp; 3 &amp; 0 \cr 3 &amp; 4 &amp; -1 \cr 0 &amp; -1 &amp; 4}\pmatrix{-0.5 \cr -1.625 \cr 3.09375} = \pmatrix{4.875 \cr 3.09375 \cr 0},$$<p>and the norm of the residual is $\|\mathbf{r}^{(1)}\|=\sqrt{4.875^2 + 3.09375^2 + 0^2} = 5.77381$.</p>
 <h4 id="Example-4">Example 4<a class="anchor-link" href="#Example-4">&#182;</a></h4><p>Write a Python program to solve the system of linear equations from <a href="#Example-1">example 1</a> using the Gauss-Seidel method.</p>
-<p>The function called <code>gauss_seidel</code> defined below solves a linear system of equations defined by the arrays <code>A</code> and <code>b</code>. Iterations cease when $|\mathbf{r}|&lt;tol$ or <code>maxiter</code> is exceeded.</p>
+<p>The function called <code>gauss_seidel</code> defined below solves a linear system of equations defined by the arrays <code>A</code> and <code>b</code>. Iterations cease when $\|\mathbf{r}\|&lt;tol$ or <code>maxiter</code> is exceeded.</p>
 
 </div>
 </div>
@@ -13449,7 +13449,7 @@ $$\mathbf{r}^{(1)} = \mathbf{b} - A \mathbf{x}^{(1)} =
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>  k      x_0       x_1       x_2       |r|
+<pre>  k      x_0       x_1       x_2     ||r||
 --------------------------------------------
    0   0.00000   0.00000   0.00000  16.24808
    1  -0.50000  -1.62500   3.09375   5.77381
@@ -13501,7 +13501,7 @@ $$\mathbf{e}^{(0)} = \alpha_1 \mathbf{v}_1 + \alpha_2 \mathbf{v}_2 + \cdots + \a
 \mathbf{e}^{(2)} &amp;= T \mathbf{e}^{(1)} =  T\left( \sum_{i=1}^n \alpha_i \lambda_i \mathbf{v}_i\right) = \sum_{i=1}^n \alpha_i \lambda_i T \mathbf{v}_i = \sum_{i=1}^n \alpha_i \lambda_i^2 \mathbf{v}_i, \\
 &amp;\vdots \\
 \mathbf{e}^{(k+1)} &amp;= \sum_{i=1}^n \alpha_i \lambda_i^k \mathbf{v}_i.
-\end{align*}<p>If $|\lambda_1|&gt;\lambda_i$ for $i=2,3, \ldots, n$ then</p>
+\end{align*}<p>If $\|\lambda_1\|&gt;\lambda_i$ for $i=2,3, \ldots, n$ then</p>
 $$\mathbf{e}^{(k+1)} = \alpha_1 \lambda_1^{k+1} \mathbf{v}_1 + \sum_{i=2}^n \alpha_i \lambda_i^{k+1} \mathbf{v}_i = \lambda_1^{k+1} \left( \alpha_1\mathbf{v}_1 + \sum_{i=2}^n \alpha_i\mathbf{v}_i \left(\frac{\lambda_i}{\lambda_1}\right)^{(k+1)}\right),$$<p>and since $\left(\dfrac{\lambda_i}{\lambda_1}\right)^{(k+1)}$ so</p>
 $$\lim_{k\to \infty} \mathbf{e}^{(k+1)} = \alpha_1 \lambda_1^{(k+1)} \mathbf{v}_1.$$<p>This means that the error varies by a factor of $\lambda_1^{(k+1)}$ where $\lambda_1$ is the largest eigenvalue of $T$ which is also known as the <a href="https://en.wikipedia.org/wiki/Spectral_radius">spectral radius</a> and denoted by $\rho(T)$. The spectral radius gives us the following information about an indirect method</p>
 <ul>
@@ -13768,9 +13768,9 @@ $$\mathbf{r}^{(1)} = \mathbf{b} - A \mathbf{x}^{(1)} =
 \pmatrix{ -2 \cr -8 \cr 14} - 
 \pmatrix{4 &amp; 3 &amp; 0 \cr 3 &amp; 4 &amp; -1 \cr 0 &amp; -1 &amp; 4}
 \pmatrix{-0.62 \cr -1.9034 \cr 3.74995} = 
-\pmatrix{6.1902 \cr 5.2235 \cr -2.9032},$$<p>and the norm of the residual is $|\mathbf{r}^{(1)}|=\sqrt{6.1902^2 + 5.2235^2 + (-2.9032)^2} = 8.60421$.</p>
+\pmatrix{6.1902 \cr 5.2235 \cr -2.9032},$$<p>and the norm of the residual is $\|\mathbf{r}^{(1)}\|=\sqrt{6.1902^2 + 5.2235^2 + (-2.9032)^2} = 8.60421$.</p>
 <h4 id="Example-9">Example 9<a class="anchor-link" href="#Example-9">&#182;</a></h4><p>Write a Python program to solve the system of linear equations from example 1 using the SOR method with $\omega=1.24$.</p>
-<p>The function called <code>sor</code> below solves a linear system of equations defined by the arrays <code>A</code> and <code>b</code> using the SOR method. Iterations cease when $|\mathbf{r}|&lt;tol$ or <code>maxiter</code> is exceeded.</p>
+<p>The function called <code>sor</code> below solves a linear system of equations defined by the arrays <code>A</code> and <code>b</code> using the SOR method. Iterations cease when $\|\mathbf{r}\|&lt;tol$ or <code>maxiter</code> is exceeded.</p>
 
 </div>
 </div>
@@ -13859,7 +13859,7 @@ $$\mathbf{r}^{(1)} = \mathbf{b} - A \mathbf{x}^{(1)} =
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>  k      x_0       x_1       x_2       |r|
+<pre>  k      x_0       x_1       x_2     ||r||
 --------------------------------------------
    0   0.00000   0.00000   0.00000  16.24808
    1  -0.62000  -1.90340   3.74995   8.60421

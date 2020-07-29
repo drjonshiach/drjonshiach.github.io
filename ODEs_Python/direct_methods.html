@@ -13223,7 +13223,7 @@ $$A = \begin{pmatrix} 1 &amp; 3 &amp; 0 \\ 2 &amp; -4 &amp; -1 \\ -3 &amp; 1 &am
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
-<span class="k">def</span> <span class="nf">LU</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">lu</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Calculates the LU decomposition of the square matrix A</span>
 <span class="sd">    &#39;&#39;&#39;</span>
@@ -13258,7 +13258,7 @@ $$A = \begin{pmatrix} 1 &amp; 3 &amp; 0 \\ 2 &amp; -4 &amp; -1 \\ -3 &amp; 1 &am
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The code below uses the function <code>LU</code> to calculate the LU decomposition of the matrix from <a href="#Example-1">example 1</a>.</p>
+<p>The code below uses the function <code>lu</code> to calculate the LU decomposition of the matrix from <a href="#Example-1">example 1</a>.</p>
 
 </div>
 </div>
@@ -13274,7 +13274,7 @@ $$A = \begin{pmatrix} 1 &amp; 3 &amp; 0 \\ 2 &amp; -4 &amp; -1 \\ -3 &amp; 1 &am
               <span class="p">[</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span> <span class="p">]])</span>
 
 <span class="c1"># Calculate L and U</span>
-<span class="n">L</span><span class="p">,</span> <span class="n">U</span> <span class="o">=</span> <span class="n">LU</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="n">L</span><span class="p">,</span> <span class="n">U</span> <span class="o">=</span> <span class="n">lu</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
 
 <span class="c1"># Output L and U and check results</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;L = </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
@@ -13391,7 +13391,7 @@ y_3 &amp;= -1 + 3y_1 + y_2 = -1 + 3(-7) + 1(25) = 5.
 <span class="sd">    Calculates the solution to Lx = b where L is a lower triangular matrix</span>
 <span class="sd">    using forward substitution</span>
 <span class="sd">    &#39;&#39;&#39;</span>
-    <span class="n">ncols</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+    <span class="n">ncols</span> <span class="o">=</span> <span class="n">L</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">ncols</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ncols</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
@@ -13405,7 +13405,7 @@ y_3 &amp;= -1 + 3y_1 + y_2 = -1 + 3(-7) + 1(25) = 5.
 <span class="sd">    Calculates the solution to Ux = b where U is a upper triangular matrix</span>
 <span class="sd">    using back substitution</span>
 <span class="sd">    &#39;&#39;&#39;</span>
-    <span class="n">ncols</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+    <span class="n">ncols</span> <span class="o">=</span> <span class="n">U</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">ncols</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ncols</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">ncols</span><span class="p">):</span>
@@ -13453,7 +13453,7 @@ y_3 &amp;= -1 + 3y_1 + y_2 = -1 + 3(-7) + 1(25) = 5.
 <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">7</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
 
 <span class="c1"># Calculate LU decomposition of A</span>
-<span class="n">L</span><span class="p">,</span> <span class="n">U</span> <span class="o">=</span> <span class="n">LU</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="n">L</span><span class="p">,</span> <span class="n">U</span> <span class="o">=</span> <span class="n">lu</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
 
 <span class="c1"># Calculate solution to Ax = b using Crout&#39;s method</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">crout</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">U</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
@@ -13711,7 +13711,7 @@ $$A \mathbf{x} = P\mathbf{b}.$$<p>So Crout's algorithm when using LU decompositi
 
 <span class="c1"># Calculate LU decomposition of PA</span>
 <span class="n">PA</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">A</span><span class="p">)</span>
-<span class="n">L</span><span class="p">,</span> <span class="n">U</span> <span class="o">=</span> <span class="n">LU</span><span class="p">(</span><span class="n">PA</span><span class="p">)</span>
+<span class="n">L</span><span class="p">,</span> <span class="n">U</span> <span class="o">=</span> <span class="n">lu</span><span class="p">(</span><span class="n">PA</span><span class="p">)</span>
 
 <span class="c1"># Use Crout&#39;s method to solve LUx = Pb</span>
 <span class="n">Pb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
@@ -14053,7 +14053,7 @@ $$A^T A = I.$$</p>
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Calculating-QR-decomposition-using-the-Gram-Schmidt-process">Calculating QR decomposition using the Gram-Schmidt process<a class="anchor-link" href="#Calculating-QR-decomposition-using-the-Gram-Schmidt-process">&#182;</a></h3><p>The calculation of the orthogonal matrix $Q$ can be achieved by using the <a href="https://en.wikipedia.org/wiki/Gram%E2%80%93Schmidt_process"><strong>Gram-Schmidt process</strong></a>. Given a matrix consisting of $n$ of linearly independent column vectors $A = (\mathbf{a}_1, \mathbf{a}_2, \ldots, \mathbf{a}_n)$ we wish to find a matrix that consists of $n$ orthogonal vectors $U = (\mathbf{u}_1, \mathbf{u}_2, \ldots, \mathbf{u}_n)$ where the span of $U$ is that same as the span of $A$.</p>
-<p><img src=Gram_Schmidt.png width=300></p>
+<p><img src="https://raw.githubusercontent.com/drjonshiach/ODEs/221789614a1dad2f9491dfc9a5c6bf350f185a93/Diagrams/gram_schmidt.svg" alt=""></p>
 <p>Consider the diagram above. Let $\mathbf{u}_1 = \mathbf{a}_1$ then the vector $\mathbf{u}_2$ that is orthogonal to $\mathbf{u}_1$ can be found by subtracting the <a href="https://en.wikipedia.org/wiki/Vector_projection"><strong>vector projection</strong></a> of $\mathbf{a}_2$ onto $\mathbf{u}_1$, i.e.,</p>
 \begin{align*}
     \mathbf{u}_2 &amp;= \mathbf{a}_2 - \operatorname{proj}_{\mathbf{u}_1} \mathbf{a}_2.
@@ -14064,7 +14064,7 @@ $$A^T A = I.$$</p>
     \mathbf{u}_3 &amp;= \mathbf{a}_3 - \text{proj}_{\mathbf{u}_1}(\mathbf{a}_3) - \text{proj}_{\mathbf{u}_2}(\mathbf{a}_3),  &amp; \mathbf{q}_3 &amp;= \frac{\mathbf{u}_3}{\|\mathbf{u}_3\|}\\
     &amp;\vdots \\
     \mathbf{u}_n &amp;= \mathbf{a}_n - \sum_{i=1}^{n-1} \text{proj}_{\mathbf{u}_i}(\mathbf{a}_n),   &amp; \mathbf{q}_n &amp;= \frac{\mathbf{u}_n}{\|\mathbf{u}_n\|}.
-\end{align*}<p>where $\mathbf{q}_i$ are orthonormal basis vectors. The vectors in $A$ can be expressed using the orthornomal basis $Q = (\mathbf{q}_1, \mathbf{q}_2, \ldots , \mathbf{q}_n)$</p>
+\end{align*}<p>where $\mathbf{q}_i$ are orthonormal basis vectors. The vectors in $A$ can be expressed using the orthonormal basis $Q = (\mathbf{q}_1, \mathbf{q}_2, \ldots , \mathbf{q}_n)$</p>
 \begin{align*}
     \mathbf{a}_1 &amp;= (\mathbf{q}_1 \cdot \mathbf{a}_1) \mathbf{q}_1, \\
     \mathbf{a}_2 &amp;= (\mathbf{q}_1 \cdot \mathbf{a}_2) \mathbf{q}_1 + (\mathbf{q}_2 \cdot \mathbf{a}_2) \mathbf{q}_2 , \\
@@ -14101,54 +14101,48 @@ $$A^T A = I.$$</p>
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="Example-14">Example 14<a class="anchor-link" href="#Example-14">&#182;</a></h4><p>Calculate the QR decomposition of the following matrix using the Gram-Schmidt process</p>
 \begin{align*}
-    A = \begin{pmatrix} 1 &amp; -1 &amp; 4 \\ 1 &amp; 4 &amp; -2 \\ 1 &amp; 4 &amp; 2 \\ 1 &amp; -1 &amp; 0 \end{pmatrix}.
+    A = \pmatrix{ -1 &amp; -1 &amp; 1 \cr 1 &amp; 3 &amp; 3 \cr -1 &amp; -1 &amp; 5 \cr 1 &amp; 3 &amp; 7 }.
 \end{align*}<p>Column $j=1$:</p>
 \begin{align*}
-    r_{11} &amp;= \| \mathbf{a}_1 \| = \sqrt{1^2 + 1^2 + 1^2 + 1^2} = \sqrt{4} = 2, \\
-    \mathbf{q}_1 &amp;= \frac{\mathbf{a}_1}{r_{11}} = \frac{1}{2}\begin{pmatrix} 1 \\ 1 \\ 1 \\ 1 \end{pmatrix} = \begin{pmatrix} 1/2 \\ 1/2 \\ 1/2 \\ 1/2 \end{pmatrix}.
+    r_{11} &amp;= \| \mathbf{a}_1 \| = 2, \cr
+    \mathbf{q}_1 &amp;= \frac{\mathbf{a}_1}{r_{11}} = \pmatrix{ -1/2 \cr 1/2 \cr -1/2 \cr 1/2 }.
 \end{align*}<p>Column $j=2$:</p>
 \begin{align*}
     r_{12} &amp;= \mathbf{q}_1 \cdot \mathbf{a}_2 = 
-    \begin{pmatrix} 1/2 \\ 1/2 \\ 1/2 \\ 1/2 \end{pmatrix} \cdot
-    \begin{pmatrix} -1 \\ 4 \\ 4 \\ -1 \end{pmatrix} = 3, \\
+    \pmatrix{ -1/2 \cr 1/2 \cr -1/2 \cr 1/2 } \cdot
+    \pmatrix{ -1 \cr 3 \cr -1 \cr 3 } = 4, \cr
     \mathbf{u}_2 &amp;= \mathbf{a}_2 - r_{12} \mathbf{q}_1 = 
-    \begin{pmatrix} -1 \\ 4 \\ 4 \\ -1 \end{pmatrix} - 3 \begin{pmatrix} 1/2 \\ 1/2 \\ 1/2 \\ 1/2 \end{pmatrix} = 
-    \begin{pmatrix} -5/2 \\ 5/2 \\ 5/2 \\ -5/2 \end{pmatrix}, \\
-    r_{22} &amp;= \| \mathbf{u}_2 \| = \sqrt{(\tfrac{5}{2})^2 + (\tfrac{5}{2})^2 + (\tfrac{5}{2})^2 + (\tfrac{5}{2})^2} = \sqrt{25} = 5, \\
-    \mathbf{q}_2 &amp;= \frac{\mathbf{u}_2}{r_{22}} = \frac{1}{5}\begin{pmatrix} -5/2 \\ 5/2 \\ 5/2 \\ -5/2 \end{pmatrix} = 
-    \begin{pmatrix} -1/2 \\ 1/2 \\ 1/2 \\ -1/2 \end{pmatrix}.
+    \pmatrix{ -1 \cr 3 \cr -1 \cr 3 } - 4 \pmatrix{ -1/2 \cr 1/2 \cr -1/2 \cr 1/2 } = 
+    \pmatrix{ 1 \cr 1 \cr 1 \cr 1 }, \cr
+    r_{22} &amp;= \| \mathbf{u}_2 \| = 2, \cr
+    \mathbf{q}_2 &amp;= \frac{\mathbf{u}_2}{r_{22}} = \pmatrix{1/2 \cr 1/2 \cr 1/2 \cr 1/2}.
 \end{align*}<p>Column $j=3$:</p>
 \begin{align*}
     r_{13} &amp;= \mathbf{q}_1 \cdot \mathbf{a}_3 =
-    \begin{pmatrix} 1/2 \\ 1/2 \\ 1/2 \\ 1/2 \end{pmatrix} \cdot
-    \begin{pmatrix} 4 \\ -2 \\ 2 \\ 0 \end{pmatrix} = 2, \\
+    \pmatrix{ -1/2 \cr 1/2 \cr -1/2 \cr 1/2 } \cdot
+    \pmatrix{ 1 \cr 3 \cr 5 \cr 7 } = 2, \cr
     r_{23} &amp;= \mathbf{q}_2 \cdot \mathbf{a}_3 = 
-    \begin{pmatrix} -1/2 \\ 1/2 \\ 1/2 \\ -1/2 \end{pmatrix} \cdot
-    \begin{pmatrix} 4 \\ -2 \\ 2 \\ 0 \end{pmatrix} = -2, \\
+    \pmatrix{ 1/2 \cr 1/2 \cr 1/2 \cr 1/2 } \cdot
+    \pmatrix{ 1 \cr 3 \cr 5 \cr 7 } = 8, \cr
     \mathbf{u}_3 &amp;= \mathbf{a}_3 - r_{13} \mathbf{q}_1 - r_{23} \mathbf{q}_2 =
-    \begin{pmatrix} 4 \\ -2 \\ 2 \\ 0 \end{pmatrix} - 2
-    \begin{pmatrix} 1/2 \\ 1/2 \\ 1/2 \\ 1/2 \end{pmatrix} + 2
-    \begin{pmatrix} -1/2 \\ 1/2 \\ 1/2 \\ -1/2 \end{pmatrix} =
-    \begin{pmatrix} 2 \\ -2 \\ 2 \\ -2 \end{pmatrix}, \\
-    r_{33} &amp;= \| \mathbf{u}_3 \| = \sqrt{2^2 + (-2)^2 + 2^2 + (-2)^2} = \sqrt{16} = 4, \\
-    \mathbf{q}_3 &amp;= \frac{\mathbf{u}_3}{r_{33}} = \frac{1}{4}
-    \begin{pmatrix} 2 \\ -2 \\ 2 \\ -2 \end{pmatrix} = 
-    \begin{pmatrix} 1/2 \\ -1/2 \\ 1/2 \\ -1/2 \end{pmatrix}.
+    \pmatrix{ 1 \cr 3 \cr 5 \cr 7 } - 2
+    \pmatrix{ -1/2 \cr 1/2 \cr -1/2 \cr 1/2 } - 8
+    \pmatrix{ 1/2 \cr 1/2 \cr 1/2 \cr 1/2 } =
+    \pmatrix{ -2 \cr -2 \cr 2 \cr 2 }, \cr
+    r_{33} &amp;= \| \mathbf{u}_3 \| = 4, \cr
+    \mathbf{q}_3 &amp;= \frac{\mathbf{u}_3}{r_{33}} = \pmatrix{-1/2 \cr -1/2 \cr 1/2 \cr 1/2}.
 \end{align*}<p>Therefore the QR decomposition of $A$ is</p>
 \begin{align*}
-    Q &amp;= \begin{pmatrix} 1/2 &amp; -1/2 &amp; 1/2 \\ 1/2 &amp; 1/2 &amp; -1/2 \\ 1/2 &amp; 1/2 &amp; 1/2 \\ 1/2 &amp; -1/2 &amp; -1/2 \end{pmatrix}, &amp;
-    R &amp;= \begin{pmatrix} 2 &amp; 3 &amp; 2 \\ 0 &amp; 5 &amp; -2 \\ 0 &amp; 0 &amp; 4 \end{pmatrix}.
+    Q &amp;= \pmatrix{ -1/2 &amp; 1/2 &amp; -1/2 \cr 1/2 &amp; 1/2 &amp; -1/2 \cr -1/2 &amp; 1/2 &amp; 1/2 \cr 1/2 &amp; 1/2 &amp; 1/2 }, &amp;
+    R &amp;= \pmatrix{ 2 &amp; 4 &amp; 2 \cr 0 &amp; 2 &amp; 8 \cr 0 &amp; 0 &amp; 4 }.
 \end{align*}<p>Checking that $QR= A$</p>
 \begin{align*}
-    QR = \begin{pmatrix} 1/2 &amp; -1/2 &amp; 1/2 \\ 1/2 &amp; 1/2 &amp; -1/2 \\ 1/2 &amp; 1/2 &amp; 1/2 \\ 1/2 &amp; -1/2 &amp; -1/2 \end{pmatrix}
-    \begin{pmatrix} 2 &amp; 3 &amp; 2 \\ 0 &amp; 5 &amp; -2 \\ 0 &amp; 0 &amp; 4 \end{pmatrix} = 
-    \begin{pmatrix} 1 &amp; -1 &amp; 4 \\ 1 &amp; 4 &amp; -2 \\ 1 &amp; 4 &amp; 2 \\ 1 &amp; -1 &amp; 0 \end{pmatrix} = A.
+    QR = \pmatrix{ -1/2 &amp; 1/2 &amp; -1/2 \cr 1/2 &amp; 1/2 &amp; -1/2 \cr -1/2 &amp; 1/2 &amp; 1/2 \cr 1/2 &amp; 1/2 &amp; 1/2 }
+    \pmatrix{ 2 &amp; 4 &amp; 2 \cr 0 &amp; 2 &amp; 8 \cr 0 &amp; 0 &amp; 4 } = 
+    \pmatrix{ -1 &amp; -1 &amp; 1 \cr 1 &amp; 3 &amp; 3 \cr -1 &amp; -1 &amp; 5 \cr 1 &amp; 3 &amp; 7 } = A.
 \end{align*}<p>Checking that $Q$ is orthonormal</p>
 \begin{align*}
-    Q^T Q = \begin{pmatrix} 1/2 &amp; 1/2 &amp; 1/2 &amp; 1/2 \\ -1/2 &amp; 1/2 &amp; 1/2 &amp; -1/2 \\ 1/2 &amp; -1/2 &amp; 1/2 &amp; -1/2 \end{pmatrix} 
-    \begin{pmatrix} 1/2 &amp; -1/2 &amp; 1/2 \\ 1/2 &amp; 1/2 &amp; -1/2 \\ 1/2 &amp; 1/2 &amp; 1/2 \\ 1/2 &amp; -1/2 &amp; -1/2 \end{pmatrix}
-    =
-    \begin{pmatrix} 1 &amp; 0 &amp; 0 \\ 0 &amp; 1 &amp; 0  \\ 0 &amp; 0 &amp; 1 \end{pmatrix} = I.
+    Q^T Q = \pmatrix{ -1/2 &amp; 1/2 &amp; -1/2 &amp; 1/2 \cr 1/2 &amp; 1/2 &amp; 1/2 &amp; 1/2 \cr -1/2 &amp; -1/2 &amp; 1/2 &amp; 1/2 } \pmatrix{ -1/2 &amp; 1/2 &amp; -1/2 \cr 1/2 &amp; 1/2 &amp; -1/2 \cr -1/2 &amp; 1/2 &amp; 1/2 \cr 1/2 &amp; 1/2 &amp; 1/2 } = \pmatrix{ 1 &amp; 0 &amp; 0 \cr 0 &amp; 1 &amp; 0  \cr 0 &amp; 0 &amp; 1 } = I.
 \end{align*}
 </div>
 </div>
@@ -14156,7 +14150,7 @@ $$A^T A = I.$$</p>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Example-15">Example 15<a class="anchor-link" href="#Example-15">&#182;</a></h4><p>The function defined below called <code>QR</code> calculates the QR decomposition of the square matrix <code>A</code> using the Gram-Schmidt process.</p>
+<h4 id="Example-15">Example 15<a class="anchor-link" href="#Example-15">&#182;</a></h4><p>The function defined below called <code>qr_gs</code> calculates the QR decomposition of the square matrix <code>A</code> using the Gram-Schmidt process.</p>
 
 </div>
 </div>
@@ -14166,7 +14160,7 @@ $$A^T A = I.$$</p>
 <div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">QR</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">qr_gs</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Calculates the QR decomposition of the m x n matrix A using the </span>
 <span class="sd">    Gram-Schmidt process</span>
@@ -14185,7 +14179,7 @@ $$A^T A = I.$$</p>
         <span class="n">R</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">Q</span><span class="p">[:,</span><span class="n">j</span><span class="p">])</span>
         <span class="n">Q</span><span class="p">[:,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">Q</span><span class="p">[:,</span><span class="n">j</span><span class="p">]</span> <span class="o">/</span> <span class="n">R</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="n">j</span><span class="p">]</span>
         
-    <span class="k">return</span> <span class="n">Q</span><span class="p">,</span> <span class="n">R</span>       
+    <span class="k">return</span> <span class="n">Q</span><span class="p">,</span> <span class="n">R</span>     
 </pre></div>
 
     </div>
@@ -14196,24 +14190,24 @@ $$A^T A = I.$$</p>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The code below uses the function <code>QR</code> to calculate the QR decomposition of the matrix $A$ in <a href="#Example-14">example 14</a></p>
+<p>The code below uses the function <code>qr_gs</code> to calculate the QR decomposition of the matrix $A$ in <a href="#Example-14">example 14</a></p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="prompt input_prompt">In&nbsp;[143]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Define matrix A</span>
-<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> 
-              <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">],</span> 
-              <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> 
-              <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> 
+              <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> 
+              <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> 
+              <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">]])</span>
 
 <span class="c1"># Calculate QR decomposition</span>
-<span class="n">Q</span><span class="p">,</span> <span class="n">R</span> <span class="o">=</span> <span class="n">QR</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="n">Q</span><span class="p">,</span> <span class="n">R</span> <span class="o">=</span> <span class="n">qr_gs</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
 
 <span class="c1"># Output and check results</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Q = </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
@@ -14242,16 +14236,16 @@ $$A^T A = I.$$</p>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Q = 
 
-[[ 0.5 -0.5  0.5]
+[[-0.5  0.5 -0.5]
  [ 0.5  0.5 -0.5]
- [ 0.5  0.5  0.5]
- [ 0.5 -0.5 -0.5]]
+ [-0.5  0.5  0.5]
+ [ 0.5  0.5  0.5]]
 
 R = 
 
-[[ 2.  3.  2.]
- [ 0.  5. -2.]
- [ 0.  0.  4.]]
+[[2. 4. 2.]
+ [0. 2. 8.]
+ [0. 0. 4.]]
 
 Check QR - A = 0
 
@@ -14293,25 +14287,25 @@ Check Q^T Q = I
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="Example-16">Example 16<a class="anchor-link" href="#Example-16">&#182;</a></h4><p>Solve the following system of linear equations using QR decomposition</p>
 \begin{align*}
-    \begin{pmatrix} 1 &amp; -1 &amp; 4 \\ 1 &amp; 4 &amp; -2 \\ 1 &amp; 4 &amp; 2 \\ 1 &amp; -1 &amp; 0 \end{pmatrix}
-    \begin{pmatrix} x_1 \\ x_2 \\ x_3 \end{pmatrix} = 
-    \begin{pmatrix} 6 \\ 8 \\ 20 \\ -6 \end{pmatrix}.
-\end{align*}<p>We have seen in <a href="#Example-14">example 14</a> that the QR decomposition of the coefficient matrix is</p>
+    \pmatrix{ -1 &amp; -1 &amp; 1 \cr 1 &amp; 3 &amp; 3 \cr -1 &amp; -1 &amp; 5 \cr 1 &amp; 3 &amp; 7 }
+    \pmatrix{ x_1 \cr x_2 \cr x_3 } = 
+    \pmatrix{ 1 \cr 19 \cr 13 \cr 31 }.
+\end{align*}<p>We saw in <a href="#Example-14">example 14</a> that the QR decomposition of the coefficient matrix is</p>
 \begin{align*}
-    Q &amp;= \begin{pmatrix} 1/2 &amp; -1/2 &amp; 1/2 \\ 1/2 &amp; 1/2 &amp; -1/2 \\ 1/2 &amp; 1/2 &amp; 1/2 \\ 1/2 &amp; -1/2 &amp; -1/2 \end{pmatrix}, &amp;
-    R &amp;= \begin{pmatrix} 2 &amp; 3 &amp; 2 \\ 0 &amp; 5 &amp; -2 \\ 0 &amp; 0 &amp; 4 \end{pmatrix}.
+    Q &amp;= \pmatrix{ -1/2 &amp; 1/2 &amp; -1/2 \cr 1/2 &amp; 1/2 &amp; -1/2 \cr -1/2 &amp; 1/2 &amp; 1/2 \cr 1/2 &amp; 1/2 &amp; 1/2 }, &amp;
+    R &amp;= \pmatrix{ 2 &amp; 4 &amp; 2 \cr 0 &amp; 2 &amp; 8 \cr 0 &amp; 0 &amp; 4 }.
 \end{align*}<p>Solving $R\mathbf{x} = Q^T\mathbf{b}$</p>
 \begin{align*}
-    \begin{pmatrix} 2 &amp; 3 &amp; 2 \\ 0 &amp; 5 &amp; -2 \\ 0 &amp; 0 &amp; 4 \end{pmatrix}
-    \begin{pmatrix} x_1 \\ x_2 \\ x_3 \end{pmatrix} = 
-    \begin{pmatrix} 1/2 &amp; 1/2 &amp; 1/2 &amp; 1/2 \\ -1/2 &amp; 1/2 &amp; 1/2 &amp; - 1/2 \\ 1/2 &amp; -1/2 &amp; 1/2 &amp; -1/2 \end{pmatrix}
-    \begin{pmatrix} 6 \\ 8 \\ 20 \\ -6 \end{pmatrix} =
-    \begin{pmatrix} 14 \\ 14 \\ 12 \end{pmatrix},
+    \pmatrix{ 2 &amp; 4 &amp; 2 \cr 0 &amp; 2 &amp; 8 \cr 0 &amp; 0 &amp; 4 }
+    \pmatrix{ x_1 \cr x_2 \cr x_3 } = 
+    \pmatrix{ -1/2 &amp; 1/2 &amp; -1/2 &amp; 1/2 \cr 1/2 &amp; 1/2 &amp; 1/2 &amp; 1/2 \cr -1/2 &amp; -1/2 &amp; 1/2 &amp; 1/2 }
+    \pmatrix{ 1 \cr 19 \cr 13 \cr 31 } =
+    \pmatrix{ 18 \cr 32 \cr 12 },
 \end{align*}<p>gives</p>
 \begin{align*}
-    x_3 &amp;= \frac{12}{4} = 3, \\
-    x_2 &amp;= \frac{1}{5}(14 + 2x_3) = \frac{1}{5}(14 + 2(3)) = 4, \\
-    x_1 &amp;= \frac{1}{2}(14 - 3x_2 - 2x_3) = \frac{1}{2}(14 - 3(4) - 2(3)) = -2.
+    x_3 &amp;= \frac{12}{4} = 3, \cr
+    x_2 &amp;= \frac{1}{2}(32 - 8(3)) = 4, \cr
+    x_1 &amp;= \frac{1}{2}(18 - 4(4) - 2(3))= -2.
 \end{align*}<p>So the solution is $\mathbf{x} = (-2, 4, 3)$.</p>
 
 </div>
@@ -14327,18 +14321,18 @@ Check Q^T Q = I
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="prompt input_prompt">In&nbsp;[145]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Define linear system</span>
-<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> 
-              <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">],</span> 
-              <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> 
-              <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
-<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="o">-</span><span class="mi">6</span><span class="p">])</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> 
+              <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> 
+              <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> 
+              <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">]])</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">31</span><span class="p">])</span>
 
 <span class="c1"># Calculate QR decomposition of A</span>
-<span class="n">Q</span><span class="p">,</span> <span class="n">R</span> <span class="o">=</span> <span class="n">QR</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="n">Q</span><span class="p">,</span> <span class="n">R</span> <span class="o">=</span> <span class="n">qr_gs</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
 
 <span class="c1"># Solve Rx = Q.T b using back substitution</span>
 <span class="n">QTb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
@@ -14377,13 +14371,337 @@ x_2 = 3.0
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Calculating-QR-decomposition-using-Householder-transformations">Calculating QR decomposition using Householder transformations<a class="anchor-link" href="#Calculating-QR-decomposition-using-Householder-transformations">&#182;</a></h3><p>Another method we can use to calculate the QR decomposition of a matrix is by the use of <a href="https://en.wikipedia.org/wiki/Householder_transformation">Householder transformations</a>. Consider the diagram below, the vector $\mathbf{x}$ is reflected about the hyperplane represented by the dashed line with unit normal vector $\mathbf{v}$ so that it is parallel to the basis vector $\mathbf{e}_1$.</p>
+<p><img src="https://raw.githubusercontent.com/drjonshiach/ODEs/67c822e7ea593b7a3877b3f94124c576a4df8cd4/Diagrams/householder_1.svg" alt=""></p>
+<p>The Householder matrix is a linear transformation that performs this reflection and is calculated using</p>
+\begin{align*}
+    H = I - 2\frac{\mathbf{u} \, \mathbf{u}^T}{\mathbf{u} \cdot \mathbf{u}},
+\end{align*}<p>where</p>
+\begin{align*}
+    \mathbf{u} = \mathbf{x} - \|\mathbf{x}\| \mathbf{e}_1.
+\end{align*}<p>If $\mathbf{x}$ is nearly parallel to $\mathbf{e}_1$ then the value of $\mathbf{u}\cdot \mathbf{u}$ is close to zero and computational rounding errors can occur. However, we can choose to reflect $\mathbf{x}$ so that it is parallel to $\mathbf{e}$ but pointing in the opposite direction.</p>
+<p><img src="https://raw.githubusercontent.com/drjonshiach/ODEs/67c822e7ea593b7a3877b3f94124c576a4df8cd4/Diagrams/householder_2.svg" alt=""></p>
+<p>In the diagram above $\mathbf{x}$ is to be transformed to $\mathbf{x}^*$ then</p>
+\begin{align*}
+    \mathbf{u} = \mathbf{x} + \| \mathbf{x} \| \mathbf{e}_1,
+\end{align*}<p>so in order to always reflect in the direction that gives the largest value of $\|\mathbf{u}\|$ we use</p>
+\begin{align*}
+    \mathbf{u} = \mathbf{x} + \text{sign}(x) \| \mathbf{x} \| \mathbf{e}_1,
+\end{align*}<p>where</p>
+\begin{align*}
+    \text{sign}(x) = \begin{cases} 1, &amp; x \geq 0, \\ -1, &amp; x &lt; 0. \end{cases}
+\end{align*}<p>To calculate the QR decomposition of an $m\times n$ matrix $A$ we let $Q=I_m$ and $R=A$ and use Householder transformations to transform each of the column vectors in $R$ so that they are parallel to the basis vector $\mathbf{e}_1$. To do this we first calculate $\mathbf{u}$ using</p>
+\begin{align*}
+    \mathbf{u} &amp;= \mathbf{r}_1 + \text{sign}(r_{11}) \|\mathbf{r}_1\| \mathbf{e}_1
+\end{align*}<p>and then we calculate the Householder matrix</p>
+\begin{align*}
+    H &amp;= I_m - 2 \frac{\mathbf{u} \mathbf{u}^T}{\mathbf{u} \cdot \mathbf{u}}.
+\end{align*}<p>The Householder transformation is applied to $R$ and $Q$ as follows</p>
+\begin{align*}
+    R &amp;= HR = \pmatrix{ r_{11} &amp; r_{12} &amp; r_{13} &amp; \cdots &amp; r_{1n} \cr 0 &amp; r_{12} &amp; r_{13} &amp; \cdots &amp; r_{2n} \cr 0 &amp; r_{32} &amp; r_{33} &amp; \cdots &amp; r_{3n} \cr \vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \cr 0 &amp; r_{m2} &amp; r_{m3} &amp; \cdots &amp; r_{mn}}, \\
+    Q &amp;= QH.
+\end{align*}<p>So the first column of $R$ is now parallel to $\mathbf{e}_1$ in $\mathbb{R}^m$. We now need to transform the second column of $R$, without changing the first row and column, so that it is parallel to $\mathbb{e}_1$ in $\mathbb{R}^{m-1}$. Therefore we apply a Householder transformation to the matrix formed by omitting the first row and column of $R$.</p>
+<p>Calculate the Householder matrix for the second column of $R$</p>
+\begin{align*}
+    \mathbf{u} &amp;= \mathbf{r}_2 + \text{sign}\left(r_{22} \right) \| \mathbf{r}_2 \| \mathbf{e}_1, \\
+    H &amp;= I_{m-1} - 2 \frac{\mathbf{u} \mathbf{u}^T}{\mathbf{u} \cdot \mathbf{u}}.
+\end{align*}<p>Here $H$ is an $m-1 \times m-1$ matrix so we add the first row and column of the identity matrix to $H$ to ensure that it is and $m \times m$ matrix, i.e.,</p>
+\begin{align*}
+    H_2 = \pmatrix{ 1 &amp; 0 &amp; \cdots &amp; 0 \cr 0 &amp; &amp; &amp; \cr \vdots &amp; &amp; H \cr 0 &amp; },
+\end{align*}<p>and this transformation is applied to $R$ and $Q$</p>
+\begin{align*}
+    R &amp;= HR = \pmatrix{ r_{11} &amp; r_{12} &amp; r_{13} &amp; \cdots &amp; r_{1n} \cr 0 &amp; r_{12} &amp; r_{13} &amp; \cdots &amp; r_{2n} \cr 0 &amp; 0 &amp; r_{33} &amp; \cdots &amp; r_{3n} \cr \vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \cr 0 &amp; 0 &amp; r_{m3} &amp; \cdots &amp; r_{mn}}, \\
+    Q &amp;= QH.
+\end{align*}<p>This process is repeated for all columns in $R$ so that it is an upper triangular matrix. The $Q$ matrix is the product of all of the individual Householder transformations and is an orthonormal matrix.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Example-18">Example 18<a class="anchor-link" href="#Example-18">&#182;</a></h4><p>Calculate the QR decomposition of the following matrix using the Householder transformations</p>
+\begin{align*}
+    A = \pmatrix{ -1 &amp; -1 &amp; 1 \cr 1 &amp; 3 &amp; 3 \cr -1 &amp; -1 &amp; 5 \cr 1 &amp; 3 &amp; 7 }.
+\end{align*}<p>Let $Q = I$ and $R = A$ and calculate Householder matrix for the first column of $R$</p>
+\begin{align*} 
+    \mathbf{u} &amp;= \mathbf{r}_1 + \text{sign}(r_{11}) \|\mathbf{r}_1\|\mathbf{e}_1 = \pmatrix{ -1 \cr 1 \cr -1 \cr 1} - 2 \pmatrix{1 \cr 0 \cr 0 \cr 0} = \pmatrix{-3 \cr 1 \cr -1 \cr 1}, \\
+    H &amp;= I - 2\frac{\mathbf{u}^T \mathbf{u}}{\mathbf{u} \cdot \mathbf{u}} = \pmatrix{1 &amp; 0 &amp; 0 &amp; 0 \cr 0 &amp; 1 &amp; 0 &amp; 0 \cr 0 &amp; 0 &amp; 1 &amp; 0 \cr 0 &amp; 0 &amp; 0 &amp; 1} - \frac{2}{12} \pmatrix{9 &amp; -3 &amp; 3 &amp; -3 \cr -3 &amp; 1 &amp; -1 &amp; 1 \cr 3 &amp; -1 &amp; 1 &amp; -1 \cr -3 &amp; 1 &amp; -1 &amp; 1} = \pmatrix{-1/2 &amp; 1/2 &amp; -1/2 &amp; 1/2 \cr 1/2 &amp; 5/6 &amp; 1/6 &amp; -1/6 \cr -1/2 &amp; 1/6 &amp; 5/6 &amp; 1/6 \cr 1/2 &amp; -1/6 &amp; 1/6 &amp; 5/6}.
+\end{align*}<p>Update $Q$ and $R$</p>
+\begin{align*}
+    Q &amp;= QH = \pmatrix{-1/2 &amp; 1/2 &amp; -1/2 &amp; 1/2 \cr 1/2 &amp; 5/6 &amp; 1/6 &amp; -1/6 \cr -1/2 &amp; 1/6 &amp; 5/6 &amp; 1/6 \cr 1/2 &amp; -1/6 &amp; 1/6 &amp; 5/6}, \\
+    R &amp;= HR = \pmatrix{-1/2 &amp; 1/2 &amp; -1/2 &amp; 1/2 \cr 1/2 &amp; 5/6 &amp; 1/6 &amp; -1/6 \cr -1/2 &amp; 1/6 &amp; 5/6 &amp; 1/6 \cr 1/2 &amp; -1/6 &amp; 1/6 &amp; 5/6}\pmatrix{ -1 &amp; -1 &amp; 1 \cr 1 &amp; 3 &amp; 3 \cr -1 &amp; -1 &amp; 5 \cr 1 &amp; 3 &amp; 7 } = \pmatrix{2 &amp; 4 &amp; 2 \cr 0 &amp; 4/3 &amp; 8/3 \cr 0 &amp; 2/3 &amp; 16/3 \cr 0 &amp; 4/3 &amp; 20/3}.
+\end{align*}<p>Calculate Householder matrix for the second column</p>
+\begin{align*}
+    \mathbf{u} &amp;= \mathbf{r}_2 + \text{sign}(r_{22}) \|\mathbf{r}_2\| \mathbf{e}_1 = \pmatrix{4/3 \cr 2/3 \cr 4/3} + 2 \pmatrix{1 \cr 0 \cr 0} = \pmatrix{10/3 \cr 2/3 \cr 4/3}, \\
+    H &amp;= I - 2\frac{\mathbf{u}^T \mathbf{u}}{\mathbf{u} \cdot \mathbf{u}} = \pmatrix{1 &amp; 0 &amp; 0 \cr 0 &amp; 1 &amp; 0 \cr 0 &amp; 0 &amp; 1} - \frac{2}{40/3} \pmatrix{100/9 &amp; 20/9 &amp; 40/9 \cr 20/9 &amp; 4/9 &amp; 8/9 \cr 40/9 &amp; 8/9 &amp; 16/9}= \pmatrix{-2/3 &amp; -1/3 &amp; -2/3 \cr -1/3 &amp; 14/15 &amp; -2/15 \cr -2/3 &amp; -2/15 &amp; 11/15}.
+\end{align*}<p>Adding the first row and column of the identity matrix to $H$ so that it is a $4\times 4$ matrix</p>
+\begin{align*}
+    H = \pmatrix{1 &amp; 0 &amp; 0 &amp; 0 \cr 0 &amp; -2/3 &amp; -1/3 &amp; -2/3 \cr 0 &amp; -1/3 &amp; 14/15 &amp; -2/15 \cr 0 &amp; -2/3 &amp; -2/15 &amp; 11/15}
+\end{align*}<p>Update $Q$ and $R$</p>
+\begin{align*}
+    Q &amp;= QH = \pmatrix{-1/2 &amp; 1/2 &amp; -1/2 &amp; 1/2 \cr 1/2 &amp; 5/6 &amp; 1/6 &amp; -1/6 \cr -1/2 &amp; 1/6 &amp; 5/6 &amp; 1/6 \cr 1/2 &amp; -1/6 &amp; 1/6 &amp; 5/6}\pmatrix{1 &amp; 0 &amp; 0 &amp; 0 \cr 0 &amp; -2/3 &amp; -1/3 &amp; -2/3 \cr 0 &amp; -1/3 &amp; 14/15 &amp; -2/15 \cr 0 &amp; -2/3 &amp; -2/15 &amp; 11/15} = \pmatrix{-1/2 &amp; -1/2 &amp; -7/10 &amp; 1/10 \cr 1/2 &amp; -1/2 &amp; -1/10 &amp; -7/10 \cr -1/2 &amp; -1/2 &amp; 7/10 &amp; -1/10 \cr 1/2 &amp; -1/2 &amp; 1/10 &amp; 7/10}, \\
+    R &amp;= HR = \pmatrix{1 &amp; 0 &amp; 0 &amp; 0 \cr 0 &amp; -2/3 &amp; -1/3 &amp; -2/3 \cr 0 &amp; -1/3 &amp; 14/15 &amp; -2/15 \cr 0 &amp; -2/3 &amp; -2/15 &amp; 11/15}\pmatrix{2 &amp; 4 &amp; 2 \cr 0 &amp; 4/3 &amp; 8/3 \cr 0 &amp; 2/3 &amp; 16/3 \cr 0 &amp; 4/3 &amp; 20/3} = \pmatrix{2 &amp; 4 &amp; 2 \cr 0 &amp; -2 &amp; -8 \cr 0 &amp; 0 &amp; 16/5 \cr 0 &amp; 0 &amp; 12/5}.
+\end{align*}<p>Calculate Householder matrix for the third column</p>
+\begin{align*}
+    \mathbf{u} &amp;= \mathbf{r}_3 + \text{sign}(r_{33}) \|\mathbf{r}_3\| \mathbf{e}_1 = \pmatrix{16/5 \cr 12/5} + 4 \pmatrix{1 \cr 0} = \pmatrix{36/5 \cr 12/5}, \\
+    H &amp;= I - 2\frac{\mathbf{u}^T \mathbf{u}}{\mathbf{u} \cdot \mathbf{u}} = \pmatrix{1 &amp; 0 \cr 0 &amp; 1} - \frac{2}{288/5} \pmatrix{1296/25 &amp; 432/25 \cr 432/25 &amp; 144/25} = \pmatrix{ -4/5 &amp; -3/5 \cr -3/5 &amp; 4/5}.
+\end{align*}<p>Adding the first two rows and columns of the identity matrix to $H$ so that is is a $4\times 4$ matrix</p>
+\begin{align*}
+    H = \pmatrix{ 1 &amp; 0 &amp; 0 &amp; 0 \cr 0 &amp; 1 &amp; 0 &amp; 0 \cr 0 &amp; 0 &amp; -4/5 &amp; -3/5 \cr 0 &amp; 0 &amp; -3/5 &amp; 4/5}
+\end{align*}<p>Update $Q$ and $R$</p>
+\begin{align*}
+    Q &amp;= QH = \pmatrix{-1/2 &amp; -1/2 &amp; -7/10 &amp; 1/10 \cr 1/2 &amp; -1/2 &amp; -1/10 &amp; -7/10 \cr -1/2 &amp; -1/2 &amp; 7/10 &amp; -1/10 \cr 1/2 &amp; -1/2 &amp; 1/10 &amp; 7/10}\pmatrix{ 1 &amp; 0 &amp; 0 &amp; 0 \cr 0 &amp; 1 &amp; 0 &amp; 0 \cr 0 &amp; 0 &amp; -4/5 &amp; -3/5 \cr 0 &amp; 0 &amp; -3/5 &amp; 4/5} = \pmatrix{-1/2 &amp; -1/2 &amp; 1/2 &amp; 1/2 \cr 1/2 &amp; -1/2 &amp; 1/2 &amp; -1/2 \cr -1/2 &amp; -1/2 &amp; -1/2 &amp; -1/2 \cr 1/2 &amp; -1/2 &amp; -1/2 &amp; 1/2 }, \\
+    R &amp;= HR = \pmatrix{ 1 &amp; 0 &amp; 0 &amp; 0 \cr 0 &amp; 1 &amp; 0 &amp; 0 \cr 0 &amp; 0 &amp; -4/5 &amp; -3/5 \cr 0 &amp; 0 &amp; -3/5 &amp; 4/5}\pmatrix{2 &amp; 4 &amp; 2 \cr 0 &amp; -2 &amp; -8 \cr 0 &amp; 0 &amp; 16/5 \cr 0 &amp; 0 &amp; 12/5} = \pmatrix{2 &amp; 4 &amp; 2 \cr 0 &amp; -2 &amp; -8 \cr 0 &amp; 0 &amp; -4 \cr 0 &amp; 0 &amp; 0}.
+\end{align*}<p>Checking that $QR= A$</p>
+\begin{align*}
+    QR = \pmatrix{-1/2 &amp; -1/2 &amp; 1/2 &amp; 1/2 \cr 1/2 &amp; -1/2 &amp; 1/2 &amp; -1/2 \cr -1/2 &amp; -1/2 &amp; -1/2 &amp; -1/2 \cr 1/2 &amp; -1/2 &amp; -1/2 &amp; 1/2 }\pmatrix{2 &amp; 4 &amp; 2 \cr 0 &amp; -2 &amp; -8 \cr 0 &amp; 0 &amp; -4 \cr 0 &amp; 0 &amp; 0} = \pmatrix{ -1 &amp; -1 &amp; 1 \cr 1 &amp; 3 &amp; 3 \cr -1 &amp; -1 &amp; 5 \cr 1 &amp; 3 &amp; 7} = A.
+\end{align*}<p>Checking that $Q$ is orthonormal</p>
+\begin{align*}
+    Q^T Q = \pmatrix{-1/2 &amp; 1/2 &amp; -1/2 &amp; 1/2 \cr -1/2 &amp; -1/2 &amp; -1/2 &amp; -1/2 \cr 1/2 &amp; 1/2 &amp; -1/2 &amp; -1/2 \cr 1/2 &amp; -1/2 &amp; -1/2 &amp; 1/2 }\pmatrix{-1/2 &amp; -1/2 &amp; 1/2 &amp; 1/2 \cr 1/2 &amp; -1/2 &amp; 1/2 &amp; -1/2 \cr -1/2 &amp; -1/2 &amp; -1/2 &amp; -1/2 \cr 1/2 &amp; -1/2 &amp; -1/2 &amp; 1/2 } = \begin{pmatrix} 1 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 1 &amp; 0 &amp; 0  \\ 0 &amp; 0 &amp; 1 &amp; 0 \cr 0 &amp; 0 &amp; 0 &amp; 1 \end{pmatrix} = I.
+\end{align*}
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Example-19">Example 19<a class="anchor-link" href="#Example-19">&#182;</a></h4><p>The function defined below called <code>qr_hh</code> calculates the QR decomposition of the <code>A</code> using Householder transformations.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[157]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">qr_hh</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Calculates the QR decomposition of the m x n matrix A using the </span>
+<span class="sd">    Householder transformations</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    
+    <span class="k">def</span> <span class="nf">sign</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">1</span>
+    
+    <span class="n">nrows</span><span class="p">,</span> <span class="n">ncols</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">Q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">nrows</span><span class="p">)</span>
+    <span class="n">R</span> <span class="o">=</span> <span class="n">A</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ncols</span><span class="p">):</span>
+
+        <span class="c1"># Calculate Householder matrix</span>
+        <span class="n">u</span> <span class="o">=</span> <span class="n">R</span><span class="p">[</span><span class="n">i</span><span class="p">:,</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">sign</span><span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="p">])</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="n">i</span><span class="p">:,</span><span class="n">i</span><span class="p">])</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">nrows</span> <span class="o">-</span> <span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">H</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">nrows</span><span class="p">)</span>
+        <span class="n">H</span><span class="p">[</span><span class="n">i</span><span class="p">:,</span><span class="n">i</span><span class="p">:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">nrows</span> <span class="o">-</span> <span class="n">i</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">u</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+        
+        <span class="c1"># Apply Householder transformation to R and update Q</span>
+        <span class="n">R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">R</span><span class="p">)</span>
+        <span class="n">Q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span> <span class="n">H</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">Q</span><span class="p">,</span> <span class="n">R</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The code below uses the function <code>qr_hh</code> to calculate the QR decomposition of the matrix $A$ in <a href="#Example-18">example 18</a>.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[158]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Define matrix A</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> 
+              <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> 
+              <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> 
+              <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">]])</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="o">-</span><span class="mi">6</span><span class="p">])</span>
+
+<span class="c1"># Calculate QR decomposition</span>
+<span class="n">Q</span><span class="p">,</span> <span class="n">R</span> <span class="o">=</span> <span class="n">qr_hh</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+
+<span class="c1"># Output and check results</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Q = </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Q</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">R = </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">decimals</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Check QR = A</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span> <span class="n">R</span><span class="p">)</span> <span class="o">-</span> <span class="n">A</span><span class="p">,</span> <span class="n">decimals</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Check Q^T Q = I</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">Q</span><span class="p">),</span> <span class="n">decimals</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Q = 
+
+[[-0.5 -0.5  0.5  0.5]
+ [ 0.5 -0.5  0.5 -0.5]
+ [-0.5 -0.5 -0.5 -0.5]
+ [ 0.5 -0.5 -0.5  0.5]]
+
+R = 
+
+[[ 2.  4.  2.]
+ [-0. -2. -8.]
+ [ 0.  0. -4.]
+ [ 0. -0. -0.]]
+
+Check QR = A
+
+[[ 0.  0.  0.]
+ [-0.  0.  0.]
+ [ 0. -0.  0.]
+ [ 0.  0.  0.]]
+
+Check Q^T Q = I
+
+[[ 1. -0.  0.  0.]
+ [-0.  1. -0.  0.]
+ [ 0. -0.  1. -0.]
+ [ 0.  0. -0.  1.]]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Rounding-errors-in-calculating-QR-decomposition">Rounding errors in calculating QR decomposition<a class="anchor-link" href="#Rounding-errors-in-calculating-QR-decomposition">&#182;</a></h3><p>As with all numerical techniques, the two QR decomposition methods shown here are prone to computational rounding errors, especially since they both use square root calculations. The matrix $Q$ is orthogonal so the dot product of each column of $Q$ with all other columns should be equal to zero. We can use this to check the <strong>loss of orthogonality</strong> in our results.</p>
+<p>Defining an orthogonality error $e_j$ for a column vector $\mathbf{q}_j$ from $Q$ such that</p>
+\begin{align*}
+    e_j = \max_{1 \leq i &lt; j} | \mathbf{q}_j \cdot \mathbf{q}_i |, \qquad j = 1, \ldots, n,
+\end{align*}<p>then non-zero values of $e_j$ indicates that we have lost some orthogonality due to computational rounding errors.</p>
+<p>The Python program below generates a random $100 \times 100$ matrix $A$ and calculates the QR decomposition using the Gram-Schmidt process and Householder transformations and plots the orthogonality errors.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[160]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">rc</span>
+<span class="n">rc</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">,</span> <span class="n">usetex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">orthogonality_error</span><span class="p">(</span><span class="n">Q</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Calculates the maximum orthogonality error for the columns of an </span>
+<span class="sd">    orthogonal matrix Q</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">ncols</span> <span class="o">=</span> <span class="n">Q</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">e</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">ncols</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">ncols</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
+            <span class="n">e</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="nb">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Q</span><span class="p">[:,</span><span class="n">i</span><span class="p">],</span> <span class="n">Q</span><span class="p">[:,</span><span class="n">j</span><span class="p">])))</span>
+    
+    <span class="k">return</span> <span class="n">e</span>
+
+
+<span class="c1"># Generate 50 x 50 random matrix A</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">))</span>
+
+<span class="c1"># Calculate the QR decomposition of A using the Gram-Schmidt process</span>
+<span class="c1"># and Householder transformations</span>
+<span class="n">Q1</span><span class="p">,</span> <span class="n">R</span> <span class="o">=</span> <span class="n">qr_gs</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="n">Q2</span><span class="p">,</span> <span class="n">R</span> <span class="o">=</span> <span class="n">qr_hh</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+
+<span class="c1"># Calculate orthogonality errors</span>
+<span class="n">e1</span> <span class="o">=</span> <span class="n">orthogonality_error</span><span class="p">(</span><span class="n">Q1</span><span class="p">)</span>
+<span class="n">e2</span> <span class="o">=</span> <span class="n">orthogonality_error</span><span class="p">(</span><span class="n">Q2</span><span class="p">)</span>
+
+<span class="c1"># Plot orthogonality errors</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span><span class="n">e1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Gram-Schmidt&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span><span class="n">e2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Householder&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;$k$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;$e_k$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,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
+"
+>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Here we can see that the loss of orthogonality using Householder QR decomposition remains fairly constant the same cannot be said of the Gram-Schmidt QR decomposition where the loss of orthogonality increases as we reach the end columns of Q. We would expect this to increase further as the size of the matrix $A$ increases.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <hr>
 <h2 id="Summary">Summary<a class="anchor-link" href="#Summary">&#182;</a></h2><ul>
 <li><a href="#LU-decomposition">LU decomposition</a> decomposes a square matrix in the product of a lower triangular matrix $L$ and an upper triangular matrix $U$.</li>
 <li><a href="#Crout&#39;s-method">Crout's method</a> is used to solve a system of linear equations using LU decomposition by apply forward and back substitution.</li>
 <li><a href="#Partial-pivoting">Partial pivoting</a> ensures that the pivot element has a larger absolute value than the elements in the column below the pivot. This eliminates the problems caused when the pivot element is small resulting in computational rounding errors.</li>
-<li><a href="#Cholesky-decomposition">Cholesky decomposition</a> can be applied to decompose a <a href="#positive_definite">positive definite</a> matrix into the product of a lower triangular matrix $L$ and its transpose. Cholesky decomposition of a $n\times n$ matrix requires fewer operations than the equivalent LU decomposition.</li>
-<li><a href="#QR-Decomposition">QR decomposition</a> can be applied to decompose an $m\times n$ matrix into  the product of an $m \times n$ <a href="#orthogonal_matrix">orthogonal matrix</a> $Q$ and an $n\times n$ upper triangular matrix $R$. QR decomposition can be calculated using the <a href="#Calculating-QR-decomposition-using-the-Gram-Schmidt-process">Gram-Schmidt</a> where an orthonormal basis is determined by recursively subtracting the vector projection of non-orthogonal vectors onto known basis vectors.</li>
+<li><a href="#Cholesky-decomposition">Cholesky decomposition</a> can be applied to decompose a <a href="#positive_definite">positive definite</a> matrix into the product of a lower triangular matrix $L$ and its transpose. Cholesky decomposition of an $n\times n$ matrix requires fewer operations than the equivalent LU decomposition.</li>
+<li><a href="#QR-Decomposition">QR decomposition</a> can be applied to decompose an $m\times n$ matrix into  the product of <a href="#orthogonal_matrix">orthogonal matrix</a> $Q$ and an $n\times n$ upper triangular matrix $R$. QR decomposition can be calculated using the <a href="#Calculating-QR-decomposition-using-the-Gram-Schmidt-process">Gram-Schmidt</a> where an orthonormal basis is determined by recursively subtracting the vector projection of non-orthogonal vectors onto known basis vectors or using <a href="#Calculating-QR-decomposition-using-Householder-transformations">Householder transformations</a> which recursively applies a linear transformation to the columns of $A$ to reflect them onto the basis vector $\mathbf{e}_1$.</li>
 <li>QR decomposition can be used to calculate a solution to an overdetermined system when the number of equations is bigger than the number of unknowns.</li>
 <li>The advantage of using decomposition methods for solving systems of linear equations is that a change in the constant values do not require a recalculation of the decomposition as opposed to <a href="https://en.wikipedia.org/wiki/Gaussian_elimination">Gaussian elimination</a>.</li>
 </ul>
@@ -14467,7 +14785,7 @@ x_2 = 3.0
 \end{align*}
 <br></p>
 </li>
-<li><p>Solve the following systems of linear equations using <a href="#QR-decomposition">QR decomposition</a> with a pen and calculator.
+<li><p>Calculate the <a href="#QR-decomposition">QR decomposition</a> of the coefficient matrix for the following systems using the <a href="#Calculating-QR-decomposition-using-the-Gram-Schmidt-process">Gram-Schmidt process</a> with a pen and calculator.
 <br><br>
 &emsp; (a)
 \begin{align*}
@@ -14491,7 +14809,11 @@ x_2 = 3.0
 \end{align*}
 <br></p>
 </li>
-<li><p>Check your solutions to questions 1 to 4 using Python.</p>
+<li><p>Repeat question 4 using <a href="#Calculating-QR-decomposition-using-Householder-transformations">Householder transformations</a>.</p>
+</li>
+<li><p>Calculate the solutions to the linear systems in question 4 using QR decomposition.</p>
+</li>
+<li><p>Check your solutions to questions 1 to 6 using Python.</p>
 </li>
 </ol>
 
@@ -14500,7 +14822,7 @@ x_2 = 3.0
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Question 1</span>
@@ -14513,7 +14835,7 @@ x_2 = 3.0
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Question 2</span>
@@ -14526,7 +14848,7 @@ x_2 = 3.0
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Question 3</span>
@@ -14539,10 +14861,36 @@ x_2 = 3.0
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Question 4</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Question 5</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Question 6</span>
 </pre></div>
 
     </div>
