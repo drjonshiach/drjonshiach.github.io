@@ -1,0 +1,1112 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Boundary Value Problems &#8212; My Jupyter Book</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link href="_static/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="_static/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/jupyter-sphinx.css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/sphinx-book-theme.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/mystnb.js"></script>
+    <script src="_static/sphinx-book-theme.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-2 bd-sidebar site-navigation show single-page" id="site-navigation">
+    
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/5_boundary_value_problems.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+    
+</div>
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/5_boundary_value_problems.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#learning-outcomes">
+   Learning outcomes
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#general-two-point-boundary-value-problem">
+   General two-point boundary value problem
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#existence-and-uniqueness-of-solutions-to-boundary-value-problems">
+     Existence and uniqueness of solutions to boundary value problems
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#example-1">
+       Example 1
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-shooting-method">
+   The shooting method
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-2">
+     Example 2
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#improving-the-guess-value-using-the-secant-method">
+     Improving the guess value using the Secant method
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#example-3">
+       Example 3
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#a-note-about-accuracy">
+     A note about accuracy
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#finite-difference-method">
+   Finite-difference method
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#finite-difference-solutions-to-a-boundary-value-problem">
+     Finite-difference solutions to a boundary value problem
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-thomas-algorithm">
+     The Thomas algorithm
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id1">
+       Example 3
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#accuracy-vs-number-of-nodes">
+     Accuracy vs number of nodes
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#example-5">
+       Example 5
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#summary">
+   Summary
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercises">
+   Exercises
+  </a>
+ </li>
+</ul>
+
+        </nav>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="boundary-value-problems">
+<h1>Boundary Value Problems<a class="headerlink" href="#boundary-value-problems" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="learning-outcomes">
+<h2>Learning outcomes<a class="headerlink" href="#learning-outcomes" title="Permalink to this headline">¶</a></h2>
+<p>On successful completion of this page readers will be able to:</p>
+<ul class="simple">
+<li><p>Understand the definition of a <a class="reference external" href="#General-two-point-boundary-value-problem">two-point boundary value problem</a>.</p></li>
+<li><p>Apply the <a class="reference external" href="#The-shooting-method">shooting method</a> to solve a boundary value problem.</p></li>
+<li><p>Implement the <a class="reference external" href="#Improving-the-guess-value-using-the-Secant-method">Secant method</a> to calculate estimates of the initial value.</p></li>
+<li><p>Implement the <a class="reference external" href="#Finite-difference-method">finite-difference method</a> to solve boundary value problems.</p></li>
+<li><p>Implement the <a class="reference external" href="#The-Thomas-algorithm">Thomas algorithm</a> to solve a tridiagonal linear system of equations.</p></li>
+</ul>
+</div>
+<div class="section" id="general-two-point-boundary-value-problem">
+<h2>General two-point boundary value problem<a class="headerlink" href="#general-two-point-boundary-value-problem" title="Permalink to this headline">¶</a></h2>
+<p><a id="bvp"></a>A <a class="reference external" href="https://en.wikipedia.org/wiki/Boundary_value_problem"><strong>Boundary Value Problem</strong></a> (BVP) is an Ordinary Differential Equation (ODE) where the solutions at the boundaries of the domain are known. A common type of a BVP is the <strong>two-point BVP</strong> which is written using a second-order ODE</p>
+<div class="math notranslate nohighlight">
+\[y'' = f(t, y), \qquad t \in [t_{\min}, t_{\max}], \qquad y(t_{\min}) = y_0 \qquad y(t_{\max}) = y_N,\]</div>
+<p>for some known values <span class="math notranslate nohighlight">\(y_0\)</span> and <span class="math notranslate nohighlight">\(y_N\)</span>.</p>
+<div class="section" id="existence-and-uniqueness-of-solutions-to-boundary-value-problems">
+<h3>Existence and uniqueness of solutions to boundary value problems<a class="headerlink" href="#existence-and-uniqueness-of-solutions-to-boundary-value-problems" title="Permalink to this headline">¶</a></h3>
+<p>If an Initial Value Problem (IVP) has a solution it will be unique for a particular initial value. This is not true for BVPs which can have a unique solution, no solution or an infinite number of solutions. Consider the following ODE</p>
+<div class="math notranslate nohighlight">
+\[y' + y = 0.\]</div>
+<p>The general solution is</p>
+<div class="math notranslate nohighlight">
+\[y = c_1 \cos(t) + c_2 \sin(t), \]</div>
+<p>and consider the boundary values <span class="math notranslate nohighlight">\(y(0)= 0\)</span> and <span class="math notranslate nohighlight">\(y(\frac{\pi}{6}) = 1\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+     0 &amp;= c_1 \cos(0) + c_2 \sin(0) = c_1, \\
+     1 &amp;= c_1 \cos\left(\frac{\pi}{6}\right) + c_2 \sin\left(\frac{\pi}{6}\right) = \frac{\sqrt{3}}{2} c_1 + \frac{1}{2}c_2.
+\end{aligned}
+\end{split}\]</div>
+<p>Since <span class="math notranslate nohighlight">\(c_1=0\)</span> then <span class="math notranslate nohighlight">\(c_2=2\)</span> and this BVP has the unique solution</p>
+<div class="math notranslate nohighlight">
+\[y=2\sin(t).\]</div>
+<p>Now consider the boundary values <span class="math notranslate nohighlight">\(y(0) = 0\)</span> and <span class="math notranslate nohighlight">\(y(\pi) = 0\)</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+    0 &amp;= c_1 \cos(0) + c_2 \sin(0) = c_1, \\
+    1 &amp;= c_! \cos(\pi) + c_2 \sin(\pi) = -c_1.
+\end{aligned}
+\end{split}\]</div>
+<p>Here <span class="math notranslate nohighlight">\(c_1=0\)</span> and <span class="math notranslate nohighlight">\(c_2\)</span> can take any value so this BVP has an infinite number of solutions.</p>
+<p>Now consider the boundary values <span class="math notranslate nohighlight">\(y(0) = 0\)</span> and <span class="math notranslate nohighlight">\(y(2\pi)=1\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+    0 &amp;= c_1 \cos(0) + c_2 \sin(0) = c_1, \\
+    1 &amp;= c_1 \cos(2\pi) + c_2 \sin(2\pi) = c_1.
+\end{aligned}
+\end{split}\]</div>
+<p>here <span class="math notranslate nohighlight">\(c_1=0\)</span> and <span class="math notranslate nohighlight">\(c_1=1\)</span> which is a contradiction so this BVP does not have a solution.</p>
+<div class="admonition-theorem-uniqueness-of-the-solution-to-a-boundary-value-problem admonition">
+<p class="admonition-title"><strong>Theorem:</strong> Uniqueness of the solution to a boundary value problem</p>
+<p>A linear boundary value problem of the form</p>
+<div class="math notranslate nohighlight">
+\[y'' = p(t) y' + q(t)y + r(t), \qquad t \in [t_{\min}, t_{\max}], \qquad y(t_{\min}) = y_0, \qquad y(t_{\max}) = y_N,\]</div>
+<p>where <span class="math notranslate nohighlight">\(p(t)\)</span>, <span class="math notranslate nohighlight">\(q(t)\)</span> and <span class="math notranslate nohighlight">\(r(t)\)</span> are some functions of <span class="math notranslate nohighlight">\(t\)</span> then it has a unique solution if the following are satisfied</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(p(t)\)</span>, <span class="math notranslate nohighlight">\(q(t)\)</span> and <span class="math notranslate nohighlight">\(r(t)\)</span> are continuous on <span class="math notranslate nohighlight">\([t_{\min}, t_{\max}]\)</span>;</p></li>
+<li><p><span class="math notranslate nohighlight">\(q(t) &gt; 0\)</span> for all <span class="math notranslate nohighlight">\(t\in [t_{\min}, t_{\max}]\)</span>.</p></li>
+</ol>
+</div>
+<div class="section" id="example-1">
+<h4>Example 1<a class="headerlink" href="#example-1" title="Permalink to this headline">¶</a></h4>
+<p>Show that the following BVP has a unique solution</p>
+<div class="math notranslate nohighlight">
+\[y'' = (t^3 + 5)y + \sin(t), \qquad t \in [0, 1], \qquad y(0) = 0, \qquad y(1) = 1.\]</div>
+<p>Comparing this BVP to <span class="math notranslate nohighlight">\(y'' = p(t) y' + q(t)y + r(t)\)</span> we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+    p(t) &amp;= 0, \\
+    q(t) &amp;= t^3 + 5, \\
+    r(t) &amp;= \sin(t),
+\end{aligned}
+\end{split}\]</div>
+<p>which are all continuous on <span class="math notranslate nohighlight">\([0,1]\)</span> and <span class="math notranslate nohighlight">\(q(t)\geq 5\)</span> for all <span class="math notranslate nohighlight">\(t\in[0,1]\)</span> so this BVP has a unique solution.</p>
+</div>
+</div>
+</div>
+<div class="section" id="the-shooting-method">
+<h2>The shooting method<a class="headerlink" href="#the-shooting-method" title="Permalink to this headline">¶</a></h2>
+<p>Consider the two-point BVP from equation <a class="reference external" href="#bvp">(1)</a>. Since the ODE solvers we use can only be applied to a first-order ODE we need to rewrite the second-order ODE as a system of two first-order ODEs</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+    y_1' &amp;= y_2, \\
+    y_2' &amp;= f(t, y_1, y_2).
+\end{aligned}
+\end{split}\]</div>
+<p>Since we have let <span class="math notranslate nohighlight">\(y_1=y\)</span> we know that <span class="math notranslate nohighlight">\(y_1(t_{\min})=y_0\)</span> from the problem definition but we do not know that value of <span class="math notranslate nohighlight">\(y_2(t_{\min}) = y'(t_{\min})\)</span>. To overcome this problem we simply guess this value and compute the solutions to the <a class="reference external" href="https://en.wikipedia.org/wiki/Initial_value_problem">Initial Value Problem</a> (IVP) and compare the solution of <span class="math notranslate nohighlight">\(y_1(t_{\max})\)</span> to <span class="math notranslate nohighlight">\(y(t_{\max})=y_N\)</span> and adjust the guess value accordingly. This method is called the <a class="reference external" href="https://en.wikipedia.org/wiki/Shooting_method"><strong>shooting method</strong></a> because someone shooting at a target will adjust their next shot based where their previous shot landed.</p>
+<div class="section" id="example-2">
+<h3>Example 2<a class="headerlink" href="#example-2" title="Permalink to this headline">¶</a></h3>
+<p>Use the shooting method to solve the following BVP</p>
+<div class="math notranslate nohighlight">
+\[y'' - y' - y = 0, \qquad t \in [0, 1], \qquad y(0) = 1, \qquad y(1) = 2.\]</div>
+<p>Rewriting this as a system of first-order ODEs gives</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+    y_1' &amp;= y_2, &amp; y_1(0) &amp;= 1, \\
+    y_2' &amp;= y_2 + y_1, &amp; y_2(0) &amp;= s,
+\end{aligned}
+\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(s\)</span> is a guess of <span class="math notranslate nohighlight">\(y'(0)\)</span>.</p>
+<p>The function defined below calculates the solution to an IVP using the Euler method</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="k">def</span> <span class="nf">euler</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">tspan</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">h</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Calculates the solution to an IVP using the Euler method</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="c1"># Initialise solution arrays</span>
+    <span class="n">nsteps</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">tspan</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">tspan</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="n">h</span><span class="p">)</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nsteps</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">nsteps</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">y0</span><span class="p">)))</span>
+    <span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">tspan</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">y0</span>
+    
+    <span class="c1"># Solver loop</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nsteps</span><span class="p">):</span>
+        <span class="n">y</span><span class="p">[</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">n</span><span class="p">,:]</span> <span class="o">+</span> <span class="n">h</span> <span class="o">*</span> <span class="n">f</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">n</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="n">n</span><span class="p">,:])</span>
+        <span class="n">t</span><span class="p">[</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">+</span> <span class="n">h</span>
+        
+    <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">y</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The function defined below calculates the right-hand side of the system of ODEs.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="n">dy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+    <span class="n">dy</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">dy</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">dy</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The program below solves the BVP problem defined here using the guess values <span class="math notranslate nohighlight">\(s=1\)</span>, <span class="math notranslate nohighlight">\(s=2\)</span> and <span class="math notranslate nohighlight">\(s=1.5\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">rc</span>
+<span class="n">rc</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">,</span> <span class="n">usetex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Define BVP parameters</span>
+<span class="n">tspan</span> <span class="o">=</span> <span class="p">[</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span> <span class="p">]</span>      <span class="c1"># t domain</span>
+<span class="n">bvals</span> <span class="o">=</span> <span class="p">[</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span> <span class="p">]</span>      <span class="c1"># boundary values</span>
+<span class="n">s</span> <span class="o">=</span> <span class="p">[</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">1.5</span> <span class="p">]</span>     <span class="c1"># guess values for y&#39;(0)</span>
+<span class="n">h</span> <span class="o">=</span> <span class="mf">0.2</span>               <span class="c1"># step length</span>
+
+<span class="c1"># Loop through the 3 guess values</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+    
+    <span class="c1"># Solve IVP using the Euler method</span>
+    <span class="n">t</span><span class="p">,</span> <span class="n">y1</span> <span class="o">=</span> <span class="n">euler</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">tspan</span><span class="p">,</span> <span class="p">[</span> <span class="n">bvals</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="p">],</span> <span class="n">h</span><span class="p">)</span>
+    
+    <span class="c1"># Append current solution to y array</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">y1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># Output solution table</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1"> t      y1      y2</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="s1">&#39;-&#39;</span> <span class="o">*</span> <span class="mi">20</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{:3.2f}</span><span class="s1"> </span><span class="si">{:7.4f}</span><span class="s1"> </span><span class="si">{:7.4f}</span><span class="s1">&#39;</span>\
+              <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">n</span><span class="p">],</span> <span class="n">y1</span><span class="p">[</span><span class="n">n</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">y1</span><span class="p">[</span><span class="n">n</span><span class="p">,</span><span class="mi">1</span><span class="p">]))</span>
+
+<span class="c1"># Plot solution</span>
+<span class="n">colours</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;g&#39;</span><span class="p">]</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">[:,</span><span class="mi">2</span><span class="o">*</span><span class="n">i</span><span class="p">],</span> <span class="s1">&#39;o-&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colours</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$s=</span><span class="si">{:0.2f}</span><span class="s1">$&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">i</span><span class="p">]))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tspan</span><span class="p">,</span> <span class="n">bvals</span><span class="p">,</span> <span class="s1">&#39;ks&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;boundary values&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Solutions to the BVP $y&#39;&#39; - y&#39; - y = 0$, $y(0) = 0$, $y(1) = 2$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;$t$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;$y(t)$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>
+ t      y1      y2
+--------------------
+0.00  0.0000  1.0000
+0.20  0.2000  1.2000
+0.40  0.4400  1.4800
+0.60  0.7360  1.8640
+0.80  1.1088  2.3840
+1.00  1.5856  3.0826
+
+ t      y1      y2
+--------------------
+0.00  0.0000  2.0000
+0.20  0.4000  2.4000
+0.40  0.8800  2.9600
+0.60  1.4720  3.7280
+0.80  2.2176  4.7680
+1.00  3.1712  6.1651
+
+ t      y1      y2
+--------------------
+0.00  0.0000  1.5000
+0.20  0.3000  1.8000
+0.40  0.6600  2.2200
+0.60  1.1040  2.7960
+0.80  1.6632  3.5760
+1.00  2.3784  4.6238
+</pre></div>
+</div>
+<img alt="_images/5_boundary_value_problems_10_1.png" src="_images/5_boundary_value_problems_10_1.png" />
+</div>
+</div>
+<p>Comparing the solutions of <span class="math notranslate nohighlight">\(y(1)\)</span> to the boundary value of <span class="math notranslate nohighlight">\(y(1)=2\)</span> we can see that using <span class="math notranslate nohighlight">\(s=1\)</span> results in <span class="math notranslate nohighlight">\(y_1(1) = 1.5856\)</span> which is too small and using <span class="math notranslate nohighlight">\(s=1\)</span> results in <span class="math notranslate nohighlight">\(y(1) = 3.1712\)</span> which is too large. Choosing a guess of somewhere in between such as <span class="math notranslate nohighlight">\(s=0.5\)</span> results in <span class="math notranslate nohighlight">\(y(1) = 2.2384\)</span> which is closer to the exact solution but still not an accurate approximation of <span class="math notranslate nohighlight">\(y(1)=2\)</span>. We continue to adjust the initial guess value based on the solution at the upper boundary until we get a result that is accurate enough for our needs.</p>
+</div>
+<div class="section" id="improving-the-guess-value-using-the-secant-method">
+<h3>Improving the guess value using the Secant method<a class="headerlink" href="#improving-the-guess-value-using-the-secant-method" title="Permalink to this headline">¶</a></h3>
+<p>To improve the guess value we can use the <a class="reference external" href="https://en.wikipedia.org/wiki/Secant_method"><strong>Secant method</strong></a>. The Secant method is a root finding algorithm that calculates the value of <span class="math notranslate nohighlight">\(s\)</span> where <span class="math notranslate nohighlight">\(F(s) = 0\)</span> for some function <span class="math notranslate nohighlight">\(F\)</span></p>
+<div class="math notranslate nohighlight">
+\[s_{i+1} = s_i - F(s_i) \frac{s_i - s_{i-1}}{F(s_i) - F(s_{i-1})}.\]</div>
+<p>This expression is iterated until <span class="math notranslate nohighlight">\(|s_i - s_{i-1}| &lt; tol\)</span> where <span class="math notranslate nohighlight">\(tol\)</span> is some small number. Since we want the solution of <span class="math notranslate nohighlight">\(f'(t_{\max})\)</span> to be equal to the upper boundary value <span class="math notranslate nohighlight">\(y_N\)</span> we can define</p>
+<div class="math notranslate nohighlight">
+\[F(s) = f'(t_{\max}) - y_N, \]</div>
+<p>and use the Secant method to calculate <span class="math notranslate nohighlight">\(s\)</span>.</p>
+<p>The function defined below solves a BVP using the shooting method with the Secant method to calculate an improved guess value using two starting guess values of <span class="math notranslate nohighlight">\(s=1\)</span> and <span class="math notranslate nohighlight">\(s=2\)</span>. The Secant method is iterated until two successive guess values are within <span class="math notranslate nohighlight">\(tol=10^{-6}\)</span> or the number of iterations exceeds <code class="docutils literal notranslate"><span class="pre">maxiter</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">shooting_method</span><span class="p">(</span><span class="n">odesolver</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">tspan</span><span class="p">,</span> <span class="n">bvals</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">maxiter</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Calculates the solution to a BVP using the shooting method with the Secant method</span>
+<span class="sd">    used to determine the guess values</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="c1"># Iterate until successive guess values agree</span>
+    <span class="n">s0</span><span class="p">,</span> <span class="n">s1</span><span class="p">,</span> <span class="n">F0</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">maxiter</span><span class="p">):</span>
+
+        <span class="c1"># Solve IVP using current guess value</span>
+        <span class="n">t</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">odesolver</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">tspan</span><span class="p">,</span> <span class="p">[</span> <span class="n">bvals</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">s1</span><span class="p">],</span> <span class="n">h</span><span class="p">)</span>
+
+        <span class="c1"># Use Secant method to calculate next guess value after first iteration</span>
+        <span class="n">F1</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">bvals</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">s2</span> <span class="o">=</span> <span class="n">s1</span> <span class="o">-</span> <span class="n">F1</span> <span class="o">*</span> <span class="p">(</span><span class="n">s1</span> <span class="o">-</span> <span class="n">s0</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">F1</span> <span class="o">-</span> <span class="n">F0</span><span class="p">)</span>
+        <span class="n">s1</span><span class="p">,</span> <span class="n">s0</span><span class="p">,</span> <span class="n">F0</span> <span class="o">=</span> <span class="n">s2</span><span class="p">,</span> <span class="n">s1</span><span class="p">,</span> <span class="n">F1</span> 
+        
+        <span class="c1"># Check for convergence</span>
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">s1</span> <span class="o">-</span> <span class="n">s0</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-6</span><span class="p">:</span>
+            <span class="k">break</span>
+
+    <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">y</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="example-3">
+<h4>Example 3<a class="headerlink" href="#example-3" title="Permalink to this headline">¶</a></h4>
+<p>Use the shooting method to calculate the solution of the BVP from <a class="reference external" href="#Example-2">example 2</a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define BVP parameters</span>
+<span class="n">tspan</span> <span class="o">=</span> <span class="p">[</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span> <span class="p">]</span>      <span class="c1"># t domain</span>
+<span class="n">bvals</span> <span class="o">=</span> <span class="p">[</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span> <span class="p">]</span>      <span class="c1"># boundary values</span>
+<span class="n">h</span> <span class="o">=</span> <span class="mf">0.2</span>               <span class="c1"># step length</span>
+
+<span class="c1"># Solve BVP using the shooting method</span>
+<span class="n">t</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">shooting_method</span><span class="p">(</span><span class="n">euler</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">tspan</span><span class="p">,</span> <span class="n">bvals</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+
+<span class="c1"># Output solution table</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39; t      y1      y2</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="s1">&#39;-&#39;</span> <span class="o">*</span> <span class="mi">20</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{:3.2f}</span><span class="s1"> </span><span class="si">{:7.4f}</span><span class="s1"> </span><span class="si">{:7.4f}</span><span class="s1">&#39;</span>\
+          <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">n</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="n">n</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="n">n</span><span class="p">,</span><span class="mi">1</span><span class="p">]))</span>
+
+<span class="c1"># Plot solution</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">[:,</span><span class="o">-</span><span class="mi">2</span><span class="p">],</span> <span class="s1">&#39;bo-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$s=</span><span class="si">{:0.4f}</span><span class="s1">$&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tspan</span><span class="p">,</span> <span class="n">bvals</span><span class="p">,</span> <span class="s1">&#39;ks&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;boundary values&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Solution to the BVP $y&#39;&#39; - y&#39; - y = 0$, $y(0) = 0$, $y(1) = 2$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;$t$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;$y(t)$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span> t      y1      y2
+--------------------
+0.00  0.0000  1.2614
+0.20  0.2523  1.5136
+0.40  0.5550  1.8668
+0.60  0.9284  2.3512
+0.80  1.3986  3.0071
+1.00  2.0000  3.8882
+</pre></div>
+</div>
+<img alt="_images/5_boundary_value_problems_15_1.png" src="_images/5_boundary_value_problems_15_1.png" />
+</div>
+</div>
+<p>Here the Secant method converged to a guess value of <span class="math notranslate nohighlight">\(s=1.2614\)</span> which provides a solution at the upper boundary of <span class="math notranslate nohighlight">\(y(1)=2.0000\)</span>.</p>
+</div>
+</div>
+<div class="section" id="a-note-about-accuracy">
+<h3>A note about accuracy<a class="headerlink" href="#a-note-about-accuracy" title="Permalink to this headline">¶</a></h3>
+<p>In <a class="reference external" href="#Example-2">example 2</a> we iterated the Secant method until convergence and got a very accurate solution for the value of <span class="math notranslate nohighlight">\(y(t_{\max})\)</span>. We must be careful not to forget that this solution was obtained using the Euler method which being only first-order so expect it to be relatively inaccurate.</p>
+<p>The exact solution to the BVP from <a class="reference external" href="#Example-1">example 1</a> above is</p>
+<div class="math notranslate nohighlight">
+\[y = \frac{2e^{-\frac{1}{2}(\sqrt{5} - 1)(t-1)}(e^{\sqrt{5}t} - 1)}{e^{\sqrt{5}} - 1},\]</div>
+<p>which is defined in the function below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">exact_sol</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">t</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> \
+            <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The code below plots the solution obtained using the Euler method with the guess value of <span class="math notranslate nohighlight">\(s=1.2614\)</span> and compares it to the exact solution.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot solution</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="n">t1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">tspan</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">tspan</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span> <span class="n">exact_sol</span><span class="p">(</span><span class="n">t1</span><span class="p">),</span> <span class="s1">&#39;r-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Exact solution&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;bo-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Euler method&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;$t$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;$y(t)$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/5_boundary_value_problems_20_0.png" src="_images/5_boundary_value_problems_20_0.png" />
+</div>
+</div>
+<p>So despite the Secant method giving a guess value that gives an accurate solution at the upper boundary, the use of the Euler method does not give an accurate solution in the interior points. One way to improve the accuracy of our approximation is to use a more accurate ODE solver.</p>
+<p>The function below calculates the solution to an IVP using the second-order <a class="reference external" href="https://en.wikipedia.org/wiki/Runge%E2%80%93Kutta_methods">Runge-Kutta method</a> (RK2).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">rk2</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">tspan</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">h</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Calculates the solution to an IVP using the second-order Runge-Kutta method</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="c1"># Initialise solution arrays</span>
+    <span class="n">nsteps</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">tspan</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">tspan</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="n">h</span><span class="p">)</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nsteps</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">nsteps</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">y0</span><span class="p">)))</span>
+    <span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">tspan</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">y0</span>
+    
+    <span class="c1"># Solver loop</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nsteps</span><span class="p">):</span>
+        <span class="n">k1</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">n</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="n">n</span><span class="p">,:])</span>
+        <span class="n">k2</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">h</span><span class="p">,</span> <span class="n">y</span><span class="p">[</span><span class="n">n</span><span class="p">,:]</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">h</span> <span class="o">*</span> <span class="n">k1</span><span class="p">)</span>
+        <span class="n">y</span><span class="p">[</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">n</span><span class="p">,:]</span> <span class="o">+</span> <span class="n">h</span> <span class="o">*</span> <span class="n">k2</span>
+        <span class="n">t</span><span class="p">[</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">+</span> <span class="n">h</span>
+        
+    <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">y</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The code below invokes the shooting method with the RK2 solver to solve the BVP from <a class="reference external" href="#Example-2">example 2</a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define BVP parameters</span>
+<span class="n">tspan</span> <span class="o">=</span> <span class="p">[</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span> <span class="p">]</span>
+<span class="n">bvals</span> <span class="o">=</span> <span class="p">[</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span> <span class="p">]</span>
+<span class="n">h</span> <span class="o">=</span> <span class="mf">0.2</span>
+
+<span class="c1"># Use shooting method with RK2 to solve the BVP</span>
+<span class="n">t</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">shooting_method</span><span class="p">(</span><span class="n">rk2</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">tspan</span><span class="p">,</span> <span class="n">bvals</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+
+<span class="c1"># Output solution table</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39; t      y1      y2</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="s1">&#39;-&#39;</span> <span class="o">*</span> <span class="mi">20</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{:3.2f}</span><span class="s1"> </span><span class="si">{:7.4f}</span><span class="s1"> </span><span class="si">{:7.4f}</span><span class="s1">&#39;</span>\
+          <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">n</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="n">n</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="n">n</span><span class="p">,</span><span class="mi">1</span><span class="p">]))</span>
+    
+<span class="c1"># Plot solution</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="n">t1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">tspan</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">tspan</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span> <span class="n">exact_sol</span><span class="p">(</span><span class="n">t1</span><span class="p">),</span> <span class="s1">&#39;r-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Exact solution&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">2</span><span class="p">],</span> <span class="s1">&#39;bo-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;RK2&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;$t$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;$y(t)$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span> t      y1      y2
+--------------------
+0.00  0.0000  1.0182
+0.20  0.2240  1.2625
+0.40  0.5062  1.6148
+0.60  0.8716  2.1138
+0.80  1.3541  2.8128
+1.00  2.0000  3.7858
+</pre></div>
+</div>
+<img alt="_images/5_boundary_value_problems_24_1.png" src="_images/5_boundary_value_problems_24_1.png" />
+</div>
+</div>
+<p>Here we can see that we have a much more accurate solution than when we used the Euler method to solve the ODE.</p>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="finite-difference-method">
+<h2>Finite-difference method<a class="headerlink" href="#finite-difference-method" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference external" href="https://en.wikipedia.org/wiki/Finite_difference_method"><strong>finite-difference method</strong></a> for solving a BVP converts the BVP into a system of algebraic equations by replacing the derivatives in the ODE with finite-difference approximations derived from the <a class="reference external" href="https://en.wikipedia.org/wiki/Taylor_series">Taylor series</a>. The system of equations is then solved to obtain an approximation of the solution to the BVP.</p>
+<p>The solution is approximated at discrete points called <strong>nodes</strong> that are equally spaced in the domain. If <span class="math notranslate nohighlight">\(N\)</span> nodes are used to <strong>discretise</strong> the domain then the spacing between two nodes is</p>
+<div class="math notranslate nohighlight">
+\[ h = \frac{t_{\max} - t_{\min}}{N - 1}, \]</div>
+<p>and the <span class="math notranslate nohighlight">\(t\)</span> value of the <span class="math notranslate nohighlight">\(i\)</span>th node is calculated using <span class="math notranslate nohighlight">\(t_i = t_{\min} + ih\)</span> and the solution  <span class="math notranslate nohighlight">\(y(t_i)\)</span> is denoted by <span class="math notranslate nohighlight">\(y_i\)</span> for brevity. The derivatives of <span class="math notranslate nohighlight">\(y_i\)</span> are approximated using values of neighbouring nodes <span class="math notranslate nohighlight">\(y_{i+1}\)</span>, <span class="math notranslate nohighlight">\(y_{i-1}\)</span> etc. using expressions derived by truncating the Taylor series and rearranging to make the derivative term the subject. Some common finite-difference approximations are listed in the table below.</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="text-align:center head"><p>Derivative</p></th>
+<th class="text-align:center head"><p>Finite-difference approximation</p></th>
+<th class="text-align:center head"><p>Order of accuracy</p></th>
+<th class="text-align:left head"><p>Name</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:center"><p><span class="math notranslate nohighlight">\(y'\)</span></p></td>
+<td class="text-align:center"><p><a id="forward_difference"></a> <span class="math notranslate nohighlight">\(\dfrac{y_{i+1} - y_{i}}{h}\)</span></p></td>
+<td class="text-align:center"><p>1st</p></td>
+<td class="text-align:left"><p>forward difference</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p><span class="math notranslate nohighlight">\(y'\)</span></p></td>
+<td class="text-align:center"><p><span class="math notranslate nohighlight">\(\dfrac{y_i - y_{i-1}}{h}\)</span></p></td>
+<td class="text-align:center"><p>1st</p></td>
+<td class="text-align:left"><p>backward difference</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:center"><p><span class="math notranslate nohighlight">\(y'\)</span></p></td>
+<td class="text-align:center"><p><a id="central_difference"></a><span class="math notranslate nohighlight">\(\dfrac{y_{i+1} - y_{i-1}}{2h}\)</span></p></td>
+<td class="text-align:center"><p>2nd</p></td>
+<td class="text-align:left"><p>central difference</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p><span class="math notranslate nohighlight">\(y''\)</span></p></td>
+<td class="text-align:center"><p><a id="symmetric_difference"></a><span class="math notranslate nohighlight">\(\dfrac{y_{i-1} - 2y_i + y_{i+1}}{h^2}\)</span></p></td>
+<td class="text-align:center"><p>2nd</p></td>
+<td class="text-align:left"><p>symmetric difference</p></td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="finite-difference-solutions-to-a-boundary-value-problem">
+<h3>Finite-difference solutions to a boundary value problem<a class="headerlink" href="#finite-difference-solutions-to-a-boundary-value-problem" title="Permalink to this headline">¶</a></h3>
+<p>The solution to a BVP using then finite-difference method is determined by approximating the derivatives in the ODE using finite-differences. Consider the following BVP</p>
+<p>\begin{align*}
+y’’ &amp;= f(t, y), &amp; t &amp;\in [t_{\min}, t_{\max}], &amp; y(t_{\min}) &amp;= y_0, &amp; y(t_{\max}) &amp;= y_N
+\end{align*}</p>
+<p>Using the <a class="reference external" href="#symmetric_difference">symmetric difference</a> to approximate <span class="math notranslate nohighlight">\(y''\)</span> in the ODE we have</p>
+<p>\begin{align*}
+y_{i-1} - 2y_i + y_{i+1} &amp;= h^2 f(t_i, y_i), &amp; i &amp;= 1, 2, \ldots, N-1.
+\end{align*}</p>
+<p>This is a linear system of <span class="math notranslate nohighlight">\(N-1\)</span> equations. The values of the nodes at the lower and upper boundaries, <span class="math notranslate nohighlight">\(y_0\)</span> and <span class="math notranslate nohighlight">\(y_N\)</span>, are known so the we can reduce this system to <span class="math notranslate nohighlight">\(N-3\)</span> equations where</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+    -2y_1 + y_2 &amp;= h^2 f(t_1, y_1) - y_0, \\
+    y_{i-1} - 2y_i + y_{i+1} &amp;= h^2 f(t_i, y_i), &amp; i &amp;= 2, 3, \ldots, N-2, \\
+    y_{N-2} - 2y_{N-1} &amp;= h^2 f(t_{N-1}, y_{N-1}) - y_N.
+\end{aligned}
+\end{split}\]</div>
+<p>This can be expressed as a matrix equation</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \pmatrix{-2 &amp; 1 \\
+    1 &amp; -2 &amp; 1 \\
+    &amp; \ddots &amp; \ddots &amp; \ddots \\
+    &amp; &amp; 1 &amp; -2 &amp; 1 \\ 
+    &amp; &amp; &amp; 1 &amp; -2}
+    \pmatrix{y_1 \\ y_2 \\ \vdots \\ y_{N-2} \\ y_{N-1}} =
+    \pmatrix{f(t_1, y_1) - y_0, \\ f(t_2, y_2) \\ \vdots \\ f(t_{N-2},y_{N-2}) \\ f(t_{N-1}, y_{N-1}) - y_N}.
+\end{split}\]</div>
+</div>
+<div class="section" id="the-thomas-algorithm">
+<h3>The Thomas algorithm<a class="headerlink" href="#the-thomas-algorithm" title="Permalink to this headline">¶</a></h3>
+<p>We have seen above that the matrix equation resulting from a second-order two-point BVP has a tridiagonal coefficient matrix. This means we can use the <a class="reference external" href="https://en.wikipedia.org/wiki/Tridiagonal_matrix_algorithm"><strong>Thomas Algorithm</strong></a> which is a form of Gaussian elimination and very efficient for solving tridiagonal systems.</p>
+<p>Given a linear tridiagonal system of the form <span class="math notranslate nohighlight">\(A\mathbf{x} = \mathbf{d}\)</span> then let <span class="math notranslate nohighlight">\(a_i\)</span>, <span class="math notranslate nohighlight">\(b_i\)</span>, <span class="math notranslate nohighlight">\(c_i\)</span> be the elements on the lower, main and upper-diagonals of the coefficient matrix <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(d_i\)</span> be the values of the right-hand side vector <span class="math notranslate nohighlight">\(\mathbf{d}\)</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\pmatrix{ b_0 &amp; c_0 \\
+            a_1 &amp; b_1 &amp; c_1 \\
+                &amp; \ddots &amp; \ddots &amp; \ddots \\
+                &amp;        &amp; a_{N-1} &amp; b_{N-1} &amp; c_{N-1} \\
+                &amp;        &amp;         &amp; a_{N}   &amp; b_{N}}
+\pmatrix{ x_0 \\ x_1 \\ \vdots \\ x_{N-1} \\ x_{N} } =
+\pmatrix{ d_0 \\ d_1 \\ \vdots \\ d_{N-1} \\ d_{N} },
+\end{split}\]</div>
+<p>The Thomas algorithm first uses a forward sweep to apply row operations to the values of <span class="math notranslate nohighlight">\(b_i\)</span> and <span class="math notranslate nohighlight">\(d_i\)</span> before solving for the values of <span class="math notranslate nohighlight">\(x_i\)</span> by back substitution.</p>
+<p>Forward sweep:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+    b_i &amp;= b_i - \frac{a_i}{b_{i-1}} c_{i-1}, &amp; i &amp;= 2, 3, \ldots, N \\
+    d_i &amp;= d_i - \frac{a_i}{b_{i-1}} d_{i-1}, &amp; i &amp;= 2, 3, \ldots, N.
+\end{aligned}
+\end{split}\]</div>
+<p>Back substitution:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+    x_n &amp;= \frac{d_N}{b_N}, \\
+    x_i &amp;= \frac{d_i - c_i x_{i+1}}{b_i}, &amp; i &amp;= N-1, N-2, \ldots, 1.
+\end{aligned}
+\end{split}\]</div>
+<p>The function below solves a tridiagonal linear system using the Thomas algorithm given inputs of the arrays for <span class="math notranslate nohighlight">\(a_i\)</span>, <span class="math notranslate nohighlight">\(b_i\)</span>, <span class="math notranslate nohighlight">\(c_i\)</span> and <span class="math notranslate nohighlight">\(d_i\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">tridiag_solver</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Calculates the solution to a tridiagonal linear system of equations using</span>
+<span class="sd">    the Thomas algorithm</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="c1"># Forward sweep</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">)):</span>
+        <span class="n">w</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">w</span> <span class="o">*</span> <span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">w</span> <span class="o">*</span> <span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="c1"># Back substitution</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">b</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+    <span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">b</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">)</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        
+    <span class="k">return</span> <span class="n">x</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id1">
+<h4>Example 3<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
+<p>Use the finite-difference method to solve the BVP given in <a class="reference external" href="#Example-2">example 2</a></p>
+<div class="math notranslate nohighlight">
+\[y'' - y' - y = 0, \qquad t \in [0, 1], \qquad y(0) = 1, \qquad y(1) = 2.\]</div>
+<p>Using a <span class="xref myst">forward difference</span> to approximate <span class="math notranslate nohighlight">\(y'\)</span> and a <a class="reference external" href="#symmetric_difference">symmetric difference</a> to approximate <span class="math notranslate nohighlight">\(y''\)</span> we have</p>
+<p>\begin{align*}
+\frac{y_{i-1} - 2y_i + y_{i+1}}{h^2} - \frac{y_{i+1} - y_{i}}{h} - y_i &amp;= 0,
+\end{align*}</p>
+<p>which can be simplified to</p>
+<p>\begin{align*}
+y_{i-1} + (h - h^2 - 2)y_i + (1 - h)y_{i+1} = 0,
+\end{align*}</p>
+<p>with the nodes adjacent to the lower and upper boundaries</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+    (h - h^2 - 2)y_1 + (1 - h)y_2 &amp;= -y_0, \\
+    y_{N-2} + (h - h^2 - 2)y_{N-1} &amp;= -(1 - h)y_N.
+\end{aligned}
+\end{split}\]</div>
+<p>We can write the linear system as the matrix equation</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \pmatrix{
+        h - h^2 - 2 &amp; 1 - h &amp; \\
+        1 &amp; h - h^2 - 2 &amp; 1 - h \\
+          &amp; 1 &amp;  h - h^2 - 2 &amp; 1 - h \\
+          &amp; &amp; \ddots &amp; \ddots &amp; \ddots \\
+          &amp; &amp;        &amp;   1  &amp;  h - h^2 - 2 &amp; 1 - h \\
+          &amp; &amp;        &amp;        &amp; 1 &amp;  h - h^2 - 2
+    }
+    \pmatrix{ y_1 \\ y_2 \\ y_3 \\ \vdots \\ y_{N-2} \\ y_{N-1} } =
+    \pmatrix{ -y_0 \\ 0 \\ 0 \\ \vdots \\ 0 \\ -y_N}.
+\end{split}\]</div>
+<p>The code below defines this linear system and solves it using the Thomas algorithm.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define BVP parameters</span>
+<span class="n">tspan</span> <span class="o">=</span> <span class="p">[</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span> <span class="p">]</span>      <span class="c1"># t domain</span>
+<span class="n">bvals</span> <span class="o">=</span> <span class="p">[</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span> <span class="p">]</span>      <span class="c1"># boundary values</span>
+<span class="n">h</span> <span class="o">=</span> <span class="mf">0.2</span>               <span class="c1"># step length</span>
+
+<span class="c1"># Discretise domain</span>
+<span class="n">N</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">tspan</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">tspan</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="n">h</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">tspan</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">tspan</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">N</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">bvals</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">y</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">bvals</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="c1"># Define linear system</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">N</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="p">(</span><span class="n">h</span> <span class="o">-</span> <span class="n">h</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">N</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">c</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">h</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">N</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">N</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">d</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">d</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">h</span><span class="p">)</span> <span class="o">*</span> <span class="n">y</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="c1"># Solve linear system</span>
+<span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">tridiag_solver</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span>
+
+<span class="c1"># Output solution table</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39; t      y</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="s1">&#39;-&#39;</span> <span class="o">*</span> <span class="mi">12</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{:3.2f}</span><span class="s1"> </span><span class="si">{:7.4f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">n</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="n">n</span><span class="p">]))</span>
+
+<span class="c1"># Plot solution</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="n">t1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">tspan</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">tspan</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span> <span class="n">exact_sol</span><span class="p">(</span><span class="n">t1</span><span class="p">),</span> <span class="s1">&#39;r-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;exact solution&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s1">&#39;bo-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;finite-difference solution&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;$t$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;$y(t)$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span> t      y
+------------
+0.00  0.0000
+0.20  0.2060
+0.40  0.4738
+0.60  0.8322
+0.80  1.3219
+1.00  2.0000
+</pre></div>
+</div>
+<img alt="_images/5_boundary_value_problems_31_1.png" src="_images/5_boundary_value_problems_31_1.png" />
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="accuracy-vs-number-of-nodes">
+<h3>Accuracy vs number of nodes<a class="headerlink" href="#accuracy-vs-number-of-nodes" title="Permalink to this headline">¶</a></h3>
+<p>The solutions seen in <a class="reference external" href="#Example-4">example 4</a> seem to show that the finite-difference method produces reasonably accurate results for this BVP. One way to improve on the accuracy of our solution is to increase the number of nodes used.</p>
+<div class="section" id="example-5">
+<h4>Example 5<a class="headerlink" href="#example-5" title="Permalink to this headline">¶</a></h4>
+<p>Solve the following BVP using the finite-difference method with <span class="math notranslate nohighlight">\(N=51\)</span> and <span class="math notranslate nohighlight">\(N=501\)</span> nodes</p>
+<p>\begin{align*}
+y’’ + 3ty’ + 7y &amp;= \cos(2t), &amp; t &amp;\in [0, 3], &amp; y(0) &amp;= 1, &amp; y(3) &amp;= 0.
+\end{align*}</p>
+<p>Using <a class="reference external" href="#forward_difference">forward</a> and <a class="reference external" href="#symmetric_difference">symmetric differences</a> to approximate <span class="math notranslate nohighlight">\(y'\)</span> and <span class="math notranslate nohighlight">\(y''\)</span> respectively results in the following system</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+    (7h^2 - 3ht_1 - 2) y_1 + (1 + 3ht_1)y_2 &amp;= h^2 \cos(2t_1) - y_0, \\
+    y_{i-1} + (7h^2 - 3ht_i - 2) y_i + (1 + 3ht_i)y_{i+1} &amp;= h^2 \cos(2t_i), \qquad \qquad i = 2, 3, \ldots ,N-2, \\
+    y_{N-2} + (7h^2 - 3ht_{N-1} - 2)y_{N-1} &amp;= h^2 \cos(2t_{N-1}) - (1 + 3ht_N) y_N.
+\end{aligned}
+\end{split}\]</div>
+<p>The code below calculates the solution to this system using <span class="math notranslate nohighlight">\(N=51\)</span> and <span class="math notranslate nohighlight">\(N=501\)</span> nodes and compares the solutions in a plot.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define BVP parameteres</span>
+<span class="n">tspan</span> <span class="o">=</span> <span class="p">[</span> <span class="mi">0</span> <span class="p">,</span> <span class="mi">3</span> <span class="p">]</span>
+<span class="n">bvals</span> <span class="o">=</span> <span class="p">[</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span> <span class="p">]</span>
+
+<span class="c1"># Solve using 51 and 501 nodes</span>
+<span class="k">for</span> <span class="n">N</span> <span class="ow">in</span> <span class="p">[</span> <span class="mi">51</span><span class="p">,</span> <span class="mi">501</span> <span class="p">]:</span>
+
+    <span class="c1"># Discretise domain</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="p">(</span><span class="n">tspan</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">tspan</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="p">(</span><span class="n">N</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">tspan</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">tspan</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">N</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+    <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">bvals</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">y</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">bvals</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="c1"># Define linear system</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">N</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="mi">7</span> <span class="o">*</span> <span class="n">h</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">h</span> <span class="o">*</span> <span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">2</span> 
+    <span class="n">c</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">h</span> <span class="o">*</span> <span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">h</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">d</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">d</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">h</span> <span class="o">*</span> <span class="n">t</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">*</span> <span class="n">y</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="c1"># Solve linear system</span>
+    <span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">tridiag_solver</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span>
+    
+    <span class="c1"># Save solutions</span>
+    <span class="k">if</span> <span class="n">N</span> <span class="o">==</span> <span class="mi">51</span><span class="p">:</span>
+        <span class="n">t1</span><span class="p">,</span> <span class="n">y1</span> <span class="o">=</span> <span class="n">t</span><span class="p">,</span> <span class="n">y</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">t2</span><span class="p">,</span> <span class="n">y2</span> <span class="o">=</span> <span class="n">t</span><span class="p">,</span> <span class="n">y</span>
+
+<span class="c1"># Plot solutions</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="s1">&#39;b-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$N=51$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t2</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="s1">&#39;r-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$N=501$&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Solution to the BVP $y&#39;&#39; + 3ty + 7y = \cos(2t)$, $y(0)=1$, $y(3)=0$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;$t$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;$y(t)$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/5_boundary_value_problems_33_0.png" src="_images/5_boundary_value_problems_33_0.png" />
+</div>
+</div>
+<p>Here we can see that the solution using <span class="math notranslate nohighlight">\(N=51\)</span> nodes is inaccurate when compared to the solution using <span class="math notranslate nohighlight">\(N=501\)</span> nodes (we expect the more nodes used the more accurate the result). As well as increasing the number of nodes, another way we can improve our solution is to use a higher order approximation of the <span class="math notranslate nohighlight">\(y'\)</span> derivative.</p>
+<p>Using the <a class="reference external" href="#central_difference">central difference</a> (which is second-order accurate) to approximate <span class="math notranslate nohighlight">\(y'\)</span> results in the following tridiagonal linear system</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+    (7 h^2  - 2) y_1 + \left(1 + \frac{3}{2} h \right) y_2 &amp;= h^2 \cos(2 t_1) - \left(1 - \frac{3}{2} h t_0 \right) y_0, \\
+    \left( 1 - \frac{3}{2} h t_i \right) y_{i-1} + (7h^2 - 2) y_i + \left(1 + \frac{3}{2} h t_i \right) y_{i+1} &amp;= h^2 \cos(2 t_i), \qquad  i = 2, 3, \ldots, N-2, \\
+    \left(1 - \frac{3}{2} h t_{N-1} \right) y_{N-2} + (7h^2 - 2) y_{N-1} &amp;= h^2 \cos(2 t_{N-1}) - \left( 1 + \frac{3}{2} h t_N \right) y_N.
+\end{aligned}
+\end{split}\]</div>
+<p>The code below solves this system using <span class="math notranslate nohighlight">\(N=51\)</span> and <span class="math notranslate nohighlight">\(N=501\)</span> nodes and compares it to the solution using <span class="math notranslate nohighlight">\(N=501\)</span> nodes for the first-order forward difference to approximate the <span class="math notranslate nohighlight">\(y'\)</span> term.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Solve BVP using 51 and 501 nodes</span>
+<span class="k">for</span> <span class="n">N</span> <span class="ow">in</span> <span class="p">[</span> <span class="mi">51</span><span class="p">,</span> <span class="mi">501</span> <span class="p">]:</span>
+
+    <span class="c1"># Discretise domain</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="p">(</span><span class="n">tspan</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">tspan</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">/</span><span class="p">(</span><span class="n">N</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">tspan</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">tspan</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">N</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+    <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">bvals</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">y</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">bvals</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="c1"># Define linear system</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="mi">3</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">h</span> <span class="o">*</span> <span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="p">(</span><span class="mi">7</span> <span class="o">*</span> <span class="n">h</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">N</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">h</span> <span class="o">*</span> <span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">h</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">d</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="mi">3</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">h</span> <span class="o">*</span> <span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">*</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">d</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">h</span> <span class="o">*</span> <span class="n">t</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">*</span> <span class="n">y</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="c1"># Solve linear system</span>
+    <span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">tridiag_solver</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span>
+    
+    <span class="c1"># Save solutions</span>
+    <span class="k">if</span> <span class="n">N</span> <span class="o">==</span> <span class="mi">51</span><span class="p">:</span>
+        <span class="n">t3</span><span class="p">,</span> <span class="n">y3</span> <span class="o">=</span> <span class="n">t</span><span class="p">,</span> <span class="n">y</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">t4</span><span class="p">,</span> <span class="n">y4</span> <span class="o">=</span> <span class="n">t</span><span class="p">,</span> <span class="n">y</span>
+
+<span class="c1"># Plot solutions</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="s1">&#39;r-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;forward difference $N=51$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t2</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="s1">&#39;b-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;forward difference $N=501$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t3</span><span class="p">,</span> <span class="n">y3</span><span class="p">,</span> <span class="s1">&#39;g-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;central difference $N=51$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t4</span><span class="p">,</span> <span class="n">y4</span><span class="p">,</span> <span class="s1">&#39;k-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;central difference $N=501$&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Solution to the BVP $y&#39;&#39; + 3ty + 7y = \cos(2t)$, $y(0)=1$, $y(3)=0$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;$t$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;$y(t)$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/5_boundary_value_problems_35_0.png" src="_images/5_boundary_value_problems_35_0.png" />
+</div>
+</div>
+<p>Here we can see that there is very little difference between the solutions using <span class="math notranslate nohighlight">\(N=51\)</span> and <span class="math notranslate nohighlight">\(N=501\)</span> nodes for the central difference approximation showing that <span class="math notranslate nohighlight">\(N=51\)</span> nodes is adequate.</p>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>A <a class="reference external" href="#General-two-point-boundary-value-problem">two-point boundary value problem</a> is defined by a second-order ODE where the solutions at the lower and upper boundaries are known.</p></li>
+<li><p>The <a class="reference external" href="#The-shooting-method">shooting method</a> guesses the initial value for <span class="math notranslate nohighlight">\(y'(0)\)</span> and alters the guess by comparing the computed solution at the upper boundary to the known solution.</p></li>
+<li><p>The <a class="reference external" href="#Improving-the-guess-value-using-the-Secant-method">Secant method</a> is used to calculate improved estimates of the guess value.</p></li>
+<li><p>The <a class="reference external" href="#Finite-difference-method">finite-difference method</a> uses finite-difference approximations of the derivatives in the ODE to derive a tridiagonal linear system of equations that approximates the solution to the boundary value problem.</p></li>
+<li><p>The <a class="reference external" href="#The-Thomas-algorithm">Thomas algorithm</a> is a very efficient algorithm for solving tridiagonal linear systems of equations.</p></li>
+<li><p>The higher the order of a method, the fewer nodes are required to achieve the same accuracy.</p></li>
+</ul>
+</div>
+<hr class="docutils" />
+<div class="section" id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
+<ol>
+<li><p>Determine which of the following BVPs have a unique solutions:</p>
+<p>(a) <span class="math notranslate nohighlight">\(y'' = -\dfrac{4}{t} y' + \dfrac{2}{t^2}y - \dfrac{2\ln(t)}{t^3}, \qquad t\in[1,2], \qquad y(1) = \dfrac{1}{2}, \qquad y(2) = \ln(2)\)</span>;</p>
+<p>(b) <span class="math notranslate nohighlight">\(y'' = e^t + y\cos(t) - (t + 1) y', \qquad t \in [0, 2], \qquad y(0) = 1, \qquad y(2) = \ln(3)\)</span>;</p>
+<p>(c) <span class="math notranslate nohighlight">\(y'' = (t^3 + 5)y + \sin(t), \qquad t \in [0, 1], \qquad y(0) = 0, \qquad y(1) = 1\)</span>;</p>
+<p>(d) <span class="math notranslate nohighlight">\(y'' = (5y + \sin(3t))e^t, \qquad t \in [0, 1], \qquad y(0) = 0, \qquad y(1) = 0\)</span>.</p>
+</li>
+<li><p>Consider the following BVP</p>
+<div class="math notranslate nohighlight">
+\[y'' = 2t, \qquad t \in [0, 2], \qquad y(0) = 1, \qquad y(2) = 3.\]</div>
+<p>Using a pen and calculator, calculate the Euler method solutions using a step length of <span class="math notranslate nohighlight">\(h=0.5\)</span> for each of the following guess values:</p>
+<p>(a) <span class="math notranslate nohighlight">\(s = 1\)</span>;</p>
+<p>(b) <span class="math notranslate nohighlight">\(s = -1\)</span>.</p>
+</li>
+<li><p>Use the Secant method to calculate the next value of <span class="math notranslate nohighlight">\(s\)</span> for your solutions to the BVP in question 2 and hence calculate the Euler method using this new guess values.</p></li>
+<li><p>Using a pen and calculator, calculate the solution of the BVP in question 2 using the finite-difference method with a step length <span class="math notranslate nohighlight">\(h=0.5\)</span>.</p></li>
+<li><p>Write a Python program to repeat questions 3 and 4 using a step length of <span class="math notranslate nohighlight">\(h=0.1\)</span>. The exact solution to this BVP is <span class="math notranslate nohighlight">\(y= \frac{1}{3}t^3 - \frac{1}{3}t + 1\)</span>. Produce a plot of the numerical solution and exact solution on the same set of axes.</p></li>
+</ol>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By The Jupyter Book community<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    <script src="_static/js/index.js"></script>
+    
+  </body>
+</html>

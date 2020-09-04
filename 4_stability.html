@@ -1,0 +1,1040 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Stability of Runge-Kutta Methods &#8212; My Jupyter Book</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link href="_static/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="_static/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/jupyter-sphinx.css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/sphinx-book-theme.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/mystnb.js"></script>
+    <script src="_static/sphinx-book-theme.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-2 bd-sidebar site-navigation show single-page" id="site-navigation">
+    
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/4_stability.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+    
+</div>
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/4_stability.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#learning-outcomes">
+   Learning outcomes
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#example-1">
+   Example 1
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#stability-functions">
+   Stability functions
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-2">
+     Example 2
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#absolute-stability">
+     Absolute stability
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#example-3">
+       Example 3
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#interval-of-absolute-stability">
+     Interval of absolute stability
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#example-4">
+       Example 4
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#stability-function-of-a-runge-kutta-method">
+     Stability function of a Runge-Kutta Method
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#stability-function-of-an-explicit-runge-kutta-method">
+     Stability function of an explicit Runge-Kutta method
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#example-5">
+       Example 5
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#example-6">
+       Example 6
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#stability-functions-of-implicit-methods">
+     Stability functions of implicit methods
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#example-7">
+       Example 7
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#stability-functions-for-an-implicit-runge-kutta-method">
+     Stability functions for an implicit Runge-Kutta method
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#a-stability">
+     A-stability
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#example-8">
+       Example 8
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#stiffness">
+   Stiffness
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#stiffness-ratio">
+     Stiffness ratio
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#example-9">
+       Example 9
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#summary">
+   Summary
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercises">
+   Exercises
+  </a>
+ </li>
+</ul>
+
+        </nav>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="stability-of-runge-kutta-methods">
+<h1>Stability of Runge-Kutta Methods<a class="headerlink" href="#stability-of-runge-kutta-methods" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="learning-outcomes">
+<h2>Learning outcomes<a class="headerlink" href="#learning-outcomes" title="Permalink to this headline">¶</a></h2>
+<p>On successful completion of this page readers will be able to:</p>
+<ul class="simple">
+<li><p>Understand the concept of <a class="reference external" href="#local_truncation_error">local</a> and <a class="reference external" href="#global_truncation_error">global</a> truncation errors and what it means for a method to be considered <a class="reference external" href="#stability_definition">stable</a>.</p></li>
+<li><p>Determine the <a class="reference external" href="#Stability-functions">stability function</a> of <a class="reference external" href="#Stability-function-of-an-explicit-Runge-Kutta-method">explicit</a> and <a class="reference external" href="#Stability-function-of-an-implicit-Runge-Kutta-method">implicit</a> Runge-Kutta method.</p></li>
+<li><p>Plot the region of <a class="reference external" href="#Absolute-stability">absolute stability</a>.</p></li>
+<li><p>Determine whether an implicit Runge-Kutta method is <a class="reference external" href="#A-stability">A-stable</a> or not.</p></li>
+</ul>
+<p>The derivation of a numerical method to solve an ODE involves omitting the higher-order terms from the Taylor series known as <strong>truncating</strong> the <a class="reference external" href="https://en.wikipedia.org/wiki/Taylor_series">Taylor series</a>. In doing this we introduce an errors which at each step of the method and it is important to be able to analyse the extent to which these errors affect the numerical solutions. In the majority of cases the exact solution of an ODE is unknown (if it was known we would not need to use a numerical method to solve it) so we cannot determine the values of the errors but we can examine their behaviour through each step of the method.</p>
+<p>To do this it is necessary to introduce terminology used to describe the <a class="reference external" href="https://en.wikipedia.org/wiki/Truncation_error_(numerical_integration)">truncation errors</a>.</p>
+<div class="admonition-definition-local-trunction-error admonition">
+<p class="admonition-title"><strong>Definition</strong>: Local trunction error</p>
+<p>Let <span class="math notranslate nohighlight">\(y_n\)</span> be a numerical approximation of the exact solution <span class="math notranslate nohighlight">\(y(t_n)\)</span> for some step <span class="math notranslate nohighlight">\(n\)</span> of a method then the <strong>local truncation error</strong> is</p>
+<div class="math notranslate nohighlight">
+\[ \tau_n = |y_n - y(t_n)|.\]</div>
+</div>
+<div class="admonition-definition-global-trunction-error admonition">
+<p class="admonition-title"><strong>Definition</strong>: Global trunction error</p>
+<p><strong>Definition:</strong> The <strong>global truncation error</strong> is the accumulation of the local truncation errors up to the current step</p>
+<div class="math notranslate nohighlight">
+\[E_n = \sum_{i=0}^n \tau_i.\]</div>
+</div>
+<p>If <span class="math notranslate nohighlight">\(|\tau_{i+1} - \tau_{i}|&gt;1\)</span> (i.e., the local truncation errors grow from one step to the next) then <span class="math notranslate nohighlight">\(E_n \to \infty\)</span> as <span class="math notranslate nohighlight">\(n\)</span> gets large and the method is said to be <strong>unstable</strong> and unusable. So for a method to be considered <strong>stable</strong> we need the the growth in the local truncation errors to remain bounded which leads to the definition of numerical stability.</p>
+<div class="admonition-definition-stability admonition">
+<p class="admonition-title"><strong>Definition</strong>: Stability</p>
+<p>If <span class="math notranslate nohighlight">\(\tau_n\)</span> is the local truncation error of a numerical method for solving a differential equation then the method is considered <strong>stable</strong> if</p>
+<div class="math notranslate nohighlight">
+\[|\tau_{n+1} - \tau_{n}|\leq 1,\]</div>
+<p>for all steps of the method.</p>
+</div>
+<p>Since the Taylor series truncation error  is some function of the step length , as  increases then so does the truncation error and the more likely a method is to be unstable.</p>
+</div>
+<div class="section" id="example-1">
+<h2>Example 1<a class="headerlink" href="#example-1" title="Permalink to this headline">¶</a></h2>
+<p>Consider the <a class="reference external" href="https://en.wikipedia.org/wiki/Euler_method">Euler method</a> when applied to solve the ODE <span class="math notranslate nohighlight">\(y' = -2.3y\)</span> over the domain <span class="math notranslate nohighlight">\(t \in [0, 5]\)</span> with an initial condition <span class="math notranslate nohighlight">\(y(0) = 1\)</span>. This ODE has the exact solution <span class="math notranslate nohighlight">\(y=e^{-2.3t}\)</span>. The code below compares the Euler method solutions using two steps lengths of <span class="math notranslate nohighlight">\(h=0.7\)</span> and <span class="math notranslate nohighlight">\(h=1\)</span> to the exact solution.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">rc</span>
+<span class="n">rc</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">,</span> <span class="n">usetex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">euler</span><span class="p">(</span><span class="n">tspan</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">h</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Calculates the solution to an IVP using the Euler method</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="c1"># Initialise solution arrays</span>
+    <span class="n">nsteps</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">tspan</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">tspan</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="n">h</span><span class="p">)</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nsteps</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nsteps</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">tspan</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">y0</span>
+    
+    <span class="c1"># Solver loop</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nsteps</span><span class="p">):</span>
+        <span class="n">y</span><span class="p">[</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">+</span> <span class="n">h</span> <span class="o">*</span> <span class="n">f</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">n</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="n">n</span><span class="p">])</span>
+        <span class="n">t</span><span class="p">[</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">+</span> <span class="n">h</span>
+    
+    <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">y</span>
+
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">return</span> <span class="o">-</span><span class="mf">2.3</span> <span class="o">*</span> <span class="n">y</span>
+
+
+<span class="k">def</span> <span class="nf">exact_sol</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">2.3</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span>
+
+
+<span class="c1"># Define IVP parameters</span>
+<span class="n">tspan</span> <span class="o">=</span> <span class="p">[</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span> <span class="p">]</span>
+<span class="n">y0</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">h1</span><span class="p">,</span> <span class="n">h2</span> <span class="o">=</span> <span class="mf">0.7</span><span class="p">,</span> <span class="mf">1.0</span>
+
+<span class="c1"># Solve IVP using the Euler method </span>
+<span class="n">t1</span><span class="p">,</span> <span class="n">y1</span> <span class="o">=</span> <span class="n">euler</span><span class="p">(</span><span class="n">tspan</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">h1</span><span class="p">)</span> <span class="c1"># h = 0.7</span>
+<span class="n">t2</span><span class="p">,</span> <span class="n">y2</span> <span class="o">=</span> <span class="n">euler</span><span class="p">(</span><span class="n">tspan</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">h2</span><span class="p">)</span> <span class="c1"># h = 1.0</span>
+
+<span class="c1"># Plot numerical and exact solutions</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">tspan</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">tspan</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">exact_sol</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="s1">&#39;k-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Exact solution&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="s1">&#39;bo-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Euler ($h=</span><span class="si">{:0.1f}</span><span class="s1">$)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">h1</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t2</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="s1">&#39;ro-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Euler ($h=</span><span class="si">{:0.1f}</span><span class="s1">$)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">h2</span><span class="p">))</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;$t$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;$y(t)$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Euler method solutions for $y&#39;=-2.3y$&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/4_stability_2_0.png" src="_images/4_stability_2_0.png" />
+</div>
+</div>
+<p>Here we can see that the solution using <span class="math notranslate nohighlight">\(h=0.7\)</span> remains stable whereas the solution using <span class="math notranslate nohighlight">\(h=1.0\)</span> is diverging and unstable.</p>
+</div>
+<div class="section" id="stability-functions">
+<h2>Stability functions<a class="headerlink" href="#stability-functions" title="Permalink to this headline">¶</a></h2>
+<p>To examine the behaviour of the local truncation errors as we step through a method we use the test ODE <span class="math notranslate nohighlight">\(y' = \lambda y\)</span>. As the values of <span class="math notranslate nohighlight">\(y_{n+1}\)</span> are updated using the values of <span class="math notranslate nohighlight">\(y_n\)</span> so are the values of <span class="math notranslate nohighlight">\(\tau_{n+1}\)</span> using <span class="math notranslate nohighlight">\(\tau_n\)</span> by the same method. This allows us to define a <strong>stability function</strong> for a method.</p>
+<div class="admonition-definition-stability-function admonition">
+<p class="admonition-title"><strong>Definition:</strong> Stability function</p>
+<p>The <strong>stability function</strong> of a method, <span class="math notranslate nohighlight">\(R(z)\)</span> is the rate of growth over a single step of the method when applied to calculate the solution of an ODE of the form <span class="math notranslate nohighlight">\(y'=\lambda y\)</span> where <span class="math notranslate nohighlight">\(z = h\lambda\)</span> and <span class="math notranslate nohighlight">\(h\)</span> is the step size, i.e.,</p>
+<div class="math notranslate nohighlight">
+\[y_{n+1} = R(z)y_n.\]</div>
+</div>
+<div class="section" id="example-2">
+<h3>Example 2<a class="headerlink" href="#example-2" title="Permalink to this headline">¶</a></h3>
+<p>Determine the stability function for the Euler method.</p>
+<p>If the Euler method is used to solve and ODE of the form <span class="math notranslate nohighlight">\(y'=f(t, y)\)</span> then the solution will be updated over one step using</p>
+<div class="math notranslate nohighlight">
+\[y_{n+1} = y_n + hf(t_n, y_n),\]</div>
+<p>then the local truncation errors will also update in the same step by</p>
+<div class="math notranslate nohighlight">
+\[\tau_{n+1} = \tau_n + hf(t_n, \tau_n).\]</div>
+<p>Applying the Euler method to the test ODE we have</p>
+<div class="math notranslate nohighlight">
+\[y_{n+1} = y_n + h\lambda y_n.\]</div>
+<p>Let <span class="math notranslate nohighlight">\(z = h\lambda\)</span> then</p>
+<div class="math notranslate nohighlight">
+\[y_{n+1} = y_n + zy_n = (1 + z) y_n.\]</div>
+<p>So the stability function of the Euler method is <span class="math notranslate nohighlight">\(R(z) = 1 + z\)</span>.</p>
+</div>
+<div class="section" id="absolute-stability">
+<h3>Absolute stability<a class="headerlink" href="#absolute-stability" title="Permalink to this headline">¶</a></h3>
+<p>We have seen that a necessary condition for stability of a method is that the local truncation errors must not grow from one step to the next. A method satisfying this basic condition is considered to be <strong>absolutely stable</strong>. Since the stability function <span class="math notranslate nohighlight">\(R(z)\)</span> is expressed using <span class="math notranslate nohighlight">\(z=h\lambda\)</span> then a method may be stable for some value of <span class="math notranslate nohighlight">\(z\)</span> and unstable for others. This provides the definition for absolute stability.</p>
+<div class="admonition-definition-absolute-stability admonition">
+<p class="admonition-title"><strong>Definition:</strong> Absolute stability</p>
+<p>A method is considered to be <strong>absolutely stable</strong> if <span class="math notranslate nohighlight">\(|R(z)\leq 1|\)</span> for <span class="math notranslate nohighlight">\(z\in \mathbb{C}\)</span>.</p>
+</div>
+<p>Of course we require our methods to be stable so it is useful to know for what values of <span class="math notranslate nohighlight">\(z\)</span> we have a stable method. This gives the definition of the <strong>region of absolute stability</strong>.</p>
+<div class="admonition-definition-region-of-absolute-stability admonition">
+<p class="admonition-title"><strong>Definition:</strong> Region of absolute stability</p>
+<p>The <strong>region of absolute stability</strong> is the set of all <span class="math notranslate nohighlight">\(z\in \mathbb{C}\)</span> for which a method is absolutely stable.</p>
+<div class="math notranslate nohighlight">
+\[\text{region of absolute stability} = \{ z : z \in \mathbb{C}, |R(z)| \leq 1 \}.\]</div>
+</div>
+<div class="section" id="example-3">
+<h4>Example 3<a class="headerlink" href="#example-3" title="Permalink to this headline">¶</a></h4>
+<p>The stability function for the Euler method is <span class="math notranslate nohighlight">\(R(z) = 1 + z\)</span>. The code below generates a set of points in the complex plane <span class="math notranslate nohighlight">\(z = x + yi\)</span> (where <span class="math notranslate nohighlight">\(i=\sqrt{-1}\)</span>) and plots the contour where <span class="math notranslate nohighlight">\(|R(z)|=1\)</span> which represents the boundary of the stability region of the Euler method.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate z values</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="p">[</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">Z</span> <span class="o">=</span> <span class="n">X</span> <span class="o">+</span> <span class="n">Y</span> <span class="o">*</span> <span class="mi">1</span><span class="n">j</span>
+
+<span class="c1"># Define the stability function for the Euler method</span>
+<span class="n">R</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">Z</span>
+ 
+<span class="c1"># Plot the region of absolute stability</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="nb">abs</span><span class="p">(</span><span class="n">R</span><span class="p">),</span> <span class="n">levels</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">colors</span><span class="o">=</span><span class="s1">&#39;lightskyblue&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">contour</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="nb">abs</span><span class="p">(</span><span class="n">R</span><span class="p">),</span> <span class="n">levels</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">colors</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;The region of absolute stability of the Euler method&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;$\mathrm</span><span class="si">{Re}</span><span class="s1">(z)$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;$\mathrm</span><span class="si">{Im}</span><span class="s1">(z)$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/4_stability_8_0.png" src="_images/4_stability_8_0.png" />
+</div>
+</div>
+<p>The Euler method for solving <span class="math notranslate nohighlight">\(y'=\lambda y\)</span> will be stable for point <span class="math notranslate nohighlight">\(z\)</span> that lies within the shaded region.</p>
+</div>
+</div>
+<div class="section" id="interval-of-absolute-stability">
+<h3>Interval of absolute stability<a class="headerlink" href="#interval-of-absolute-stability" title="Permalink to this headline">¶</a></h3>
+<p>The choice of step length used in a method will depend on accuracy requirements, computational resources available and of course stability. It is often necessary to use as large a value of the step length as possible permitted by the stability requirements to minimise the computational effort required to solve an ODE. The range values of the step length that can be chosen is governed by the stability region and provides use with the following definition.</p>
+<div class="admonition-definition-interval-of-absolute-stability admonition">
+<p class="admonition-title"><strong>Definition:</strong> Interval of absolute stability</p>
+<p>The range of real values that the step length <span class="math notranslate nohighlight">\(h\)</span> of a method can take that ensures a method remains absolutely stable is known as the <strong>interval of absolute stability</strong></p>
+</div>
+<p>The region of absolute stability for the Euler method plotted above shows that the interval of absolute stability is</p>
+<div class="math notranslate nohighlight">
+\[z \in [-2, 0],\]</div>
+<p>i.e., the real part of the region of absolute stability.</p>
+<p>Since <span class="math notranslate nohighlight">\(z=h\lambda\)</span> then
+\begin{align*}
+h \in \left[ -\frac{2}{\lambda}, 0\right],
+\end{align*}
+so we have the condition</p>
+<div class="math notranslate nohighlight">
+\[h \leq -\dfrac{2}{\lambda}.\]</div>
+<div class="section" id="example-4">
+<h4>Example 4<a class="headerlink" href="#example-4" title="Permalink to this headline">¶</a></h4>
+<p>The step length for the Euler method when used to solve the ODE <span class="math notranslate nohighlight">\(y'=-2.3y\)</span> must satisfy</p>
+<div class="math notranslate nohighlight">
+\[h \leq \frac{2}{2.3} \approx 0.8696.\]</div>
+<p>This is why in the first example the solution using <span class="math notranslate nohighlight">\(h=0.7\)</span> was stable since <span class="math notranslate nohighlight">\(0.7 &lt; 0.8696\)</span> and the solution using <span class="math notranslate nohighlight">\(h=1.0\)</span> was unstable since <span class="math notranslate nohighlight">\(1 &gt; 0.8696\)</span>.</p>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="stability-function-of-a-runge-kutta-method">
+<h3>Stability function of a Runge-Kutta Method<a class="headerlink" href="#stability-function-of-a-runge-kutta-method" title="Permalink to this headline">¶</a></h3>
+<p>The general form of a Runge-Kutta method is</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+    y_{n+1} &amp;= y_n + h\sum_{i=1}^s b_i k_i, \\
+    k_i &amp;= f(t_n + c_ih, y_n + h\sum_{j=1}^s a_{ij}k_j).
+\end{aligned}
+\end{split}\]</div>
+<p>Let <span class="math notranslate nohighlight">\(Y_i = y_n + h\displaystyle\sum_{j=1}^s a_{ij}k_j\)</span> and applying the method to the test ODE <span class="math notranslate nohighlight">\(y'=\lambda y\)</span> the method becomes</p>
+<div class="math notranslate nohighlight" id="equation-y-n-1">
+<span class="eqno">(1)<a class="headerlink" href="#equation-y-n-1" title="Permalink to this equation">¶</a></span>\[y_{n+1} = y_n + h\lambda \sum_{i=1}^s b_i Y_i,\]</div>
+<p>and the stage values are</p>
+<div class="math notranslate nohighlight" id="equation-y-i">
+<span class="eqno">(2)<a class="headerlink" href="#equation-y-i" title="Permalink to this equation">¶</a></span>\[Y_i = y_n + h\lambda \displaystyle\sum_{j=1}^s a_{ij} Y_j.\]</div>
+<p>Let <span class="math notranslate nohighlight">\(z=h\lambda\)</span> and expanding out the summations in the stage values gives</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+    Y_1 &amp;= y_n + z (a_{11}Y_1 + a_{12}Y_2 + \cdots + a_{1s}Y_s), \\
+    Y_2 &amp;= y_n + z (a_{21}Y_1 + a_{22}Y_2 + \cdots + a_{2s}Y_s), \\
+    &amp; \vdots \\
+    Y_s &amp;= y_n + z (a_{s1}Y_1 + a_{s2}Y_2 + \cdots + a_{ss}Y_s).
+\end{aligned}
+\end{split}\]</div>
+<p>Let <span class="math notranslate nohighlight">\(Y = (Y_1, Y_2, \ldots, Y_s)^T\)</span> and <span class="math notranslate nohighlight">\(\mathbf{e} = (1, 1, \ldots, 1)^T\)</span> then we can write the stage values in vector form as</p>
+<div class="math notranslate nohighlight" id="equation-y">
+<span class="eqno">(3)<a class="headerlink" href="#equation-y" title="Permalink to this equation">¶</a></span>\[    Y = \mathbf{e} y_n + z \,A \cdot Y.\]</div>
+<p>Substituting <span class="math notranslate nohighlight">\(\displaystyle\sum_{i=1}^s b_iY_i = \mathbf{b}^T \cdot Y\)</span> into equation <a class="reference internal" href="#equation-y-n-1">(1)</a> gives the vector form of a Runge-Kutta method to solve the test ODE</p>
+<div class="math notranslate nohighlight" id="equation-y-n-1-vector">
+<span class="eqno">(4)<a class="headerlink" href="#equation-y-n-1-vector" title="Permalink to this equation">¶</a></span>\[y_{n+1} = y_n + z\, \mathbf{b}^T \cdot Y.\]</div>
+</div>
+<div class="section" id="stability-function-of-an-explicit-runge-kutta-method">
+<h3>Stability function of an explicit Runge-Kutta method<a class="headerlink" href="#stability-function-of-an-explicit-runge-kutta-method" title="Permalink to this headline">¶</a></h3>
+<p>Rerranging equation <a class="reference internal" href="#equation-y">(3)</a> we have</p>
+<div class="math notranslate nohighlight">
+\[Y = (I - zA)^{-1} \cdot \mathbf{e} y_n,\]</div>
+<p>and substituting into equation <a class="reference internal" href="#equation-y-n-1-vector">(4)</a> gives</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+    y_{n+1} &amp;= y_n + z\mathbf{b}^T \cdot (I - zA)^{-1} \cdot \mathbf{e} y_n\\
+    &amp;= (1 + z\mathbf{b}^T \cdot (I - zA)^{-1} \cdot \mathbf{e})y_n,
+\end{aligned}
+\end{split}\]</div>
+<p>so the stability function is</p>
+<div class="math notranslate nohighlight">
+\[R(z) = 1 + z\mathbf{b}^T \cdot (I - zA)^{-1} \cdot \mathbf{e}.\]</div>
+<p>Using the geometric series of matrices</p>
+<div class="math notranslate nohighlight">
+\[(I - zA)^{-1} = \sum_{k=0}^\infty (zA)^k,\]</div>
+<p>the stabilty function can be written as the infinite series</p>
+<div class="math notranslate nohighlight" id="equation-r-z">
+<span class="eqno">(5)<a class="headerlink" href="#equation-r-z" title="Permalink to this equation">¶</a></span>\[R(z) = 1 + \sum_{k=0}^s \mathbf{b}^T \cdot A^k \cdot \mathbf{e} \, z^k.\]</div>
+<p>Since the solution to the test ODE is <span class="math notranslate nohighlight">\(y=e^{\lambda t}\)</span>, over one step of an Explicit Runge-Kutta (ERK) method we would expect the local truncation errors to change at a rate of <span class="math notranslate nohighlight">\(e^z\)</span>,</p>
+<div class="math notranslate nohighlight" id="equation-e-z">
+<span class="eqno">(6)<a class="headerlink" href="#equation-e-z" title="Permalink to this equation">¶</a></span>\[e^z = \sum_{k=0}^\infty \frac{1}{k!}z^k = 1 + z + \frac{1}{2}z^2 + \frac{1}{6}z^3 + \frac{1}{24}z^4 + \cdots\]</div>
+<p>Comparing the coefficients of <span class="math notranslate nohighlight">\(z^k\)</span> in <span class="math notranslate nohighlight">\(R(z)\)</span> and <span class="math notranslate nohighlight">\(e^z\)</span> we have</p>
+<div class="math notranslate nohighlight">
+\[\frac{1}{k!} = \mathbf{b}^T\cdot A^{k-1} \cdot \mathbf{e},\]</div>
+<p>which must be satisfied up to the <span class="math notranslate nohighlight">\(k\)</span>th term for an order <span class="math notranslate nohighlight">\(k\)</span> ERK method to be stable.</p>
+<div class="section" id="example-5">
+<h4>Example 5<a class="headerlink" href="#example-5" title="Permalink to this headline">¶</a></h4>
+<p>Determine the stability function for the following Runge-Kutta method and hences find its order.</p>
+<div class="math notranslate nohighlight">
+\[\begin{array}{c|cccc}
+    0 &amp; \cr
+    \frac{1}{2} &amp; \frac{1}{2} \cr
+    \frac{3}{4} &amp; 0 &amp; \frac{3}{4} \cr
+    1 &amp; \frac{2}{9} &amp; \frac{1}{3} &amp; \frac{4}{9} \cr \hline
+    &amp; \frac{7}{24} &amp; \frac{1}{4} &amp; \frac{1}{3} &amp; \frac{1}{8}
+    \end{array}\]</div>
+<p>The code below calculates the coefficients and outputs the stability function <span class="math notranslate nohighlight">\(R(z)\)</span> for this ERK method.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="c1"># Define ERK method</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">Matrix</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+            <span class="p">[</span><span class="n">Rational</span><span class="p">(</span><span class="s1">&#39;1/2&#39;</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+            <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">Rational</span><span class="p">(</span><span class="s1">&#39;3/4&#39;</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+            <span class="p">[</span><span class="n">Rational</span><span class="p">(</span><span class="s1">&#39;2/9&#39;</span><span class="p">),</span> <span class="n">Rational</span><span class="p">(</span><span class="s1">&#39;1/3&#39;</span><span class="p">),</span> <span class="n">Rational</span><span class="p">(</span><span class="s1">&#39;4/9&#39;</span><span class="p">),</span> <span class="mi">0</span><span class="p">]])</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">Matrix</span><span class="p">([</span><span class="n">Rational</span><span class="p">(</span><span class="s1">&#39;7/24&#39;</span><span class="p">),</span> <span class="n">Rational</span><span class="p">(</span><span class="s1">&#39;1/4&#39;</span><span class="p">),</span> <span class="n">Rational</span><span class="p">(</span><span class="s1">&#39;1/3&#39;</span><span class="p">),</span> <span class="n">Rational</span><span class="p">(</span><span class="s1">&#39;1/8&#39;</span><span class="p">)])</span>
+<span class="n">e</span> <span class="o">=</span> <span class="n">Matrix</span><span class="p">([[</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span> <span class="p">]])</span><span class="o">.</span><span class="n">T</span>
+
+<span class="c1"># Determine stability function</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;R(z) = 1&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">)):</span>
+    <span class="n">coeff</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">T</span> <span class="o">*</span> <span class="p">(</span><span class="n">A</span><span class="o">**</span><span class="n">k</span><span class="p">)</span> <span class="o">*</span> <span class="n">e</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; + </span><span class="si">{}</span><span class="s2"> z**</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">coeff</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>R(z) = 1 + 1 z**1 + 1/2 z**2 + 3/16 z**3 + 1/48 z**4
+</pre></div>
+</div>
+</div>
+</div>
+<p>So the stability function is</p>
+<div class="math notranslate nohighlight">
+\[R(z) = 1 + z + \frac{1}{2}z^2 + \frac{3}{16}z^3 + \frac{1}{48}z^4,\]</div>
+<p>which agrees to the series expansion of <span class="math notranslate nohighlight">\(e^z\)</span> up to and including the <span class="math notranslate nohighlight">\(z^2\)</span> term. Therefore this ERK method is of order 2.</p>
+</div>
+<div class="section" id="example-6">
+<h4>Example 6<a class="headerlink" href="#example-6" title="Permalink to this headline">¶</a></h4>
+<p>The code below calculates the stability functions of order 1, 2, 3 and 4 ERK methods and plots their regions of absolute stability.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate z values</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="p">[</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">Z</span> <span class="o">=</span> <span class="n">X</span> <span class="o">+</span> <span class="n">Y</span> <span class="o">*</span> <span class="mi">1</span><span class="n">j</span>
+
+<span class="c1"># Define ERK stability functions</span>
+<span class="n">R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">((</span><span class="mi">1</span> <span class="o">+</span> <span class="n">Z</span><span class="p">,</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">Z</span><span class="p">,</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">Z</span><span class="p">,</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">Z</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">):</span>
+    <span class="n">R</span><span class="p">[:,:,</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">R</span><span class="p">[:,:,</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">Z</span><span class="o">**</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">R</span><span class="p">)</span>
+
+<span class="c1"># Plot regions of absolute stability</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">colours</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;lightskyblue&#39;</span><span class="p">,</span> <span class="s1">&#39;lightcoral&#39;</span><span class="p">,</span> <span class="s1">&#39;lightgreen&#39;</span><span class="p">,</span> <span class="s1">&#39;violet&#39;</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">R</span><span class="p">[:,:,</span><span class="n">i</span><span class="p">],</span> <span class="n">levels</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">colors</span><span class="o">=</span><span class="n">colours</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">contour</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">R</span><span class="p">[:,:,</span><span class="n">i</span><span class="p">],</span> <span class="n">levels</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">colors</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+    
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Regions of absolute stability of ERK methods&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;$\mathrm</span><span class="si">{Re}</span><span class="s1">(z)$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;$\mathrm</span><span class="si">{Im}</span><span class="s1">(z)$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="n">plt</span><span class="o">.</span><span class="n">Rectangle</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">fc</span><span class="o">=</span><span class="n">colours</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)]</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;Euler&#39;</span><span class="p">,</span> <span class="s1">&#39;RK2&#39;</span><span class="p">,</span> <span class="s1">&#39;RK3&#39;</span><span class="p">,</span> <span class="s1">&#39;RK4&#39;</span><span class="p">])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/4_stability_18_0.png" src="_images/4_stability_18_0.png" />
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="stability-functions-of-implicit-methods">
+<h3>Stability functions of implicit methods<a class="headerlink" href="#stability-functions-of-implicit-methods" title="Permalink to this headline">¶</a></h3>
+<p>The simplest implicit method for solving ODEs is the <a class="reference external" href="https://en.wikipedia.org/wiki/Backward_Euler_method">Backwards Euler</a> method (also known as the implicit Euler method) which is</p>
+<div class="math notranslate nohighlight">
+\[y_{n+1} = y_n + hf(t_n + h, y_{n+1}).\]</div>
+<p>Applying this to solve the test ODE <span class="math notranslate nohighlight">\(y'=\lambda y\)</span> and rearranging gives</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+    y_{n+1} &amp;= y_n + h\lambda y_{n+1} \\
+    (1 - h\lambda)y_{n+1} &amp;= y_n \\
+    y_{n+1} &amp;= \frac{1}{1-h\lambda} y_n,
+\end{aligned}
+\end{split}\]</div>
+<p>therefore the stability function for the backwards Euler method is <span class="math notranslate nohighlight">\(R(z)=\dfrac{1}{1-z}\)</span>. Stability functions for implicit methods take the form of a rational fraction</p>
+<div class="math notranslate nohighlight">
+\[R(z) = \dfrac{P(z)}{Q(z)}.\]</div>
+<div class="section" id="example-7">
+<h4>Example 7<a class="headerlink" href="#example-7" title="Permalink to this headline">¶</a></h4>
+<p>The code below plots the region of absolute stability of the backwards Euler method.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate z values</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="p">[</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">Z</span> <span class="o">=</span> <span class="n">X</span> <span class="o">+</span> <span class="n">Y</span> <span class="o">*</span> <span class="mi">1</span><span class="n">j</span>
+
+<span class="c1"># Define stability function for the backwards Euler method</span>
+<span class="n">R</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">Z</span><span class="p">))</span>
+
+<span class="c1"># Plot the region of absolute stability</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">colors</span><span class="o">=</span><span class="s1">&#39;lightskyblue&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">contour</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">colors</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;The region of absolute stability of the backwards Euler method&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;$\mathrm</span><span class="si">{Re}</span><span class="s1">(z)$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;$\mathrm</span><span class="si">{Im}</span><span class="s1">(z)$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/4_stability_20_0.png" src="_images/4_stability_20_0.png" />
+</div>
+</div>
+<p>Here the region of absolute stability includes all of the complex plane with the exception of the unshaded region shown here.</p>
+</div>
+</div>
+<div class="section" id="stability-functions-for-an-implicit-runge-kutta-method">
+<h3>Stability functions for an implicit Runge-Kutta method<a class="headerlink" href="#stability-functions-for-an-implicit-runge-kutta-method" title="Permalink to this headline">¶</a></h3>
+<p>To determine the stability function for an Implicit Runge-Kutta (IRK) method we use equations <a class="reference internal" href="#equation-y-n-1-vector">(4)</a> and <a class="reference internal" href="#equation-y">(3)</a></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+    y_{n+1} &amp;= y_n + z \mathbf{b}^T \cdot Y, \\
+    Y &amp;= \mathbf{e} y_n + z A \cdot Y.
+\end{aligned}
+\end{split}\]</div>
+<p>Transposing these equations so that the terms not involving <span class="math notranslate nohighlight">\(y_n\)</span> to the left-hand side gives</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+    y_{n+1} - z \mathbf{b}^T \cdot Y &amp;= y_n, \\
+    (I - zA) \cdot Y &amp; = \mathbf{e}y_n.
+\end{aligned}
+\end{split}\]</div>
+<p>which can be written as the matrix equation</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\pmatrix{ 1 &amp; -zb_1 &amp; -zb_2 &amp; \cdots &amp; -zb_s \\
+    0 &amp; 1 - za_{11} &amp; -za_{12} &amp; \cdots &amp; -za_{1s} \\
+    0 &amp; -za_{21} &amp; 1 - za_{22} &amp; \cdots &amp; -za_{2s} \\
+    0 &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots  \\
+    0 &amp; -za_{s1} &amp; -za_{s2} &amp; \cdots &amp; 1-za_{ss}
+    }
+\pmatrix{ y_{n+1} \\ Y_1 \\ Y_2 \\ \vdots \\ Y_s } = 
+\pmatrix{ y_n \\ y_n \\ \vdots \\ y_n \\ y_n}.
+\end{split}\]</div>
+<p>Using <a class="reference external" href="https://en.wikipedia.org/wiki/Cramer%27s_rule">Cramer’s rule</a> to solve this system for <span class="math notranslate nohighlight">\(y_{n+1}\)</span> we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+y_{n+1} &amp;= \frac{\det
+\pmatrix{ y_n &amp; -zb_1 &amp; -zb_2 &amp; \cdots &amp; -zb_s \\
+    y_n &amp; 1 - za_{11} &amp; -za_{12} &amp; \cdots &amp; -za_{1s} \\
+    y_n &amp; -za_{21} &amp; 1 - za_{22} &amp; \cdots &amp; -za_{2s} \\
+    y_n &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots  \\
+    y_m &amp; -za_{s1} &amp; -za_{s2} &amp; \cdots &amp; 1-za_{ss}
+    }}{\det(I - zA)}.
+\end{aligned}
+\end{split}\]</div>
+<p>Performing a row operation of subtracting the first row of matrix in the numerator from the other rows gives</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+y_{n+1} &amp;= \frac{\det
+\pmatrix{ y_n &amp; -zb_1 &amp; -zb_2 &amp; \cdots &amp; -zb_s \\
+    0 &amp; 1 - za_{11} + zb_1 &amp; -za_{12} + zb_2 &amp; \cdots &amp; -za_{1s} + zb_s \\
+    0 &amp; -za_{21} + zb_1 &amp; 1 - za_{22} + zb_2 &amp; \cdots &amp; -za_{2s} + zb_s \\
+    0 &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots  \\
+    0 &amp; -za_{s1} + zb_1 &amp; -za_{s2} + zb_2 &amp; \cdots &amp; 1-za_{ss} + zb_s
+    }}{\det(I - zA)} \\
+    &amp;= \frac{y_n\det(I - z\,(A - \mathbf{e}\cdot \mathbf{b}^T))}{\det(I - z\,A)},
+\end{aligned}
+\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathbf{e}\cdot \mathbf{b}^T\)</span> is a diagonal matrix with the elements of <span class="math notranslate nohighlight">\(\mathbf{b}\)</span> on the main diagonal. Therefore the stability function of an Implicit Runge-Kutta (IRK) method can be written as</p>
+<div class="math notranslate nohighlight" id="equation-irk-r-z">
+<span class="eqno">(7)<a class="headerlink" href="#equation-irk-r-z" title="Permalink to this equation">¶</a></span>\[R(z) = \frac{\det(I - z\,(A - \mathbf{e}\cdot \mathbf{b}^T))}{\det(I - z\,A)}.\]</div>
+</div>
+<div class="section" id="a-stability">
+<h3>A-stability<a class="headerlink" href="#a-stability" title="Permalink to this headline">¶</a></h3>
+<p>As we saw in the plot of the region of absolute stability of the backwards Euler method, implicit methods have a much greater region than explicit methods and are very useful for solving stiff ODEs where the stabilty constraints placed on an explcit method means the step length <span class="math notranslate nohighlight">\(h\)</span> is too small to be of practical use. A desirable property of some implicit methods is that there is no limit placed on the value of <span class="math notranslate nohighlight">\(h\)</span> for which will result in an unstable method, this is known as <a class="reference external" href="https://en.wikipedia.org/wiki/Stiff_equation#A-stability"><strong>A-stability</strong></a>.</p>
+<div class="admonition-definition-a-stability admonition">
+<p class="admonition-title"><strong>Definition:</strong> A-stability</p>
+<p>A method is said to be <strong>A-stable</strong> if its region of absolute stabilty satisfies</p>
+<div class="math notranslate nohighlight">
+\[\{ z : z \in \mathbb{C}^-, |R(z)| \leq 1\},\]</div>
+<p>i.e., the method is stable for all points in the left-hand side of the complex plane.</p>
+</div>
+<div class="tip admonition">
+<p class="admonition-title"><strong>Theorem:</strong></p>
+<p>Given an implicit Runge-Kutta method with a stability function of the form</p>
+<div class="math notranslate nohighlight">
+\[R(z) = \frac{P(z)}{Q(z)},\]</div>
+<p>and define a polynomial function</p>
+<div class="math notranslate nohighlight">
+\[E(y) = Q(iy)Q(-iy) - P(iy)P(-iy),\]</div>
+<p>then the method is A-stable if and only if the following are satisfied</p>
+<ol class="simple">
+<li><p>All roots of <span class="math notranslate nohighlight">\(Q(z)\)</span> have positive real parts;</p></li>
+<li><p><span class="math notranslate nohighlight">\(E(y)\geq 0\)</span> for all <span class="math notranslate nohighlight">\(y\in \mathbb{R}\)</span>.</p></li>
+</ol>
+</div>
+<div class="section" id="example-8">
+<h4>Example 8<a class="headerlink" href="#example-8" title="Permalink to this headline">¶</a></h4>
+<p>Determine the stability function of the following IRK and determine whether it is A-stable or not.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \begin{array}{c|cc}
+        \frac{1}{3} &amp; \frac{5}{12} &amp; -\frac{1}{12} \\
+        1 &amp; \frac{3}{4} &amp; \frac{1}{4} \\ \hline
+        &amp; \frac{3}{4} &amp; \frac{1}{4}
+    \end{array}
+\end{split}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define IRK method</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">Matrix</span><span class="p">([[</span> <span class="n">Rational</span><span class="p">(</span><span class="s1">&#39;5 / 12&#39;</span><span class="p">),</span> <span class="o">-</span><span class="n">Rational</span><span class="p">(</span><span class="s1">&#39;1 / 12&#39;</span><span class="p">)</span> <span class="p">],</span>
+           <span class="p">[</span> <span class="n">Rational</span><span class="p">(</span><span class="s1">&#39;3 / 4&#39;</span><span class="p">),</span> <span class="n">Rational</span><span class="p">(</span><span class="s1">&#39;1 / 4&#39;</span><span class="p">)</span> <span class="p">]])</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">Matrix</span><span class="p">([[</span> <span class="n">Rational</span><span class="p">(</span><span class="s1">&#39;3 / 4&#39;</span><span class="p">),</span> <span class="mi">0</span> <span class="p">],</span>
+            <span class="p">[</span> <span class="mi">0</span><span class="p">,</span> <span class="n">Rational</span><span class="p">(</span><span class="s1">&#39;1 / 4&#39;</span><span class="p">)</span> <span class="p">]])</span>
+<span class="n">I</span> <span class="o">=</span> <span class="n">eye</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># Calculate P(z) and Q(z) polynomials</span>
+<span class="n">z</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;z&#39;</span><span class="p">)</span>
+<span class="n">P</span> <span class="o">=</span> <span class="n">expand</span><span class="p">(</span><span class="n">det</span><span class="p">(</span><span class="n">I</span> <span class="o">-</span> <span class="n">z</span> <span class="o">*</span> <span class="p">(</span><span class="n">A</span> <span class="o">-</span> <span class="n">b</span><span class="p">)))</span>
+<span class="n">Q</span> <span class="o">=</span> <span class="n">expand</span><span class="p">(</span><span class="n">det</span><span class="p">(</span><span class="n">I</span> <span class="o">-</span> <span class="n">z</span> <span class="o">*</span> <span class="n">A</span><span class="p">))</span>
+
+<span class="c1"># Find roots of Q(z)</span>
+<span class="n">roots</span> <span class="o">=</span> <span class="n">solve</span><span class="p">(</span><span class="n">Q</span><span class="p">)</span>
+
+<span class="c1"># Calculate E(y)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+<span class="n">Pp</span> <span class="o">=</span> <span class="n">expand</span><span class="p">(</span><span class="n">det</span><span class="p">(</span><span class="n">I</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">y</span> <span class="o">*</span> <span class="p">(</span><span class="n">A</span> <span class="o">-</span> <span class="n">b</span><span class="p">)))</span>
+<span class="n">Pm</span> <span class="o">=</span> <span class="n">expand</span><span class="p">(</span><span class="n">det</span><span class="p">(</span><span class="n">I</span> <span class="o">-</span> <span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">y</span> <span class="o">*</span> <span class="p">(</span><span class="n">A</span> <span class="o">-</span> <span class="n">b</span><span class="p">)))</span>
+<span class="n">Qp</span> <span class="o">=</span> <span class="n">expand</span><span class="p">(</span><span class="n">det</span><span class="p">(</span><span class="n">I</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">y</span> <span class="o">*</span> <span class="n">A</span><span class="p">))</span>
+<span class="n">Qm</span> <span class="o">=</span> <span class="n">expand</span><span class="p">(</span><span class="n">det</span><span class="p">(</span><span class="n">I</span> <span class="o">-</span> <span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">y</span> <span class="o">*</span> <span class="n">A</span><span class="p">))</span>
+<span class="n">E</span> <span class="o">=</span> <span class="n">expand</span><span class="p">(</span><span class="n">Qp</span> <span class="o">*</span> <span class="n">Qm</span> <span class="o">-</span> <span class="n">Pp</span> <span class="o">*</span> <span class="n">Pm</span><span class="p">)</span>
+
+<span class="c1"># Output polynomials</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;P(z) = </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">P</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Q(z) = </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">Q</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Q(z) has roots at </span><span class="si">{}</span><span class="s2"> and </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">roots</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">roots</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;E(y) = </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">E</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>P(z) = z**2/16 + z/3 + 1
+Q(z) = z**2/6 - 2*z/3 + 1
+Q(z) has roots at 2 - sqrt(2)*I and 2 + sqrt(2)*I
+E(y) = 0.0238715277777778*y**4 + 0.125*y**2
+</pre></div>
+</div>
+</div>
+</div>
+<p>So the stability function for this IRK method is</p>
+<div class="math notranslate nohighlight">
+\[R(z) = \dfrac{1 + \frac{1}{3}z + \frac{1}{16}z^2}{1 - \frac{2}{3}z + \frac{1}{6}z^2}.\]</div>
+<p>Since the real parts of both roots of <span class="math notranslate nohighlight">\(Q(z)\)</span> is <span class="math notranslate nohighlight">\(2\)</span> which is positive and <span class="math notranslate nohighlight">\(E(y)=0.0239y^4 + 0.125y^2 \geq 0\)</span> for all <span class="math notranslate nohighlight">\(y\in \mathbb{R}\)</span> we can say that this is an A-stable method.</p>
+<p>The code below plots the region of absolute stability for this IRK method.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate z values</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="p">[</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">Z</span> <span class="o">=</span> <span class="n">X</span> <span class="o">+</span> <span class="n">Y</span> <span class="o">*</span> <span class="mi">1</span><span class="n">j</span>
+
+<span class="c1"># Define stability function for the IRK method</span>
+<span class="n">R</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span><span class="o">/</span><span class="mi">3</span> <span class="o">*</span> <span class="n">Z</span> <span class="o">+</span> <span class="mi">1</span><span class="o">/</span><span class="mi">16</span> <span class="o">*</span> <span class="n">Z</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="mi">2</span><span class="o">/</span><span class="mi">3</span> <span class="o">*</span> <span class="n">Z</span> <span class="o">+</span> <span class="mi">1</span><span class="o">/</span><span class="mi">6</span> <span class="o">*</span> <span class="n">Z</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># Plot the region of absolute stability</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="nb">abs</span><span class="p">(</span><span class="n">R</span><span class="p">),</span> <span class="n">levels</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">colors</span><span class="o">=</span><span class="s1">&#39;lightskyblue&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">contour</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="nb">abs</span><span class="p">(</span><span class="n">R</span><span class="p">),</span> <span class="n">levels</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">colors</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;The region of absolute stability of an A-stable IRK method&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;$\mathrm</span><span class="si">{Re}</span><span class="s1">(z)$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;$\mathrm</span><span class="si">{Im}</span><span class="s1">(z)$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/4_stability_26_0.png" src="_images/4_stability_26_0.png" />
+</div>
+</div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="stiffness">
+<h2>Stiffness<a class="headerlink" href="#stiffness" title="Permalink to this headline">¶</a></h2>
+<p>An important consideration when applying numerical methods to solve ODEs is whether the values that the step length can take for the method to be stable are large enough for the method to be applied without incurring prohibitive computational costs. For example, if a method requires a very small step length for it to be stabel, then the iterations required to step through the domain will be very large resulting in lots of computational operations and therefore time. Problems like is a known as stiff problems.</p>
+<div class="admonition-definition-stiffness admonition">
+<p class="admonition-title"><strong>Definition:</strong> Stiffness</p>
+<p>If a numerical method is forced to use, in a certain interval of integration, a step length which is excessively small in relation to the smoothness of the exact solution in that interval, then the problem is said to be stiff in that interval (Lambert, 1990).</p>
+</div>
+<p>The stiffness of a problem depends on the system ODEs and the solver being applied to solve them and stiffness usually arises when there is a large variation in the behaviour of the individual ODEs in the system. Stiff systems require methods which are stable for larger values of the step length <span class="math notranslate nohighlight">\(h\)</span> , e.g., implicit or A-stable methods.</p>
+<div class="section" id="stiffness-ratio">
+<h3>Stiffness ratio<a class="headerlink" href="#stiffness-ratio" title="Permalink to this headline">¶</a></h3>
+<p>Consider a system of linear ODEs of the form</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{y}' = A \mathbf{y},\]</div>
+<p>where <span class="math notranslate nohighlight">\(A\)</span> is a coefficient matrix. We use the test ODE <span class="math notranslate nohighlight">\(y'=\lambda y\)</span> to examine the stability of a numerical method so we need to transform our system into this form. Let <span class="math notranslate nohighlight">\(u_i\)</span> be a transformation of <span class="math notranslate nohighlight">\(y_i\)</span> and <span class="math notranslate nohighlight">\(u_i' = \lambda_iu_i\)</span> where <span class="math notranslate nohighlight">\(\lambda\)</span> is an <a class="reference external" href="https://en.wikipedia.org/wiki/Eigenvalues_and_eigenvectors">eigenvalue</a> of <span class="math notranslate nohighlight">\(A\)</span> then</p>
+<div class="math notranslate nohighlight">
+\[\pmatrix{ u_1' \cr u_2' \cr \vdots \cr u_N'} = 
+\pmatrix{\lambda_1 \cr &amp; \lambda_2 \cr &amp; &amp; \ddots \cr &amp; &amp; &amp; \lambda_N} 
+\pmatrix{u_1 \cr u_2 \cr \vdots \cr u_N}\]</div>
+<p>Let <span class="math notranslate nohighlight">\(V = (\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_N)\)</span> be a matrix containing the <a class="reference external" href="https://en.wikipedia.org/wiki/Eigenvalues_and_eigenvectors">eigenvectors</a> <span class="math notranslate nohighlight">\(\mathbf{v}_i\)</span> corresponding to the eigenvalues <span class="math notranslate nohighlight">\(\lambda_i\)</span> of <span class="math notranslate nohighlight">\(A\)</span> then</p>
+<div class="math notranslate nohighlight">
+\[AV = (A\mathbf{v}_1, A\mathbf{v}_2, \ldots, A\mathbf{v}_N),\]</div>
+<p>and since <span class="math notranslate nohighlight">\(\lambda_i = A\mathbf{v}_i\)</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+AV &amp;= (\lambda_1 \mathbf{v}_1, \lambda_2 \mathbf{v}_2, \ldots, \lambda_N\mathbf{v}_N) = V\Lambda \\
+V^{-1}AV &amp;= \Lambda.
+\end{aligned}
+\end{split}\]</div>
+<p>So <span class="math notranslate nohighlight">\(\Lambda = V^{-1}AV\)</span> is a linear transformation that diagonalises <span class="math notranslate nohighlight">\(A\)</span> and the stability behaviour of <span class="math notranslate nohighlight">\(\mathbf{y}'=A\mathbf{y}\)</span> can be analysed by considering <span class="math notranslate nohighlight">\(\mathbf{y}' = \Lambda \mathbf{y}\)</span> . Since a stiff system will have a large variation in the step length and hence the values of <span class="math notranslate nohighlight">\(\lambda_i\)</span> we can define a <strong>stiffness ratio</strong></p>
+<div class="math notranslate nohighlight">
+\[S = \frac{\max |\mathrm{Re}(\lambda_i)|}{\min |\mathrm{Re}(\lambda_i)|}.\]</div>
+<div class="section" id="example-9">
+<h4>Example 9<a class="headerlink" href="#example-9" title="Permalink to this headline">¶</a></h4>
+<p>Determine the stiffness ratio of the following ODE</p>
+<div class="math notranslate nohighlight">
+\[y'' - 1001 y' - 1000 y = 0.\]</div>
+<p>Writing this as a system of first-order ODEs</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+    y_1' &amp;= y_2',\\
+    y_2' &amp;= 1001y_2 - 1000 y_1,
+\end{aligned}
+\end{split}\]</div>
+<p>which can be written as the matrix equation</p>
+<div class="math notranslate nohighlight">
+\[\pmatrix{y_1'\cr y_2'} = \pmatrix{0&amp;1\cr -1000 &amp; 1001}\pmatrix{y_1 \cr y_2}.\]</div>
+<p>The eigenvalues of the coefficient matrix are <span class="math notranslate nohighlight">\(\lambda_1=1\)</span> and <span class="math notranslate nohighlight">\(\lambda_2=1000\)</span> so</p>
+<div class="math notranslate nohighlight">
+\[S = \frac{1000}{1} = 1000\]</div>
+<p>and this ODE can be considered stiff.</p>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>The <a class="reference external" href="#local_truncation_error">local truncation error</a> is the error at each step of a method due to the truncation of the Taylor series in deriving the method.</p></li>
+<li><p>The <a class="reference external" href="#global_truncation_error">global truncation error</a> is the accumulation of the local truncation errors.</p></li>
+<li><p>A method is considered <a class="reference external" href="#stability_definition">absolutely stable</a> if the local truncation errors do not increase from one step to the next.</p></li>
+<li><p>The stability of a method is analysed by considering the simple test ODE <span class="math notranslate nohighlight">\(y'=\lambda y\)</span>.</p></li>
+<li><p>The <a class="reference external" href="#Stability-functions">stability function</a>, <span class="math notranslate nohighlight">\(R(z)\)</span> where <span class="math notranslate nohighlight">\(z=h\lambda\)</span>, of a method is the amount by which the solution to the test ODE changes over a single step of length <span class="math notranslate nohighlight">\(h\)</span>.</p></li>
+<li><p>The <a class="reference external" href="#Absolute-stability">region of absolute stability</a> is the set of all values of <span class="math notranslate nohighlight">\(z\)</span> in the complex plane where the modulus of <span class="math notranslate nohighlight">\(R(z)\)</span> is less than or equal to 1 (i.e., the local truncation errors do not increase over a single step).</p></li>
+<li><p>The stability function for an explicit Runge-Kutta method is given in equation <a class="reference external" href="#erk_stability_function">(4)</a>.</p></li>
+<li><p>The stability function for an order <span class="math notranslate nohighlight">\(k\)</span> explicit Runge-Kutta method is the <span class="math notranslate nohighlight">\(k\)</span>th-order series expansion of <span class="math notranslate nohighlight">\(e^z\)</span> given in equation <a class="reference external" href="#e%5Ez_expansion">(5)</a>.</p></li>
+<li><p>The stability function for an implicit Runge-Kutta method is given in equation <a class="reference external" href="#irk_stability_function">(6)</a>.</p></li>
+<li><p>Implicit methods can be <a class="reference external" href="#A-stability">A-stable</a> which means there is no limit placed on the value of the step length <span class="math notranslate nohighlight">\(h\)</span> for a method to remain stable.</p></li>
+<li><p>A system of ODEs is considered <a class="reference external" href="#Stiffness">stiff</a> if the ratio of the eigenvalues of the coefficient matrix is large. Stiff systems require methods that have larger regions of absolute stability.</p></li>
+</ul>
+</div>
+<hr class="docutils" />
+<div class="section" id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
+<ol>
+<li><p>Determine the stability function of the following Runge-Kutta method</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \begin{array}{c|ccccc}
+0 \\
+\frac{1}{4} &amp; \frac{1}{4} \\
+\frac{1}{2} &amp; \frac{1}{2} &amp; 0 \\
+\frac{3}{4} &amp; \frac{1}{2} &amp; \frac{1}{4} \\
+0 &amp; 0 &amp; \frac{1}{6} &amp; -\frac{1}{3} &amp; \frac{1}{6} \\ \hline
+&amp; -1 &amp; \frac{2}{3} &amp; -\frac{1}{3} &amp; \frac{2}{3} &amp; 1
+\end{array}\end{split}\]</div>
+</li>
+<li><p>Determine the stability function of the following Runge-Kutta method. Is this an A-stable method?</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \begin{array}{c|cc}
+\frac{1}{4} &amp; \frac{7}{24} &amp; -\frac{1}{24} \\
+\frac{3}{4} &amp; \frac{13}{24} &amp; \frac{5}{24} \\  \hline
+&amp; \frac{1}{2} &amp; \frac{1}{2}
+\end{array}\end{split}\]</div>
+</li>
+<li><p>Plot the region of absolute stability for the following Runge-Kutta method.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{array}{c|cc}
+\frac{1}{3} &amp; \frac{1}{3} &amp; 0 \\
+1 &amp; 1 &amp; 0 \\ \hline
+&amp; \frac{3}{4} &amp; \frac{1}{4}
+\end{array}\end{split}\]</div>
+</li>
+<li><p>Determine the stability function of the following Runge-Kutta method. What is the order of the method?</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{array}{c|ccccc}
+0 \\
+\frac{2}{7} &amp; \frac{2}{7} \\
+\frac{4}{7} &amp; -\frac{8}{35} &amp; \frac{4}{5} \\
+\frac{6}{7} &amp; \frac{29}{42} &amp; -\frac{2}{3} &amp; \frac{5}{6} \\
+1 &amp; \frac{1}{6} &amp; \frac{1}{6} &amp; \frac{5}{12} &amp; \frac{1}{4} \\ \hline
+&amp; \frac{11}{96} &amp; \frac{7}{24} &amp; \frac{35}{96} &amp; \frac{7}{48} &amp; \frac{1}{12}
+\end{array}\end{split}\]</div>
+</li>
+<li><p>Calculate the stiffness ratio for the following system of ODEs. What are the maximum step lengths that the Euler method is stable for solving each equation?</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \begin{aligned}
+y_1' &amp;= -80.6y_1 + 119.4y_2, \\ 
+y_2'&amp;= 79.6y_1 - 120.4y_2.
+\end{aligned}
+\end{split}\]</div>
+</li>
+</ol>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By The Jupyter Book community<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    <script src="_static/js/index.js"></script>
+    
+  </body>
+</html>
