@@ -1,0 +1,10 @@
+file: 0_Introduction
+sections:
+- file: 1_initial_value_problems
+- file: 2_runge_kutta_methods
+- file: 3_IRK_methods
+- file: 4_stability
+- file: 5_boundary_value_problems
+- file: 6_direct_methods
+- file: 7_indirect_methods
+- file: 8_exercise_solutions

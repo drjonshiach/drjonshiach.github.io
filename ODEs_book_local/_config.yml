@@ -1,0 +1,8 @@
+# Book settings
+title: Computational Methods in Ordinary Differential Equations
+author: Dr Jon Shiach
+logo: logo.png
+
+latex:
+  latex_documents:
+    targetname: book.tex
